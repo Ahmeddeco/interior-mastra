@@ -2,42 +2,42 @@ import { ChartNoAxesCombined, Factory, Palette, Server, Shapes, Sofa, SwatchBook
 
 export const serverNav = [
   {
-    title: "سيرفر",
+    title: { ar: "سيرفر", en: "server" },
     href: "/server",
     icon: Server
   },
   {
-    title: "الأشخاص",
+    title: { ar: "الأشخاص", en: "users" },
     href: "/server/users",
     icon: Users
   },
   {
-    title: "المصانع",
+    title: { ar: "المصانع", en: "factories" },
     href: "/server/factories",
     icon: Factory
   },
   {
-    title: "الألوان",
+    title: { ar: "الألوان", en: "colors" },
     href: "/server/colors",
     icon: SwatchBook
   },
   {
-    title: "الفئات",
+    title: { ar: "الفئات", en: "classes" },
     href: "/server/classes",
     icon: Shapes
   },
   {
-    title: "الإستايلات",
+    title: { ar: "الإستايلات", en: "styles" },
     href: "/server/styles",
     icon: Palette
   },
   {
-    title: "المنتجات",
+    title: { ar: "المنتجات", en: "products" },
     href: "/server/products",
     icon: Sofa
   },
   {
-    title: "الإحصائيات",
+    title: { ar: "الإحصائيات", en: "charts" },
     href: "/server/charts",
     icon: ChartNoAxesCombined
   },

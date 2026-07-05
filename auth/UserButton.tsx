@@ -20,8 +20,8 @@ export default async function UserButton() {
 			{user ? (
 				<DropdownMenu>
 					<DropdownMenuTrigger>
-						<div className="size-8 relative rounded-full">
-							<Image src={user.image ?? "/icons/noImage.svg"} alt={"user"} fill className="rounded-full object-cover" />
+						<div className="size-8 relative rounded-none">
+							<Image src={user.image ?? "/icons/noImage.svg"} alt={"user"} fill className="rounded-none object-cover" />
 						</div>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent align="start">

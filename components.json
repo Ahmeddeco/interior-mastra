@@ -13,7 +13,7 @@
 	"registries": {},
 	"rsc": true,
 	"rtl": true,
-	"style": "radix-sera",
+	"style": "radix-vega",
 	"tailwind": {
 		"baseColor": "zinc",
 		"config": "",

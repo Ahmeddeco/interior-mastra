@@ -37,9 +37,9 @@ export default async function RootLayout({
 			className={`h-full antialiased ${cairo.className}`}
 			suppressHydrationWarning
 		>
-			<body className=" scroll-smooth ">
-				<NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
+			<body className="scroll-smooth">
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+					<NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
 					<TooltipProvider>
 						<DirectionProvider dir={locale === "ar" ? "rtl" : "ltr"}>{children}</DirectionProvider>
 						<Toaster

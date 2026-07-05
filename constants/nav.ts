@@ -1,5 +1,4 @@
-import { Home, MapPin, Newspaper, Package2, Server, Smartphone, Users } from "lucide-react"
-import { BsRobot } from "react-icons/bs"
+import { Brush, Home, MapPin, Newspaper, Package2, Server, Smartphone, } from "lucide-react"
 import { FaFacebookF, FaInstagram, FaXTwitter } from "react-icons/fa6"
 
 
@@ -8,6 +7,11 @@ export const frontNavLinks = [
     title: { ar: "الرئيسية", en: "home" },
     href: "/",
     icon: Home
+  },
+  {
+    title: { ar: "تصميماتنا", en: "designs" },
+    href: "/designs",
+    icon: Brush
   },
   {
     title: { ar: "منتجاتنا", en: "products" },
@@ -19,11 +23,7 @@ export const frontNavLinks = [
     href: "/articles",
     icon: Newspaper
   },
-  {
-    title: { ar: "عملائنا", en: "clients" },
-    href: "/clients",
-    icon: Users
-  },
+
   {
     title: { ar: "السيرفر", en: " server " },
     href: "/server",

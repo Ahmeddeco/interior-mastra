@@ -1,3 +1,3 @@
 # TODOS
 
-- [ ] Rebuild Interior with next 16 and Postgres and mastra ai.
+- [x] Rebuild Interior with next 16 and Postgres and mastra ai.
