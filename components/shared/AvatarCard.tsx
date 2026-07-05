@@ -1,6 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card"
 import Image from "next/image"
-import { Color } from "@/enums/color"
 import { Separator } from "../ui/separator"
 
 type Props = {
@@ -9,12 +8,14 @@ type Props = {
 	name: string
 	job: string
 	description: string
-	color: Color
+	color: "black" | "white"
 }
 
-export default function AvatarCard({ className, image, name, description, job, color = Color.black }: Props) {
+export default function AvatarCard({ className, image, name, description, job, color = "black" }: Props) {
 	return (
-		<Card className={`${className} ${color} border-white w-xs `}>
+		<Card
+			className={`${className} ${color === "white" ? "bg-foreground border-background border" : "bg-card border-foreground"}   w-xs `}
+		>
 			<CardHeader>
 				<CardTitle className="flex items-center gap-4">
 					<div className="relative aspect-square size-12">
@@ -22,18 +23,18 @@ export default function AvatarCard({ className, image, name, description, job, c
 							src={image}
 							alt={"customer"}
 							fill
-							className={`rounded-full ${color === Color.white ? "border-foreground" : "border-background"} border`}
+							className={`rounded-full ${color === "white" ? "border-foreground" : "border-background"} border`}
 						/>
 					</div>
 					<div className="flex flex-col gap-1">
-						<h6>{name}</h6>
-						<p>{job}</p>
+						<h4 className={color === "black" ? "text-foreground" : "text-background"}>{name}</h4>
+						<h6 className={color === "black" ? "text-foreground" : "text-background"}>{job}</h6>
 					</div>
 				</CardTitle>
-				<Separator className={color === Color.white ? "bg-foreground" : "bg-background"} />
+				<Separator color={color === "white" ? "black" : "white"} />
 			</CardHeader>
 			<CardContent className="line-clamp-4">
-				<p>{description}</p>
+				<p className={color === "black" ? "text-foreground" : "text-background"}>{description}</p>
 			</CardContent>
 		</Card>
 	)

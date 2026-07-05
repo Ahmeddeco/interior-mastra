@@ -4,7 +4,7 @@ export default function FrontLayout({ children }: { children: React.ReactNode })
 	return (
 		<>
 			<NavBar />
-			<main className="min-h-dvh px-4 pt-14 ">{children}</main>
+			<main className="min-h-dvh px-4 pt-14 container mx-auto">{children}</main>
 		</>
 	)
 }
