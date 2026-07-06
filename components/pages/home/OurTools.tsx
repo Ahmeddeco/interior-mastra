@@ -4,10 +4,14 @@ import { Button } from "@/components/ui/button"
 import { ourTools } from "@/constants/ourTools"
 import React from "react"
 
-export default function OurTools() {
+type Props = {
+	locale: "en" | "ar"
+}
+
+export default function OurTools({ locale }: Props) {
 	return (
 		<section className="flex flex-col items-center justify-center gap-8">
-			<h2>our tools</h2>
+			<h2>{locale === "en" ? "our tools" : "أدواتنا"}</h2>
 
 			<div className="flex flex-wrap gap-8 items-center justify-center ">
 				{ourTools.map(({ SlideLeftValue, icon, title }, index) => (

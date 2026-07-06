@@ -33,8 +33,11 @@ export default function CustomCard({
 				<h2 className={`${color === "black" ? "text-background" : "text-foreground"}`}>
 					{title} <br /> {titleBr}
 				</h2>
-				<p className={`line-clamp-2 ${color === "black" ? "text-background" : "text-foreground"}`}>{paragraph}</p>
-				<Link href={link} className="underline-offset-4 underline uppercase font-semibold">
+				<h6 className={`line-clamp-2 ${color === "black" ? "text-background" : "text-foreground"}`}>{paragraph}</h6>
+				<Link
+					href={link}
+					className={` ${color === "black" && "text-background"}  underline-offset-4 underline uppercase font-semibold`}
+				>
 					{linkTitle}
 				</Link>
 			</CardContent>

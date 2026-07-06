@@ -6,16 +6,22 @@ import Subscribe from "@/components/pages/home/Subscribe"
 import Testimonial from "@/components/pages/home/Testimonial"
 import WhatWeProvide from "@/components/pages/home/WhatWeProvide"
 
-export default function HomePage() {
+type Props = {
+	params: Promise<{ locale: "ar" | "en" }>
+}
+
+export default async function HomePage({ params }: Props) {
+	const locale = (await params).locale
+
 	return (
 		<>
-			<Hero />
-			<OurTools />
-			<WhatWeProvide />
-			<Banner />
-			<Banner2 />
-			<Testimonial />
-			<Subscribe />
+			<Hero locale={locale} />
+			<OurTools locale={locale} />
+			<WhatWeProvide locale={locale} />
+			<Banner locale={locale} />
+			<Banner2 locale={locale} />
+			<Testimonial locale={locale} />
+			<Subscribe locale={locale} />
 		</>
 	)
 }

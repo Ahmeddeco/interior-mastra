@@ -2,23 +2,31 @@ import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { SlideDown, SlideUp } from "@/animation/animate"
 import MotionWrapper from "@/animation/MotionWrapper"
-export default function Hero() {
+import { getDictionary } from "@/locales/dictionaries"
+
+type Props = {
+	locale: "en" | "ar"
+}
+
+export default async function Hero({ locale }: Props) {
+	const dic = await getDictionary(locale)
+
 	return (
 		<section className="flex flex-col lg:flex-row justify-center gap-12 lg:gap-24 lg:max-h-[90vh] h-auto ">
 			{/* ---------------------------------- title --------------------------------- */}
-			<div className="flex flex-col justify-center items-center lg:items-start gap-6 w-full lg:w-1/3 ">
+			<div className="flex flex-col justify-center items-center lg:items-start gap-4 w-full lg:w-1/3 ">
 				<MotionWrapper variants={SlideUp(0.2)}>
 					<h1>
-						sketch luxury <br />
-						interior design{" "}
+						{dic.homePage.heroSection.title} <br />
+						{dic.homePage.heroSection.titleBr}
 					</h1>
 				</MotionWrapper>
 				<MotionWrapper variants={SlideUp(0.4)}>
-					<p className="max-w-sm ">Bring your dream home to life with one-on-one interior design services</p>
+					<h6 className="max-w-sm ">{dic.homePage.heroSection.subTitle}</h6>
 				</MotionWrapper>
 				<MotionWrapper variants={SlideUp(0.6)} className="flex items-center gap-4">
-					<Button variant="outline">contact us</Button>
-					<Button>get started</Button>
+					<Button>{dic.homePage.heroSection.mainButtonTitle}</Button>
+					<Button variant={"ghost"}>{dic.homePage.heroSection.secondaryButtonTitle}</Button>
 				</MotionWrapper>
 			</div>
 			{/* ---------------------------------- Image --------------------------------- */}

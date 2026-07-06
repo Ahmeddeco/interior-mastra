@@ -35,16 +35,16 @@ const buttonVariants = cva(
 			},
 		},
 		defaultVariants: {
-			variant: "default",
-			size: "default",
+			variant: "outline",
+			size: "lg",
 		},
 	},
 )
 
 function Button({
 	className,
-	variant = "default",
-	size = "default",
+	variant = "outline",
+	size = "lg",
 	asChild = false,
 	...props
 }: React.ComponentProps<"button"> &

@@ -38,7 +38,7 @@ export default async function RootLayout({
 			suppressHydrationWarning
 		>
 			<body className="scroll-smooth">
-				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+				<ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
 					<NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
 					<TooltipProvider>
 						<DirectionProvider dir={locale === "ar" ? "rtl" : "ltr"}>{children}</DirectionProvider>
