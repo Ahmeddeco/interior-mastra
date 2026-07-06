@@ -21,7 +21,9 @@ export default async function Subscribe({ locale }: Props) {
 			</MotionWrapper>
 			<MotionWrapper variants={SlideUp(0.5)} className="flex items-center gap-0 h-14 w-md">
 				<Input placeholder={locale === "en" ? "Enter your email" : "أدخل الإيميل"} />
-				<Button size={"sm"}>{locale === "en" ? "subscribe" : "سجل الآن"}</Button>
+				<Button size={"default"} variant={"default"}>
+					{locale === "en" ? "subscribe" : "سجل الآن"}
+				</Button>
 			</MotionWrapper>
 		</section>
 	)

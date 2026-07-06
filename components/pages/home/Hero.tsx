@@ -12,14 +12,14 @@ export default async function Hero({ locale }: Props) {
 	const dic = await getDictionary(locale)
 
 	return (
-		<section className="flex flex-col lg:flex-row justify-center gap-12 lg:gap-24 lg:max-h-[90vh] h-auto ">
+		<section className="flex flex-col lg:flex-row justify-center lg:items-center gap-12 lg:gap-24 lg:max-h-[70vh] h-auto ">
 			{/* ---------------------------------- title --------------------------------- */}
 			<div className="flex flex-col justify-center items-center lg:items-start gap-4 w-full lg:w-1/3 ">
 				<MotionWrapper variants={SlideUp(0.2)}>
-					<h1>
+					<h2>
 						{dic.homePage.heroSection.title} <br />
 						{dic.homePage.heroSection.titleBr}
-					</h1>
+					</h2>
 				</MotionWrapper>
 				<MotionWrapper variants={SlideUp(0.4)}>
 					<h6 className="max-w-sm ">{dic.homePage.heroSection.subTitle}</h6>
