@@ -116,34 +116,36 @@ model Factory {
 }
 
 model Style {
-  id          String    @id @default(cuid())
-  title       String    @unique
-  slug        String    @unique
-  description String?   @db.Text
-  image       String?
-  product     Product[]
+  id            String    @id @default(cuid())
+  titleAr       String    @unique
+  titleEn       String    @unique
+  slug          String    @unique
+  descriptionAr String?   @db.Text
+  descriptionEn String?   @db.Text
+  image         String?
+  product       Product[]
 }
 
 model Color {
   id        String    @id @default(cuid())
-  title     String    @unique
+  titleAr   String    @unique
+  titleEn   String    @unique
   slug      String    @unique
   colorCode String    @unique
   product   Product[]
 }
 
 model Class {
-  id          String    @id @default(cuid())
-  title       String    @unique
-  slug        String    @unique
-  image       String?
-  description String?   @db.Text
-  product     Product[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@index([slug])
+  id            String    @id @default(cuid())
+  titleAr       String    @unique
+  titleEn       String    @unique
+  slug          String    @unique
+  image         String?
+  descriptionAr String?   @db.Text
+  descriptionEn String?   @db.Text
+  product       Product[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 }
 
 model Favorite {
@@ -173,31 +175,35 @@ enum ProductStatus {
 }
 
 model Product {
-  id              String        @id @default(cuid())
-  title           String
-  model           String        @unique
-  miniDescription String
-  description     String?       @db.Text
-  status          ProductStatus @default(draft)
-  quantity        Int           @default(0)
-  lowStock        Int           @default(0)
-  price           Int           @default(0)
-  discount        Int?          @default(0)
-  mainImage       String
-  bluePrint       String?
-  images          String[]
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
-  color           Color[]
-  favorites       Favorite[]
-  factory         Factory       @relation(fields: [factoryId], references: [id])
-  factoryId       String
-  style           Style?        @relation(fields: [styleId], references: [id])
-  styleId         String?
-  class           Class?        @relation(fields: [classId], references: [id])
-  classId         String?
+  id                String        @id @default(cuid())
+  titleAr           String
+  titleEn           String
+  miniDescriptionAr String
+  miniDescriptionEn String
+  descriptionAr     String?       @db.Text
+  descriptionEn     String?       @db.Text
+  slug              String        @unique
+  model             String        @unique
+  status            ProductStatus @default(draft)
+  quantity          Int           @default(0)
+  lowStock          Int           @default(0)
+  price             Int           @default(0)
+  discount          Int?          @default(0)
+  mainImage         String
+  images            String[]
+  color             Color[]
+  favorites         Favorite[]
+  factory           Factory       @relation(fields: [factoryId], references: [id])
+  factoryId         String
+  style             Style         @relation(fields: [styleId], references: [id])
+  styleId           String
+  class             Class         @relation(fields: [classId], references: [id])
+  classId           String
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
 
   @@index([factoryId])
   @@index([classId])
   @@index([price])
+  @@index([slug])
 }

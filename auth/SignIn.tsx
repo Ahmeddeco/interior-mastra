@@ -1,20 +1,17 @@
+"use client"
 import { Button } from "@/components/ui/button"
-import { auth } from "@/lib/auth"
+import { createAuthClient } from "better-auth/react"
 import { LogIn } from "lucide-react"
 import Form from "next/form"
-import { redirect } from "next/navigation"
 
-export default async function SignIn() {
+export default function SignIn() {
+	const authClient = createAuthClient()
+
 	const signIn = async () => {
-		"use server"
-		const { redirect: shouldRedirect, url } = await auth.api.signInSocial({
-			body: {
-				provider: "google",
-			},
+		await authClient.signIn.social({
+			provider: "google",
+			callbackURL: "",
 		})
-		if (shouldRedirect && url) {
-			redirect(url)
-		}
 	}
 
 	return (

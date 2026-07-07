@@ -7,7 +7,7 @@ export default async function AddColorPage() {
 	await isAllowedRoles([Role.admin])
 
 	return (
-		<ServerPageCard title={"Add user"} description={"Add a user to the database."} href="/server/users">
+		<ServerPageCard title={"Add user"} description={"Add a user to the database."} href="/server/users" btnTitle={""}>
 			<AddUser />
 		</ServerPageCard>
 	)

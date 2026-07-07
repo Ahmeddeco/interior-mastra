@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod'
 
 export const FavoriteSchema = z.object({
   id: z.string().nullish(),
@@ -8,4 +8,4 @@ export const FavoriteSchema = z.object({
 
 export type Favorite = z.infer<typeof FavoriteSchema>
 
-export default FavoriteSchema;
+export default FavoriteSchema

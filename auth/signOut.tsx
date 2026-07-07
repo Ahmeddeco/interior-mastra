@@ -1,17 +1,28 @@
-import { Button } from "@/components/ui/button"
-import { auth } from "@/lib/auth"
-import Form from "next/form"
-import { headers } from "next/headers"
+"use client"
 
-export default async function SignOut() {
+import { Button } from "@/components/ui/button"
+import { createAuthClient } from "better-auth/react"
+import Form from "next/form"
+import { useRouter } from "next/navigation"
+
+export default function SignOut() {
+	const authClient = createAuthClient()
+	const router = useRouter()
+
 	const signOut = async () => {
-		"use server"
-		await auth.api.signOut({ headers: await headers() })
+		await authClient.signOut({
+			fetchOptions: {
+				onSuccess: () => {
+					router.push("/")
+					router.refresh()
+				},
+			},
+		})
 	}
 
 	return (
 		<Form action={signOut} className="w-full">
-			<Button type="submit" variant={"destructive"} size={"full"}>
+			<Button type="submit" variant={"destructive"}>
 				SignOut
 			</Button>
 		</Form>
