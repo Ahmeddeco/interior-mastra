@@ -54,5 +54,10 @@ If the client speaks English: "Welcome! I'm thrilled to help you transform your 
   `,
   model: ollama("gemma4:12b"),
   memory: new Memory(),
-  skills: ["../../.agents/skills/marketing-psychology", "../../.agents/skills/copywriting"]
+  skills: [
+    "../../.agents/skills/marketing-psychology",
+    "../../.agents/skills/copywriting",
+    "../../.agents/interior-design-visualization",
+    "../../.agents/copywriting",
+  ]
 })

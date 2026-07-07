@@ -31,6 +31,12 @@
       "skillPath": "better-auth/emailAndPassword/SKILL.md",
       "computedHash": "7786d722fa682b3d6a99793e73a9d51b59becefa595676134a993020633e068f"
     },
+    "interior-design-visualization": {
+      "source": "eachlabs/skills",
+      "sourceType": "github",
+      "skillPath": "skills/interior-design-visualization/SKILL.md",
+      "computedHash": "fafb06c8c9def18b42ce45434dd79a7f3e410848d183ec7996089fea37039319"
+    },
     "marketing-psychology": {
       "source": "coreyhaines31/marketingskills",
       "sourceType": "github",

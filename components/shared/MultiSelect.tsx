@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Command, CommandEmpty, CommandGroup, CommandItem } from "@/components/ui/command"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { useState } from "react"
-import { Field, FieldError, FieldLabel } from "../ui/field"
+import { Field, FieldLabel } from "../ui/field"
 import { Card, CardContent, CardHeader } from "../ui/card"
 import { Input } from "../ui/input"
 
@@ -16,8 +16,6 @@ type Props = {
 				title: string
 		  }[]
 		| undefined
-	errors: string[] | undefined
-	inputKey: string | undefined // 👈 قمنا بتغيير الاسم هنا من key إلى inputKey
 	defaultValues?:
 		| {
 				id: string
@@ -28,7 +26,7 @@ type Props = {
 	label: string
 }
 
-export default function MultiSelect({ allSelectedData, inputName, label, defaultValues, errors, inputKey }: Props) {
+export default function MultiSelect({ allSelectedData, inputName, label, defaultValues }: Props) {
 	const [selected, setSelected] = useState<{ id: string; title: string }[]>(defaultValues || [])
 	const selectedIds = selected?.map((item) => item.id) ?? []
 
@@ -44,14 +42,18 @@ export default function MultiSelect({ allSelectedData, inputName, label, default
 
 	return (
 		<Field>
-			{/* 👈 نمرر هنا الـ inputKey للـ hidden input */}
-			<Input type="hidden" name={inputName} defaultValue={JSON.stringify(selectedIds)} key={inputKey} />
+			<Input type="hidden" name={inputName} value={JSON.stringify(selectedIds)} />
 			<FieldLabel>{label}</FieldLabel>
 			<Card className="w-full ">
 				{/* -------------------------------- Badge ------------------------------- */}
 				<CardHeader className="flex flex-wrap gap-6">
 					{selected.map(({ id, title }) => (
-						<Button key={id} onClick={() => setSelected(selected.filter((item) => item.id !== id))} size={"sm"}>
+						<Button
+							key={id}
+							onClick={() => setSelected(selected.filter((item) => item.id !== id))}
+							className="cursor-pointer"
+							size={"sm"}
+						>
 							{title}
 						</Button>
 					))}
@@ -61,18 +63,22 @@ export default function MultiSelect({ allSelectedData, inputName, label, default
 				<CardContent className="flex flex-col gap-3 w-full">
 					<Popover>
 						<PopoverTrigger asChild>
-							<Button variant="outline" role="combobox" size={"lg"} type="button" className="justify-start w-fit">
+							<Button variant="default" role="combobox" size={"lg"} type="button">
 								select {inputName}
-								<ChevronDown opacity={0.5} />
+								<ChevronDown opacity={0.8} />
 							</Button>
 						</PopoverTrigger>
 
-						<PopoverContent className="w-fit max-w-xl p-0 " align="start">
-							<Command>
+						<PopoverContent className="w-full p-2 " align="center">
+							<Command className="w-full">
 								<CommandEmpty>No result found.</CommandEmpty>
-								<CommandGroup>
+								<CommandGroup className="w-full">
 									{allSelectedData?.map(({ id, title }) => (
-										<CommandItem key={id} onSelect={() => toggle(id)} className="flex items-start gap-4">
+										<CommandItem
+											key={id}
+											onSelect={() => toggle(id)}
+											className="flex items-center gap-4 lg:w-lg w-full"
+										>
 											<Check className={selected.some((item) => item.id === id) ? "opacity-100" : "opacity-0"} />
 											{title}
 										</CommandItem>
@@ -83,7 +89,6 @@ export default function MultiSelect({ allSelectedData, inputName, label, default
 					</Popover>
 				</CardContent>
 			</Card>
-			<FieldError>{errors}</FieldError>
 		</Field>
 	)
 }

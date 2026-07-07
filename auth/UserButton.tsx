@@ -10,6 +10,7 @@ import Image from "next/image"
 import SignOut from "./signOut"
 import SignIn from "./SignIn"
 import { getSession } from "./getSession"
+import { Button } from "@/components/ui/button"
 
 export default async function UserButton() {
 	const Session = await getSession()
@@ -19,12 +20,12 @@ export default async function UserButton() {
 		<>
 			{user ? (
 				<DropdownMenu>
-					<DropdownMenuTrigger>
-						<div className="size-9 relative rounded-none border cursor-pointer ">
+					<DropdownMenuTrigger asChild>
+						<Button className=" relative " size={"icon"}>
 							<Image src={user.image ?? "/icons/noImage.svg"} alt={"user"} fill className="rounded-none object-cover" />
-						</div>
+						</Button>
 					</DropdownMenuTrigger>
-					<DropdownMenuContent align="start" className="w-fit">
+					<DropdownMenuContent align="start" className="w-fit p-4">
 						<DropdownMenuLabel>
 							<div className="w-full aspect-square relative rounded-xl">
 								<Image src={user.image ?? "/icons/noImage.svg"} alt={"user"} fill className="rounded-xl object-cover" />

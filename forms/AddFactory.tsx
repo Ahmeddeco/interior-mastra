@@ -34,13 +34,7 @@ export default function AddFactory({ users }: Props) {
 			{/* ---------------------------------- name --------------------------------- */}
 			<Field>
 				<FieldLabel htmlFor={fields.name.name}>{fields.name.name}</FieldLabel>
-				<Input
-					type="text"
-					key={fields.name.key}
-					name={fields.name.name}
-					defaultValue={fields.name.initialValue}
-					placeholder="Mobilia"
-				/>
+				<Input type="text" key={fields.name.key} name={fields.name.name} defaultValue={fields.name.initialValue} />
 				<FieldError>{fields.name.errors}</FieldError>
 			</Field>
 
