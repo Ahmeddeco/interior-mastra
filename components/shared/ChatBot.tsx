@@ -16,7 +16,7 @@ import { Message, MessageContent, MessageResponse } from "@/components/ai-elemen
 
 export default function ChatBot() {
 	const [input, setInput] = useState("")
-	const { messages, sendMessage, status } = useChat({
+	const { messages, sendMessage } = useChat({
 		transport: new DefaultChatTransport({
 			api: "/api/chat",
 		}),

@@ -1,0 +1,148 @@
+import { Prisma } from "@/generated/prisma/client"
+import prisma from "@/lib/prisma"
+import { ProductFilterType } from "@/types/product.type"
+import { subDays } from "date-fns"
+
+/* ----------------------------- getAllProducts ---------------------------- */
+export const getAllProducts = async (size: number, page: number) => {
+	try {
+		const totalProducts = await prisma.product.count()
+		const totalPages = Math.ceil(totalProducts / size)
+		const data = await prisma.product.findMany({
+			where: { status: "published" },
+			skip: (page * size) - size, take: size,
+			orderBy: { title: "asc" },
+		})
+		return { data, totalPages }
+	} catch (error) {
+		console.error(error)
+	}
+}
+
+
+/* ---------------------- getAllProductsForProductsPage --------------------- */
+export const getAllProductsForProductsPage = async (size: number, page: number) => {
+	try {
+		const totalProducts = await prisma.product.count()
+		const totalPages = Math.ceil(totalProducts / size)
+		const data = await prisma.product.findMany({
+			where: { status: "published" },
+			skip: (page * size) - size, take: size,
+			select: {
+				id: true,
+				title: true,
+				model: true,
+				price: true,
+				status: true,
+				mainImage: true,
+				class: { select: { title: true } },
+				style: { select: { title: true } },
+				factory: { select: { name: true } }
+			},
+
+			orderBy: { title: "asc" }
+		})
+		return { data, totalPages }
+	} catch (error) {
+		console.error(error)
+	}
+}
+
+/* ---------------------------- getOneProduct ------------------------------ */
+export const getOneProduct = async (id: string) => {
+	try {
+		return await prisma.product.findUnique({
+			where: { id, status: "published" },
+			include: {
+				class: { select: { id: true, title: true, slug: true } },
+				color: { select: { id: true, title: true, slug: true } },
+				style: { select: { id: true, title: true, slug: true } },
+				factory: { select: { id: true, name: true, slug: true } }
+			}
+		})
+	} catch (error) {
+		console.error(error)
+	}
+}
+
+/* -------------------------- getOurLatestProducts -------------------------- */
+export const getOurLatestProducts = async () => {
+	try {
+		return await prisma.product.findMany({
+			where: { status: "published" },
+			orderBy: { createdAt: "desc" },
+			take: 6,
+			select: { title: true, price: true, discount: true, id: true, mainImage: true, }
+		})
+	} catch (error) {
+		console.error(error)
+	}
+}
+
+/* ------------------------ getTheMostFavoriteProduct ----------------------- */
+export const getTheMostFavoriteProduct = async () => {
+	try {
+		return await prisma.product.findFirst({
+			where: { status: "published" },
+			orderBy: { favorites: { _count: "desc" } },
+			select: { id: true, title: true, mainImage: true, description: true, discount: true, price: true, miniDescription: true },
+		})
+	} catch (error) {
+		console.error("Error fetching most favorite products:", error)
+	}
+}
+
+/* --------------------------- getFilteredProducts -------------------------- */
+export const getFilteredProducts = async (filter?: ProductFilterType) => {
+	const where: Prisma.ProductWhereInput = { status: "published" }
+
+	if (filter === "sale") {
+		where.discount = { gt: 0 } //
+	} else if (filter === "new") {
+		where.createdAt = { gte: subDays(new Date(), 30) }
+	}
+
+	const orderBy: Prisma.ProductOrderByWithRelationInput = filter === "best" ? { favorites: { _count: "desc" } } : { createdAt: "desc" }
+
+	return prisma.product.findMany({
+		where, orderBy, take: 6, select: { title: true, price: true, discount: true, id: true, mainImage: true }
+
+	})
+}
+
+/* --------------------- getAllProductsWithSpecificClass -------------------- */
+export const getAllProductsWithSpecificClass = async (classSlug: string, size: number = 10, page: number = 1) => {
+	try {
+		const totalProducts = (await prisma.product.findMany({ where: { class: { slug: classSlug } } })).length
+		const totalPages = Math.ceil(totalProducts / size)
+		const data = await prisma.product.findMany({
+			where: { status: "published", class: { slug: classSlug } },
+			take: size,
+			skip: (page * size) - size,
+			select: { title: true, price: true, discount: true, id: true, mainImage: true, class: { select: { title: true } } },
+			orderBy: { createdAt: "desc" },
+		})
+		return { totalProducts, totalPages, data }
+	} catch (error) {
+		console.error(error)
+	}
+}
+
+/* ------------------------- getAllDiscountProducts ------------------------- */
+export const getAllDiscountProducts = async (discount: number, size: number = 10, page: number = 1) => {
+	try {
+		const totalProducts = (await prisma.product.findMany({ where: { discount: { lte: discount } } })).length
+		const totalPages = Math.ceil(totalProducts / size)
+		const data = await prisma.product.findMany({
+			where: { discount: { lte: discount } },
+			take: size,
+			skip: (page * size) - size,
+			select: { title: true, price: true, discount: true, id: true, mainImage: true, class: { select: { title: true } } },
+			orderBy: { discount: "desc" },
+		})
+		return { totalProducts, totalPages, data }
+	} catch (error) {
+		console.error(error)
+	}
+}
+

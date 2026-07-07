@@ -18,19 +18,22 @@ export const enDic = {
         title: "luxury",
         titleBr: "facilities",
         paragraph: "The advantage of hiring a workspace with us is that gives you comfortable services.",
-        icon: ClipboardPenLine
+        icon: ClipboardPenLine,
+        latency: .4
       },
       {
         title: "affordable",
         titleBr: "price",
         paragraph: "You can get a workspace of the highest quality at an affordable price.",
-        icon: CircleDollarSign
+        icon: CircleDollarSign,
+        latency: .6
       },
       {
         title: "smooth",
         titleBr: "workflow",
         paragraph: "We provide the easiest, smoothest workflow of interior design.",
-        icon: Workflow
+        icon: Workflow,
+        latency: .8
       },
     ]
   },

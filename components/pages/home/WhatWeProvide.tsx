@@ -23,8 +23,8 @@ export default async function WhatWeProvide({ locale }: Props) {
 			</div>
 			{/* ---------------------------------- cards --------------------------------- */}
 			<div className="flex flex-wrap justify-center gap-8">
-				{dic.whatWeProvide.cards.map(({ paragraph, title, titleBr, icon }, index) => (
-					<MotionWrapper variants={SlideUp(0.2)} key={index}>
+				{dic.whatWeProvide.cards.map(({ paragraph, title, titleBr, icon, latency }, index) => (
+					<MotionWrapper variants={SlideUp(latency)} key={index}>
 						<CustomCard
 							title={title}
 							titleBr={titleBr}

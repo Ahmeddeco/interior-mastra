@@ -18,19 +18,22 @@ export const arDic = {
         title: "رفاهية",
         titleBr: "مرافق",
         paragraph: "تتمثل ميزة استئجار مساحة عمل معنا في أنها توفر لك خدمات مريحة.",
-        icon: ClipboardPenLine
+        icon: ClipboardPenLine,
+        latency: .4
       },
       {
         title: "بسعر ",
         titleBr: "معقول",
         paragraph: "يمكنك الحصول على مساحة عمل عالية الجودة بسعر معقول.",
-        icon: CircleDollarSign
+        icon: CircleDollarSign,
+        latency: .6
       },
       {
         title: "سير العمل",
         titleBr: "سلس",
         paragraph: "نحن نوفر أسهل وأسرع عملية تصميم داخلي واقعية وسهلة التنفيذ.",
-        icon: Workflow
+        icon: Workflow,
+        latency: .8
       },
     ]
   },
