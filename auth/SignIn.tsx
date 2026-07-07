@@ -1,12 +1,10 @@
 "use client"
 import { Button } from "@/components/ui/button"
-import { createAuthClient } from "better-auth/react"
+import { authClient } from "@/lib/auth-client"
 import { LogIn } from "lucide-react"
 import Form from "next/form"
 
 export default function SignIn() {
-	const authClient = createAuthClient()
-
 	const signIn = async () => {
 		await authClient.signIn.social({
 			provider: "google",

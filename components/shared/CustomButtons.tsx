@@ -5,8 +5,7 @@ import { Button } from "../ui/button"
 import { Loader2, ShoppingBag, X } from "lucide-react"
 import { useCartStore } from "@/store/cartStore"
 import { IoBagCheckOutline } from "react-icons/io5"
-import { useSession } from "@/lib/auth-client"
-import { ProductCardType } from "@/types/Product.type"
+import { authClient } from "@/lib/auth-client"
 
 type SubmitButtonType = {
 	title: string
@@ -38,8 +37,8 @@ export function SubmitButton({ title, type = "submit", size = "full", variant }:
 
 /* -------------------------------- AddToCart ------------------------------- */
 
-export function AddToCart({ product }: { product: ProductCardType }) {
-	const session = useSession()
+export function AddToCart({ product }: { product: string }) {
+	const session = authClient.useSession()
 	const { pending } = useFormStatus()
 	const addToCart = useCartStore((state) => state.addToCart)
 

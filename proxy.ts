@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server'
 const I18nMiddleware = createI18nMiddleware({
   locales: ['en', 'ar'],
   defaultLocale: 'en',
-  urlMappingStrategy: "rewrite"
+  urlMappingStrategy: "redirect"
 })
 export { auth as Proxy } from "./lib/auth"
 export function proxy(request: NextRequest) {

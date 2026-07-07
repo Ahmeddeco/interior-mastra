@@ -10,7 +10,7 @@ import LanguageButton from "./LanguageButton"
 export default async function NavBar() {
 	const session = await getSession()
 	return (
-		<header className="fixed w-full inset-0 mx-auto bg-card border-b border-foreground   drop-shadow-xl backdrop-blur-2xl  px-4 h-14 z-50 flex items-center   ">
+		<header className="fixed w-full inset-0 mx-auto bg-card border-b border-foreground   drop-shadow-xl backdrop-blur-2xl  px-4 h-14 lg:h-16 z-50 flex items-center   ">
 			<div className="flex items-center justify-between container mx-auto">
 				{/* --------------------------------- Logo -------------------------------- */}
 				<Logo />

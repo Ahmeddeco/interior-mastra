@@ -16,7 +16,7 @@ export default function OurTools({ locale }: Props) {
 			<div className="flex flex-wrap gap-8 items-center justify-center ">
 				{ourTools.map(({ SlideLeftValue, icon, title }, index) => (
 					<MotionWrapper variants={SlideLeft(SlideLeftValue)} key={index}>
-						<Button variant={"outline"} size={"sm"} className="cursor-not-allowed ">
+						<Button variant={"outline"} size={"sm"} className="cursor-none ">
 							{React.createElement(icon)} {title}
 						</Button>
 					</MotionWrapper>

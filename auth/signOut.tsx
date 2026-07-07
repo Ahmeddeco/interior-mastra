@@ -1,12 +1,11 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { createAuthClient } from "better-auth/react"
+import { authClient } from "@/lib/auth-client"
 import Form from "next/form"
 import { useRouter } from "next/navigation"
 
 export default function SignOut() {
-	const authClient = createAuthClient()
 	const router = useRouter()
 
 	const signOut = async () => {
@@ -22,7 +21,7 @@ export default function SignOut() {
 
 	return (
 		<Form action={signOut} className="w-full">
-			<Button type="submit" variant={"destructive"}>
+			<Button type="submit" variant={"destructive"} size={"full"}>
 				SignOut
 			</Button>
 		</Form>
