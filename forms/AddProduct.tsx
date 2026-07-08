@@ -14,12 +14,17 @@ import { ProductStatus } from "@/generated/prisma/enums"
 import { Textarea } from "@/components/ui/textarea"
 import { UploadManyImagesDropZone, UploadOneImagesDropZone } from "@/components/shared/UploadImagesDropZone"
 import MultiSelect from "@/components/shared/MultiSelect"
+import { getAllColorsForProductPageType } from "@/types/color.type"
+import { getAllStylesForProductPageType } from "@/types/style.type"
+import { getAllFactoriesForProductPageType } from "@/types/factory.type"
+import { getAllClassesForProductPageType } from "@/types/class.type"
+import TiptapEditor from "@/components/shared/TiptapEditor"
 
 type Props = {
-	colors: { id: string; title: string }[]
-	factories: { id: string; name: string }[]
-	styles: { id: string; title: string }[]
-	classes: { id: string; title: string }[]
+	colors: getAllColorsForProductPageType
+	styles: getAllStylesForProductPageType
+	factories: getAllFactoriesForProductPageType
+	classes: getAllClassesForProductPageType
 }
 
 export default function AddProduct({ colors, factories, styles, classes }: Props) {
@@ -32,57 +37,93 @@ export default function AddProduct({ colors, factories, styles, classes }: Props
 		shouldValidate: "onBlur",
 		shouldRevalidate: "onInput",
 	})
+
+	const colorsData = colors?.map((color) => ({
+		id: color.id,
+		title: color.titleEn,
+	}))
+
 	return (
 		<Form id={form.id} action={action} onSubmit={form.onSubmit} className="space-y-6">
 			{/* ---------------------------- title & model ---------------------------- */}
 			<div className="flex lg:flex-row flex-col items-center justify-center gap-4">
-				{/* ---------------------------------- title --------------------------------- */}
+				{/* ---------------------------------- titleAr --------------------------------- */}
 				<Field>
-					<FieldLabel htmlFor={fields.title.name}>{fields.title.name}</FieldLabel>
+					<FieldLabel htmlFor={fields.titleAr.name}>{fields.titleAr.name}</FieldLabel>
 					<Input
 						type="text"
-						key={fields.title.key}
-						name={fields.title.name}
-						defaultValue={fields.title.initialValue}
-						placeholder="komode "
+						key={fields.titleAr.key}
+						name={fields.titleAr.name}
+						defaultValue={fields.titleAr.initialValue}
 					/>
-					<FieldError>{fields.title.errors}</FieldError>
+					<FieldError>{fields.titleAr.errors}</FieldError>
 				</Field>
-				{/* -------------------------------- model -------------------------------- */}
+
+				{/* ---------------------------------- titleEn --------------------------------- */}
 				<Field>
-					<FieldLabel htmlFor={fields.model.name}>{fields.model.name}</FieldLabel>
+					<FieldLabel htmlFor={fields.titleEn.name}>{fields.titleEn.name}</FieldLabel>
 					<Input
 						type="text"
-						key={fields.model.key}
-						name={fields.model.name}
-						defaultValue={fields.model.initialValue}
-						placeholder="komo-123 "
+						key={fields.titleEn.key}
+						name={fields.titleEn.name}
+						defaultValue={fields.titleEn.initialValue}
 					/>
-					<FieldError>{fields.model.errors}</FieldError>
+					<FieldError>{fields.titleEn.errors}</FieldError>
 				</Field>
 			</div>
 
-			{/* -------------------- description & miniDescription -------------------- */}
+			{/* -------------------------------- model -------------------------------- */}
+			<Field>
+				<FieldLabel htmlFor={fields.model.name}>{fields.model.name}</FieldLabel>
+				<Input
+					type="text"
+					key={fields.model.key}
+					name={fields.model.name}
+					defaultValue={fields.model.initialValue}
+					placeholder="komo-123 "
+				/>
+				<FieldError>{fields.model.errors}</FieldError>
+			</Field>
+
+			{/* ----------------------------- descriptionAr ----------------------------- */}
+			<TiptapEditor
+				name={fields.descriptionAr.name}
+				label={fields.descriptionAr.name}
+				editorKey={fields.descriptionAr.key ?? ""}
+				defaultValue={fields.descriptionAr.initialValue ?? ""}
+				errors={fields.descriptionAr.errors ?? []}
+			/>
+
+			{/* --------------------------- descriptionEn -------------------------- */}
+			<TiptapEditor
+				name={fields.descriptionEn.name}
+				label={fields.descriptionEn.name}
+				editorKey={fields.descriptionEn.key ?? ""}
+				defaultValue={fields.descriptionEn.initialValue ?? ""}
+				errors={fields.descriptionEn.errors ?? []}
+			/>
+
 			<div className="flex lg:flex-row flex-col items-center justify-center gap-4">
-				{/* ----------------------------- description ----------------------------- */}
+				{/* --------------------------- miniDescriptionAr -------------------------- */}
 				<Field>
-					<FieldLabel htmlFor={fields.description.name}>{fields.description.name}</FieldLabel>
+					<FieldLabel htmlFor={fields.miniDescriptionAr.name}>{fields.miniDescriptionAr.name}</FieldLabel>
 					<Textarea
-						key={fields.description.key}
-						name={fields.description.name}
-						defaultValue={fields.description.initialValue}
+						key={fields.miniDescriptionAr.key}
+						name={fields.miniDescriptionAr.name}
+						defaultValue={fields.miniDescriptionAr.initialValue}
 					/>
-					<FieldError>{fields.description.errors}</FieldError>
+					<FieldError>{fields.miniDescriptionAr.errors}</FieldError>
 				</Field>
-				{/* --------------------------- miniDescription -------------------------- */}
+
+				{/* ----------------------------- miniDescriptionEn ----------------------------- */}
 				<Field>
-					<FieldLabel htmlFor={fields.miniDescription.name}>{fields.miniDescription.name}</FieldLabel>
+					<FieldLabel htmlFor={fields.miniDescriptionEn.name}>{fields.miniDescriptionEn.name}</FieldLabel>
 					<Textarea
-						key={fields.miniDescription.key}
-						name={fields.miniDescription.name}
-						defaultValue={fields.miniDescription.initialValue}
+						key={fields.miniDescriptionEn.key}
+						name={fields.miniDescriptionEn.name}
+						defaultValue={fields.miniDescriptionEn.initialValue}
 					/>
-					<FieldError>{fields.miniDescription.errors}</FieldError>
+					<FieldError>{fields.miniDescriptionEn.errors}</FieldError>
 				</Field>
 			</div>
 
@@ -129,7 +170,7 @@ export default function AddProduct({ colors, factories, styles, classes }: Props
 							<SelectValue />
 						</SelectTrigger>
 						<SelectContent>
-							{factories.map(({ id, name }) => (
+							{factories?.map(({ id, name }) => (
 								<SelectItem value={id} key={id}>
 									{name}
 								</SelectItem>
@@ -146,9 +187,9 @@ export default function AddProduct({ colors, factories, styles, classes }: Props
 							<SelectValue />
 						</SelectTrigger>
 						<SelectContent>
-							{styles.map(({ id, title }) => (
+							{styles?.map(({ id, titleEn }) => (
 								<SelectItem value={id} key={id}>
-									{title}
+									{titleEn}
 								</SelectItem>
 							))}
 						</SelectContent>
@@ -163,9 +204,9 @@ export default function AddProduct({ colors, factories, styles, classes }: Props
 							<SelectValue />
 						</SelectTrigger>
 						<SelectContent>
-							{classes.map(({ id, title }) => (
+							{classes?.map(({ id, titleEn }) => (
 								<SelectItem value={id} key={id}>
-									{title}
+									{titleEn}
 								</SelectItem>
 							))}
 						</SelectContent>
@@ -214,7 +255,7 @@ export default function AddProduct({ colors, factories, styles, classes }: Props
 			</div>
 
 			{/* -------------------------------- colors ------------------------------- */}
-			<MultiSelect allSelectedData={colors} inputName={fields.colors.name} label={fields.colors.name} />
+			<MultiSelect allSelectedData={colorsData} inputName={fields.colors.name} label={fields.colors.name} />
 
 			{/* -------------------------------- mainImage ------------------------------- */}
 			<UploadOneImagesDropZone
@@ -230,12 +271,6 @@ export default function AddProduct({ colors, factories, styles, classes }: Props
 				label={fields.images.name}
 			/>
 
-			{/* -------------------------------- bluePrint ------------------------------- */}
-			<UploadOneImagesDropZone
-				imageName={fields.bluePrint.name}
-				errors={fields.bluePrint.errors}
-				label={fields.bluePrint.name}
-			/>
 			{/* ----------------------------- SubmitButton ---------------------------- */}
 			<SubmitButton text={"add product"} />
 		</Form>

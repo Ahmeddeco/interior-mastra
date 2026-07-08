@@ -3,6 +3,7 @@
 import prisma from "@/lib/prisma"
 import ColorSchema from "@/schemas/ColorSchema"
 import { parseWithZod } from "@conform-to/zod"
+import { refresh } from "next/cache"
 import { redirect } from "next/navigation"
 import slugify from "slugify"
 
@@ -16,18 +17,20 @@ export const addColorAction = async (prevState: unknown, formData: FormData) => 
   }
 
   // generatedSlug
-  const generatedSlug = slugify(submission.value.title, { lower: true, strict: true, locale: "ar" })
+  const generatedSlug = slugify(submission.value.titleEn, { lower: true, strict: true, })
 
   try {
     await prisma.color.upsert({
-      where: { title: submission.value.title },
+      where: { slug: submission.value.slug },
       create: {
-        title: submission.value.title,
+        titleAr: submission.value.titleAr,
+        titleEn: submission.value.titleEn,
         slug: generatedSlug,
         colorCode: submission.value.colorCode
       },
       update: {
-        title: submission.value.title,
+        titleAr: submission.value.titleAr,
+        titleEn: submission.value.titleEn,
         slug: generatedSlug,
         colorCode: submission.value.colorCode
       }
@@ -48,7 +51,7 @@ export const editColorAction = async (prevState: unknown, formData: FormData) =>
   }
 
   // generatedSlug
-  const generatedSlug = slugify(submission.value.title, { lower: true, strict: true, locale: "ar" })
+  const generatedSlug = slugify(submission.value.titleEn, { lower: true, strict: true, })
 
   try {
     await prisma.color.update({
@@ -56,7 +59,8 @@ export const editColorAction = async (prevState: unknown, formData: FormData) =>
         slug: submission.value.slug!
       },
       data: {
-        title: submission.value.title,
+        titleAr: submission.value.titleAr,
+        titleEn: submission.value.titleEn,
         slug: generatedSlug,
         colorCode: submission.value.colorCode
       }
@@ -69,15 +73,15 @@ export const editColorAction = async (prevState: unknown, formData: FormData) =>
 
 /* ---------------------------- deleteColorAction --------------------------- */
 export const deleteColorAction = async (formData: FormData) => {
-  const slug = formData.get("slug")
+  const id = formData.get("id")
   try {
     await prisma.color.delete({
       where: {
-        slug: slug as string
+        id: id as string
       }
     })
   } catch (error) {
     console.error(error)
   }
-  redirect("/server/colors")
+  refresh()
 }

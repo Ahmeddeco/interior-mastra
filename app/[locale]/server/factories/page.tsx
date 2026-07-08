@@ -71,11 +71,11 @@ export default async function FactoriesPage({
 					<TableBody>
 						{factories.data.map(({ id, slug, name, logo, country, state, mobile, owner, city }) => (
 							<TableRow key={id}>
-								<TableCell className="relative rounded-lg size-16 ">
+								<TableCell>
 									{logo ? (
-										<Image src={logo} alt={name} fill className="rounded-lg object-contain" />
+										<Image src={logo} alt={name} width={48} height={48} className="aspect-square object-cover" />
 									) : (
-										<ImageOff size={72} />
+										<ImageOff size={48} />
 									)}
 								</TableCell>
 								<TableCell className="capitalize ">{name}</TableCell>
@@ -95,7 +95,7 @@ export default async function FactoriesPage({
 										</DropdownMenuTrigger>
 										<DropdownMenuContent align="start" className="space-y-2">
 											<DropdownMenuItem asChild>
-												<Button variant={"default"} size={"full"} asChild>
+												<Button variant={"outline"} size={"full"} asChild>
 													<Link href={`/server/factories/edit/${slug}`}>edit</Link>
 												</Button>
 											</DropdownMenuItem>
@@ -120,7 +120,7 @@ export default async function FactoriesPage({
 																<DialogClose>cancel</DialogClose>
 															</Button>
 															<Form action={deleteFactoryAction}>
-																<Input type="hidden" name="slug" value={slug} />
+																<Input type="hidden" name="id" value={id} />
 																<Button variant={"destructive"} type="submit">
 																	delete
 																</Button>

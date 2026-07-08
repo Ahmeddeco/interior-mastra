@@ -23,8 +23,9 @@ import {
 	PaginationPrevious,
 } from "@/components/ui/pagination"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { getAllStyles } from "@/dl/styles.data"
+import { getAllStylesForStylesServerPage } from "@/dl/styles.data"
 import { Role } from "@/generated/prisma/enums"
+import { getAllStylesForStylesServerPageType } from "@/types/style.type"
 import { ImageOff, MoreVertical, PlusCircle } from "lucide-react"
 import Form from "next/form"
 import Image from "next/image"
@@ -36,7 +37,7 @@ export default async function StylesPage({ searchParams }: { searchParams: Promi
 	const { page, size } = await searchParams
 	const pageNumber = +page > 1 ? +page : 1
 	const pageSize = +size || 10
-	const styles = await getAllStyles(pageSize, pageNumber)
+	const styles: getAllStylesForStylesServerPageType = await getAllStylesForStylesServerPage(pageSize, pageNumber)
 
 	return (
 		<ServerPageCard
@@ -54,26 +55,33 @@ export default async function StylesPage({ searchParams }: { searchParams: Promi
 					<TableHeader>
 						<TableRow>
 							<TableHead>image</TableHead>
-							<TableHead>title</TableHead>
+							<TableHead>titleAr</TableHead>
+							<TableHead>titleEn</TableHead>
 							<TableHead>slug</TableHead>
-							<TableHead>mobile</TableHead>
 							<TableHead className="text-left">settings</TableHead>
 						</TableRow>
 					</TableHeader>
 					{/* ----------------------------- TableBody ----------------------------- */}
 					<TableBody>
-						{styles.data.map(({ id, description, title, slug, image }) => (
+						{styles.data.map(({ id, descriptionEn, titleAr, titleEn, slug, image }) => (
 							<TableRow key={id}>
-								<TableCell className="relative rounded-lg aspect-video w-24  ">
+								<TableCell>
 									{image ? (
-										<Image src={image} alt={title} fill className="rounded-lg object-cover  " />
+										<Image
+											src={image}
+											alt={titleEn ?? "style"}
+											width={48}
+											height={48}
+											className="aspect-square object-cover"
+										/>
 									) : (
-										<ImageOff size={32} />
+										<ImageOff size={48} />
 									)}
 								</TableCell>
-								<TableCell className="capitalize ">{title}</TableCell>
+								<TableCell className="capitalize ">{titleAr}</TableCell>
+								<TableCell className="capitalize ">{titleEn}</TableCell>
 								<TableCell>{slug}</TableCell>
-								<TableCell className="line-clamp-2">{description}</TableCell>
+								<TableCell className="line-clamp-2">{descriptionEn}</TableCell>
 
 								{/* -------------------------------- settings -------------------------------- */}
 								<TableCell className="text-left">

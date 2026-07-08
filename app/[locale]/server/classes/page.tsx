@@ -24,11 +24,12 @@ import {
 } from "@/components/ui/dialog"
 import Form from "next/form"
 import { Input } from "@/components/ui/input"
-import { getAllClasses } from "@/dl/class.data"
 import { deleteClassAction } from "@/actions/class.action"
 import { isAllowedRoles } from "@/auth/isAllowedRoles"
 import { Role } from "@/generated/prisma/enums"
 import Image from "next/image"
+import { getAllClassesForClassesServerPageType } from "@/types/class.type"
+import { getAllClassesForClassesServerPage } from "@/dl/class.data"
 
 export default async function ClassPage({ searchParams }: { searchParams: Promise<{ page: string; size: string }> }) {
 	await isAllowedRoles([Role.admin, Role.manufacturer])
@@ -36,7 +37,7 @@ export default async function ClassPage({ searchParams }: { searchParams: Promis
 	const { page, size } = await searchParams
 	const pageNumber = +page > 1 ? +page : 1
 	const pageSize = +size || 10
-	const classes = await getAllClasses(pageSize, pageNumber)
+	const classes: getAllClassesForClassesServerPageType = await getAllClassesForClassesServerPage(pageSize, pageNumber)
 
 	return (
 		<ServerPageCard
@@ -54,26 +55,28 @@ export default async function ClassPage({ searchParams }: { searchParams: Promis
 					<TableHeader>
 						<TableRow>
 							<TableHead>image</TableHead>
-							<TableHead>title</TableHead>
+							<TableHead>titleAr</TableHead>
+							<TableHead>titleEn</TableHead>
 							<TableHead>slug</TableHead>
-							<TableHead>description</TableHead>
+							<TableHead>descriptionEn</TableHead>
 							<TableHead className="text-left">settings</TableHead>
 						</TableRow>
 					</TableHeader>
 					{/* ----------------------------- TableBody ----------------------------- */}
 					<TableBody>
-						{classes.data.map(({ id, title, description, slug, image }) => (
+						{classes.data.map(({ id, titleAr, titleEn, slug, image, descriptionEn }) => (
 							<TableRow key={id}>
 								<TableCell className="relative rounded-lg size-12 ">
 									{image ? (
-										<Image src={image} alt={title} fill className="rounded-lg object-cover" />
+										<Image src={image} alt={titleEn} width={48} height={48} className="aspect-square object-cover" />
 									) : (
-										<ImageOff size={32} />
+										<ImageOff size={48} />
 									)}
 								</TableCell>
-								<TableCell className="capitalize ">{title}</TableCell>
+								<TableCell className="capitalize ">{titleAr}</TableCell>
+								<TableCell className="capitalize ">{titleEn}</TableCell>
 								<TableCell>{slug}</TableCell>
-								<TableCell className="line-clamp-2">{description}</TableCell>
+								<TableCell className="line-clamp-2">{descriptionEn}</TableCell>
 
 								{/* -------------------------------- settings -------------------------------- */}
 								<TableCell className="text-left">
@@ -108,7 +111,7 @@ export default async function ClassPage({ searchParams }: { searchParams: Promis
 																<DialogClose>cancel</DialogClose>
 															</Button>
 															<Form action={deleteClassAction}>
-																<Input type="hidden" name="slug" value={slug} />
+																<Input type="hidden" name="id" value={id} />
 																<Button variant={"destructive"} type="submit">
 																	delete
 																</Button>

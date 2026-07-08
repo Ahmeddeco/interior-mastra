@@ -6,12 +6,11 @@ export const ProductSchema = z.object({
   id: z.string().nullish(),
   titleAr: z.string(),
   titleEn: z.string(),
-  miniDescriptionAr: z.string(),
-  miniDescriptionEn: z.string(),
+  model: z.string(),
   descriptionAr: z.string().nullish(),
   descriptionEn: z.string().nullish(),
-  slug: z.string(),
-  model: z.string(),
+  miniDescriptionAr: z.string(),
+  miniDescriptionEn: z.string(),
   quantity: z.number(),
   lowStock: z.number(),
   price: z.number(),
@@ -21,6 +20,8 @@ export const ProductSchema = z.object({
   factoryId: z.string(),
   styleId: z.string(),
   classId: z.string(),
+  slug: z.string().nullish(),
+  colors: z.array(z.string())
 })
 
 export type Product = z.infer<typeof ProductSchema>

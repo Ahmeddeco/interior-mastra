@@ -4,6 +4,7 @@ import prisma from "@/lib/prisma"
 import { splittedItems } from "@/logic/splittedItems"
 import FactorySchema from "@/schemas/FactorySchema"
 import { parseWithZod } from "@conform-to/zod"
+import { refresh } from "next/cache"
 import { redirect } from "next/navigation"
 import slugify from "slugify"
 
@@ -93,15 +94,15 @@ export const editFactoryAction = async (prevState: unknown, formData: FormData) 
 
 /* ---------------------------- deleteClassAction --------------------------- */
 export const deleteFactoryAction = async (formData: FormData) => {
-	const slug = formData.get("slug")
+	const id = formData.get("id") as string
 	try {
 		await prisma.factory.delete({
 			where: {
-				slug: slug as string
+				id: id
 			}
 		})
 	} catch (error) {
 		console.error(error)
 	}
-	redirect("/server/factories")
+	refresh()
 }

@@ -3,6 +3,7 @@
 import prisma from "@/lib/prisma"
 import UserSchema from "@/schemas/UserSchema"
 import { parseWithZod } from "@conform-to/zod"
+import { refresh } from "next/cache"
 import { redirect } from "next/navigation"
 
 /* ----------------------------- addUserAction ----------------------------- */
@@ -93,5 +94,5 @@ export const deleteUserAction = async (formData: FormData) => {
   } catch (error) {
     console.error(error)
   }
-  redirect("/server/users")
+  refresh()
 }

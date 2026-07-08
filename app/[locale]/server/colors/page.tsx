@@ -28,6 +28,7 @@ import { getAllColors } from "@/dl/color.data"
 import { deleteColorAction } from "@/actions/color.action"
 import { isAllowedRoles } from "@/auth/isAllowedRoles"
 import { Role } from "@/generated/prisma/enums"
+import { getAllColorsType } from "@/types/color.type"
 
 export default async function ColorsPage({ searchParams }: { searchParams: Promise<{ page: string; size: string }> }) {
 	await isAllowedRoles([Role.admin])
@@ -35,7 +36,7 @@ export default async function ColorsPage({ searchParams }: { searchParams: Promi
 	const { page, size } = await searchParams
 	const pageNumber = +page > 1 ? +page : 1
 	const pageSize = +size || 10
-	const colors = await getAllColors(pageSize, pageNumber)
+	const colors: getAllColorsType = await getAllColors(pageSize, pageNumber)
 
 	return (
 		<ServerPageCard
@@ -53,19 +54,21 @@ export default async function ColorsPage({ searchParams }: { searchParams: Promi
 					<TableHeader>
 						<TableRow>
 							<TableHead>color</TableHead>
-							<TableHead>title</TableHead>
+							<TableHead>titleAr</TableHead>
+							<TableHead>titleEn</TableHead>
 							<TableHead>color Code</TableHead>
 							<TableHead className="text-left">settings</TableHead>
 						</TableRow>
 					</TableHeader>
 					{/* ----------------------------- TableBody ----------------------------- */}
 					<TableBody>
-						{colors.data.map(({ id, colorCode, title, slug }) => (
+						{colors.data.map(({ id, colorCode, titleAr, titleEn, slug }) => (
 							<TableRow key={id}>
 								<TableCell>
 									<div className="rounded-full size-12 shadow-xl border" style={{ backgroundColor: colorCode }} />
 								</TableCell>
-								<TableCell className="capitalize">{title}</TableCell>
+								<TableCell className="capitalize">{titleAr}</TableCell>
+								<TableCell className="capitalize">{titleEn}</TableCell>
 								<TableCell className="capitalize">{colorCode}</TableCell>
 
 								{/* -------------------------------- settings -------------------------------- */}

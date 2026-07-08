@@ -5,12 +5,13 @@ import EditColor from "@/forms/EditColor"
 import { getOneColor } from "@/dl/color.data"
 import { isAllowedRoles } from "@/auth/isAllowedRoles"
 import { Role } from "@/generated/prisma/enums"
+import { getOneColorType } from "@/types/color.type"
 
 export default async function EditUserPage({ params }: { params: Promise<{ slug: string }> }) {
 	await isAllowedRoles([Role.admin])
 
 	const slug = (await params).slug
-	const color = await getOneColor(slug)
+	const color: getOneColorType = await getOneColor(slug)
 
 	return (
 		<ServerPageCard
@@ -20,11 +21,7 @@ export default async function EditUserPage({ params }: { params: Promise<{ slug:
 			btnTitle={"back"}
 			href="/server/colors"
 		>
-			{!color?.data ? (
-				<EmptyCard href={"/server/colors"} linkTitle={"no color found"} />
-			) : (
-				<EditColor color={color.data} />
-			)}
+			{!color ? <EmptyCard href={"/server/colors"} linkTitle={"no color found"} /> : <EditColor color={color} />}
 		</ServerPageCard>
 	)
 }

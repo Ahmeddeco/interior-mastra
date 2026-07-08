@@ -1,10 +1,12 @@
 "use server"
 
 import prisma from "@/lib/prisma"
-import { splittedItems } from "@/helpers/splittedItems"
+import { splittedItems } from "@/logic/splittedItems"
 import ProductSchema from "@/schemas/ProductSchema"
 import { parseWithZod } from "@conform-to/zod"
 import { redirect } from "next/navigation"
+import { refresh } from "next/cache"
+import slugify from "slugify"
 
 /* ----------------------------- addProductAction ----------------------------- */
 export const addProductAction = async (prevState: unknown, formData: FormData) => {
@@ -14,46 +16,55 @@ export const addProductAction = async (prevState: unknown, formData: FormData) =
 	if (submission.status !== "success") {
 		return submission.reply()
 	}
-
+	console.log('formData from addProductAction', formData)
 	const splittedImagesData = splittedItems(submission.value.images!.join(","))
 	const splittedColorsData = splittedItems(JSON.parse(submission.value.colors[0]).join(","))
+	const generatedSlug = slugify(submission.value.titleEn, { lower: true, strict: true, })
+
 
 	try {
 		await prisma.product.upsert({
-			where: { model: submission.value.model }, create: {
-				title: submission.value.title,
+			where: { slug: submission.value.slug! },
+			create: {
+				titleAr: submission.value.titleAr,
+				titleEn: submission.value.titleEn,
 				model: submission.value.model,
-				miniDescription: submission.value.miniDescription,
-				description: submission.value.description,
+				miniDescriptionAr: submission.value.miniDescriptionAr,
+				miniDescriptionEn: submission.value.miniDescriptionEn,
+				descriptionAr: submission.value.descriptionAr,
+				descriptionEn: submission.value.descriptionEn,
 				status: submission.value.status,
 				quantity: submission.value.quantity,
 				lowStock: submission.value.lowStock,
 				price: submission.value.price,
 				discount: submission.value.discount,
 				mainImage: submission.value.mainImage,
-				bluePrint: submission.value.bluePrint,
 				images: splittedImagesData,
 				factoryId: submission.value.factoryId,
 				styleId: submission.value.styleId,
 				classId: submission.value.classId,
+				slug: generatedSlug,
 				color: { connect: splittedColorsData.map((id: string) => ({ id })) }
 			}, update: {
-				title: submission.value.title,
+				titleAr: submission.value.titleAr,
+				titleEn: submission.value.titleEn,
 				model: submission.value.model,
-				miniDescription: submission.value.miniDescription,
-				description: submission.value.description,
+				miniDescriptionAr: submission.value.miniDescriptionAr,
+				miniDescriptionEn: submission.value.miniDescriptionEn,
+				descriptionAr: submission.value.descriptionAr,
+				descriptionEn: submission.value.descriptionEn,
 				status: submission.value.status,
 				quantity: submission.value.quantity,
 				lowStock: submission.value.lowStock,
 				price: submission.value.price,
 				discount: submission.value.discount,
 				mainImage: submission.value.mainImage,
-				bluePrint: submission.value.bluePrint,
 				images: splittedImagesData,
 				factoryId: submission.value.factoryId,
 				styleId: submission.value.styleId,
 				classId: submission.value.classId,
-				color: { set: splittedColorsData.map((id: string) => ({ id })) }
+				slug: generatedSlug,
+				color: { connect: splittedColorsData.map((id: string) => ({ id })) }
 			}
 		})
 	} catch (error) {
@@ -70,30 +81,34 @@ export const editProductAction = async (prevState: unknown, formData: FormData) 
 	if (submission.status !== "success") {
 		return submission.reply()
 	}
-
 	const splittedImagesData = splittedItems(submission.value.images!.join(","))
+	const splittedColorsData = splittedItems(JSON.parse(submission.value.colors[0]).join(","))
+	const generatedSlug = slugify(submission.value.titleEn, { lower: true, strict: true, })
+
 
 	try {
 		await prisma.product.update({
-			where: {
-				id: submission.value.id!
-			}, data: {
-				title: submission.value.title,
+			where: { id: submission.value.id! },
+			data: {
+				titleAr: submission.value.titleAr,
+				titleEn: submission.value.titleEn,
 				model: submission.value.model,
-				miniDescription: submission.value.miniDescription,
-				description: submission.value.description,
+				miniDescriptionAr: submission.value.miniDescriptionAr,
+				miniDescriptionEn: submission.value.miniDescriptionEn,
+				descriptionAr: submission.value.descriptionAr,
+				descriptionEn: submission.value.descriptionEn,
 				status: submission.value.status,
 				quantity: submission.value.quantity,
 				lowStock: submission.value.lowStock,
 				price: submission.value.price,
 				discount: submission.value.discount,
 				mainImage: submission.value.mainImage,
-				bluePrint: submission.value.bluePrint,
 				images: splittedImagesData,
 				factoryId: submission.value.factoryId,
 				styleId: submission.value.styleId,
 				classId: submission.value.classId,
-				color: { set: submission.value.colors.map((id: string) => ({ id })) }
+				slug: generatedSlug,
+				color: { connect: splittedColorsData.map((id: string) => ({ id })) }
 			}
 		})
 	} catch (error) {
@@ -117,5 +132,5 @@ export const deleteProductAction = async (formData: FormData) => {
 	} catch (error) {
 		console.error(error)
 	}
-	redirect("/server/products")
+	refresh()
 }

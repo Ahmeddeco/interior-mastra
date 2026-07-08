@@ -10,7 +10,7 @@ import SubmitButton from "@/components/shared/SubmitButton"
 import { UploadOneImagesDropZone } from "@/components/shared/UploadImagesDropZone"
 import Phone from "@/components/shared/Phone"
 import CountryInput from "@/components/shared/CountryInput"
-import { addUserAction } from "@/actions/user.action"
+import {  editUserAction } from "@/actions/user.action"
 import { Select, SelectContent, SelectTrigger, SelectValue, SelectItem } from "@/components/ui/select"
 import { Role } from "@/generated/prisma/enums"
 import { User } from "@/generated/prisma/client"
@@ -21,7 +21,7 @@ type Props = {
 }
 
 export default function EditUser({ user }: Props) {
-	const [lastResult, action] = useActionState(addUserAction, undefined)
+	const [lastResult, action] = useActionState(editUserAction, undefined)
 	const [form, fields] = useForm({
 		lastResult,
 		onValidate({ formData }) {

@@ -1,37 +1,38 @@
 import prisma from "@/lib/prisma"
 
-// getAllStyles
-export const getAllStyles = async (size: number, page: number) => {
+/* ------------------------------ getAllStyles ------------------------------ */
+export const getAllStylesForStylesServerPage = async (size: number, page: number) => {
 	try {
 		const totalColors = await prisma.style.count()
 		const totalPages = Math.ceil(totalColors / size)
 		const data = await prisma.style.findMany({
-			skip: (page * size) - size, take: size, orderBy: {
-				title: "asc"
-			}
+			select: { titleAr: true, titleEn: true, id: true, descriptionEn: true, slug: true, image: true },
+			skip: (page * size) - size, take: size,
+			orderBy: { titleEn: "asc" }
 		})
-		return {data, totalPages}
+		return { data, totalPages }
 	} catch (error) {
 		console.error(error)
 	}
 }
 
-// getOneStyle
+/* ------------------------------- getOneStyle ------------------------------ */
 export const getOneStyle = async (slug: string) => {
 	try {
 		return await prisma.style.findUnique({
-			where: {slug}
+			where: { slug }
 		})
 	} catch (error) {
 		console.error(error)
 	}
 }
 
-// getAllStylesForProductPage
+/* ----------------------- getAllStylesForProductPage ----------------------- */
 export const getAllStylesForProductPage = async () => {
 	try {
 		return await prisma.style.findMany({
-			select: {id: true, title: true}, orderBy: {title: "asc"}
+			select: { id: true, titleAr: true, titleEn: true },
+			orderBy: { titleEn: "asc" },
 		})
 	} catch (error) {
 		console.error(error)

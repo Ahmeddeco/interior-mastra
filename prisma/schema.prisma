@@ -79,7 +79,7 @@ model User {
   name          String
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
-  email         String
+  email         String     @unique
   emailVerified Boolean    @default(false)
   image         String?
   sessions      Session[]
@@ -95,6 +95,7 @@ model User {
   factories     Factory[]
 
   @@unique([email, mobile])
+  @@index([email])
   @@map("user")
 }
 
@@ -193,9 +194,9 @@ model Product {
   images            String[]
   color             Color[]
   favorites         Favorite[]
-  factory           Factory       @relation(fields: [factoryId], references: [id])
+  factory           Factory       @relation(fields: [factoryId], references: [id], onDelete: Cascade)
   factoryId         String
-  style             Style         @relation(fields: [styleId], references: [id])
+  style             Style         @relation(fields: [styleId], references: [id], onDelete: Cascade)
   styleId           String
   class             Class         @relation(fields: [classId], references: [id])
   classId           String

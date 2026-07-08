@@ -9,7 +9,7 @@ export const getAllColors = async (size: number, page: number) => {
       skip: (page * size) - size,
       take: size,
       orderBy: {
-        title: "asc",
+        titleEn: "asc",
       },
     })
     return { data, totalPages }
@@ -21,12 +21,11 @@ export const getAllColors = async (size: number, page: number) => {
 /* ------------------------------ getOneColor ----------------------------- */
 export const getOneColor = async (slug: string) => {
   try {
-    const data = await prisma.color.findUnique({
+    return await prisma.color.findUnique({
       where: {
         slug
       }
     })
-    return { data }
   } catch (error) {
     console.error(error)
   }
@@ -34,11 +33,10 @@ export const getOneColor = async (slug: string) => {
 
 export const getAllColorsForProductPage = async () => {
   try {
-    const colors = await prisma.color.findMany({
-      select: { id: true, title: true },
-      orderBy: { title: "asc" },
+    return await prisma.color.findMany({
+      select: { id: true, titleEn: true, titleAr: true },
+      orderBy: { titleEn: "asc" },
     })
-    return colors
   } catch (error) {
     console.error(error)
   }

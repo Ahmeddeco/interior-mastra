@@ -1,15 +1,16 @@
 import prisma from "@/lib/prisma"
 
 /* ------------------------------ getAllClasses ----------------------------- */
-export const getAllClasses = async (size: number, page: number) => {
+export const getAllClassesForClassesServerPage = async (size: number, page: number) => {
   try {
     const totalClasses = await prisma.class.count()
     const totalPages = Math.ceil(totalClasses / size)
     const data = await prisma.class.findMany({
+      select: { titleAr: true, titleEn: true, id: true, image: true, slug: true,descriptionEn:true },
       skip: (page * size) - size,
       take: size,
       orderBy: {
-        title: "asc",
+        titleEn: "asc",
       },
     })
     return { data, totalPages }
@@ -21,12 +22,11 @@ export const getAllClasses = async (size: number, page: number) => {
 /* ------------------------------ getOneClass ------------------------------- */
 export const getOneClass = async (slug: string) => {
   try {
-    const data = await prisma.class.findUnique({
+    return await prisma.class.findUnique({
       where: {
         slug
       }
     })
-    return { data }
   } catch (error) {
     console.error(error)
   }
@@ -35,11 +35,10 @@ export const getOneClass = async (slug: string) => {
 /* ----------------------- getAllClassesForProductPage ---------------------- */
 export const getAllClassesForProductPage = async () => {
   try {
-    const data = await prisma.class.findMany({
-      select: { id: true, title: true, image: true, slug: true },
-      orderBy: { title: "desc" },
+    return await prisma.class.findMany({
+      select: { id: true, titleEn: true, titleAr: true, image: true, slug: true },
+      orderBy: { titleEn: "asc" },
     })
-    return data
   } catch (error) {
     console.error(error)
   }

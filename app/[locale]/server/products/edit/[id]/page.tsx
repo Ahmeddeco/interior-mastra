@@ -2,13 +2,13 @@ import { CircleChevronLeft } from "lucide-react"
 import ServerPageCard from "@/components/shared/ServerPageCard"
 import EmptyCard from "@/components/shared/EmptyCard"
 import { getAllFactoriesForProductPage } from "@/dl/factory.data"
-import EditProduct from "@/forms/EditProduct"
 import { getAllColorsForProductPage } from "@/dl/color.data"
 import { getAllStylesForProductPage } from "@/dl/styles.data"
 import { getAllClassesForProductPage } from "@/dl/class.data"
 import { getOneProduct } from "@/dl/product.data"
 import { isAllowedRoles } from "@/auth/isAllowedRoles"
 import { Role } from "@/generated/prisma/enums"
+import EditProduct from "@/forms/EditProduct"
 
 export default async function EditProductPage({ params }: { params: Promise<{ id: string }> }) {
 	await isAllowedRoles([Role.admin])

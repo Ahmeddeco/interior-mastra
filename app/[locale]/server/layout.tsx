@@ -11,7 +11,7 @@ export default async function ServerLayout({
 	const locale = (await params).locale
 
 	return (
-		<SidebarProvider>
+		<SidebarProvider suppressHydrationWarning>
 			<ServerSidebar locale={locale} />
 			<div className="w-full p-6 ">
 				<SidebarTrigger dir={locale === "ar" ? "rtl" : "ltr"} />

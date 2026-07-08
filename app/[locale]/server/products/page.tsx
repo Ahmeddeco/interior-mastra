@@ -29,6 +29,7 @@ import { getAllProductsForProductsPage } from "@/dl/product.data"
 import { deleteProductAction } from "@/actions/product.action"
 import { isAllowedRoles } from "@/auth/isAllowedRoles"
 import { Role } from "@/generated/prisma/enums"
+import { getAllProductsForProductsPageType } from "@/types/product.type"
 
 export default async function ProductsPage({
 	searchParams,
@@ -40,7 +41,7 @@ export default async function ProductsPage({
 	const { page, size } = await searchParams
 	const pageNumber = +page > 1 ? +page : 1
 	const pageSize = +size || 10
-	const products = await getAllProductsForProductsPage(pageSize, pageNumber)
+	const products: getAllProductsForProductsPageType = await getAllProductsForProductsPage(pageSize, pageNumber)
 
 	return (
 		<ServerPageCard
@@ -58,7 +59,7 @@ export default async function ProductsPage({
 					<TableHeader>
 						<TableRow>
 							<TableHead>logo</TableHead>
-							<TableHead>name</TableHead>
+							<TableHead>name ar</TableHead>
 							<TableHead>model</TableHead>
 							<TableHead>price</TableHead>
 							<TableHead>factory</TableHead>
@@ -71,21 +72,27 @@ export default async function ProductsPage({
 					{/* ----------------------------- TableBody ----------------------------- */}
 					<TableBody>
 						{products.data.map(
-							({ id, mainImage, title, model, price, status, factory, style, class: productClass }) => (
+							({ id, mainImage, titleAr, model, price, status, factory, style, class: productClass }) => (
 								<TableRow key={id}>
-									<TableCell className="relative rounded-lg size-16 ">
+									<TableCell>
 										{mainImage ? (
-											<Image src={mainImage} alt={title} fill className="rounded-lg object-contain" />
+											<Image
+												src={mainImage}
+												alt={titleAr}
+												width={48}
+												height={48}
+												className=" object-cover aspect-square"
+											/>
 										) : (
-											<ImageOff size={72} />
+											<ImageOff size={48} />
 										)}
 									</TableCell>
-									<TableCell className="capitalize ">{title}</TableCell>
+									<TableCell className="capitalize ">{titleAr}</TableCell>
 									<TableCell>{model}</TableCell>
 									<TableCell>{price}</TableCell>
 									<TableCell>{factory.name}</TableCell>
-									<TableCell>{style?.title}</TableCell>
-									<TableCell>{productClass?.title}</TableCell>
+									<TableCell>{style?.titleEn}</TableCell>
+									<TableCell>{productClass?.titleEn}</TableCell>
 									<TableCell>{status}</TableCell>
 
 									{/* -------------------------------- settings -------------------------------- */}

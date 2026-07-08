@@ -3,6 +3,7 @@
 import prisma from "@/lib/prisma"
 import StyleSchema from "@/schemas/StyleSchema"
 import { parseWithZod } from "@conform-to/zod"
+import { refresh } from "next/cache"
 import { redirect } from "next/navigation"
 import slugify from "slugify"
 
@@ -14,23 +15,25 @@ export const addStyleAction = async (prevState: unknown, formData: FormData) => 
   if (submission.status !== 'success') {
     return submission.reply()
   }
-
-  // generatedSlug
-  const generatedSlug = slugify(submission.value.title, { lower: true, strict: true, locale: "ar" })
+  const generatedSlug = slugify(submission.value.titleEn, { lower: true, strict: true, })
 
   try {
     await prisma.style.upsert({
-      where: { title: submission.value.title },
+      where: { slug: submission.value.slug },
       create: {
-        title: submission.value.title,
+        titleAr: submission.value.titleAr,
+        titleEn: submission.value.titleEn,
         slug: generatedSlug,
-        description: submission.value.description,
+        descriptionAr: submission.value.descriptionAr,
+        descriptionEn: submission.value.descriptionEn,
         image: submission.value.image
       },
       update: {
-        title: submission.value.title,
+        titleAr: submission.value.titleAr,
+        titleEn: submission.value.titleEn,
         slug: generatedSlug,
-        description: submission.value.description,
+        descriptionAr: submission.value.descriptionAr,
+        descriptionEn: submission.value.descriptionEn,
         image: submission.value.image
       }
     })
@@ -48,19 +51,20 @@ export const editStyleAction = async (prevState: unknown, formData: FormData) =>
   if (submission.status !== 'success') {
     return submission.reply()
   }
-
-  // generatedSlug
-  const generatedSlug = slugify(submission.value.title, { lower: true, strict: true, locale: "ar" })
+  const generatedSlug = slugify(submission.value.titleEn, { lower: true, strict: true })
+  console.log('editStyleAction entries', Array.from(formData.entries()))
 
   try {
     await prisma.style.update({
       where: {
-        slug: submission.value.slug!
+        id: submission.value.id!
       },
       data: {
-        title: submission.value.title,
+        titleAr: submission.value.titleAr,
+        titleEn: submission.value.titleEn,
         slug: generatedSlug,
-        description: submission.value.description,
+        descriptionAr: submission.value.descriptionAr,
+        descriptionEn: submission.value.descriptionEn,
         image: submission.value.image
       }
     })
@@ -82,5 +86,5 @@ export const deleteStyleAction = async (formData: FormData) => {
   } catch (error) {
     console.error(error)
   }
-  redirect("/server/styles")
+  refresh()
 }

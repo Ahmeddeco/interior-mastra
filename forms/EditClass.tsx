@@ -7,17 +7,17 @@ import { useActionState } from "react"
 import { Input } from "@/components/ui/input"
 import { Field, FieldError, FieldLabel } from "@/components/ui/field"
 import SubmitButton from "@/components/shared/SubmitButton"
-import { Class } from "@/generated/modelSchema/ClassSchema"
 import ClassSchema from "@/schemas/ClassSchema"
 import { Textarea } from "@/components/ui/textarea"
 import { editClassAction } from "@/actions/class.action"
 import { UploadOneImagesDropZone } from "@/components/shared/UploadImagesDropZone"
+import { getOneClassType } from "@/types/class.type"
 
 type Props = {
-	data: Class
+	oneClass: getOneClassType
 }
 
-export default function EditClass({ data }: Props) {
+export default function EditClass({ oneClass }: Props) {
 	const [lastResult, action] = useActionState(editClassAction, undefined)
 	const [form, fields] = useForm({
 		lastResult,
@@ -29,30 +29,56 @@ export default function EditClass({ data }: Props) {
 	})
 	return (
 		<Form id={form.id} action={action} onSubmit={form.onSubmit} className="space-y-6">
-			<Input type="hidden" name="id" value={data.id} />
+			<Input type="hidden" name="id" value={oneClass?.id} />
 
-			{/* ---------------------------------- title --------------------------------- */}
+			{/* ---------------------------------- titleAr --------------------------------- */}
+			<div className="flex lg:flex-row flex-col gap-6">
+				<Field>
+					<FieldLabel htmlFor={fields.titleAr.name}>{fields.titleAr.name}</FieldLabel>
+					<Input type="text" key={fields.titleAr.key} name={fields.titleAr.name} defaultValue={oneClass?.titleAr} />
+					<FieldError>{fields.titleAr.errors}</FieldError>
+				</Field>
+
+				{/* ---------------------------------- titleEn --------------------------------- */}
+				<Field>
+					<FieldLabel htmlFor={fields.titleEn.name}>{fields.titleEn.name}</FieldLabel>
+					<Input
+						type="text"
+						key={fields.titleEn.key}
+						name={fields.titleEn.name}
+						defaultValue={fields.titleEn.initialValue}
+					/>
+					<FieldError>{oneClass?.titleEn}</FieldError>
+				</Field>
+			</div>
+
+			{/* ------------------------------- descriptionAr ------------------------------ */}
 			<Field>
-				<FieldLabel htmlFor={fields.title.name}>{fields.title.name}</FieldLabel>
-				<Input
-					type="text"
-					key={fields.title.key}
-					name={fields.title.name}
-					defaultValue={data.title ?? ""}
-					placeholder="Red"
+				<FieldLabel htmlFor={fields.descriptionAr.name}>{fields.descriptionAr.name}</FieldLabel>
+				<Textarea
+					key={fields.descriptionAr.key}
+					name={fields.descriptionAr.name}
+					defaultValue={fields.descriptionAr.initialValue}
 				/>
-				<FieldError>{fields.title.errors}</FieldError>
+				<FieldError>{oneClass?.descriptionAr}</FieldError>
 			</Field>
 
-			{/* ------------------------------- description ------------------------------ */}
+			{/* ------------------------------- descriptionEn ------------------------------ */}
 			<Field>
-				<FieldLabel htmlFor={fields.description.name}>{fields.description.name}</FieldLabel>
-				<Textarea key={fields.description.key} name={fields.description.name} defaultValue={data.description ?? ""} />
-				<FieldError>{fields.description.errors}</FieldError>
+				<FieldLabel htmlFor={fields.descriptionEn.name}>{fields.descriptionEn.name}</FieldLabel>
+				<Textarea
+					key={fields.descriptionEn.key}
+					name={fields.descriptionEn.name}
+					defaultValue={fields.descriptionEn.initialValue}
+				/>
+				<FieldError>{oneClass?.descriptionEn}</FieldError>
 			</Field>
-
 			{/* ---------------------------------- image --------------------------------- */}
-			<UploadOneImagesDropZone imageName={fields.image.name} errors={fields.image.errors} dbImage={data.image ?? ""} />
+			<UploadOneImagesDropZone
+				imageName={fields.image.name}
+				errors={fields.image.errors}
+				dbImage={oneClass?.image ?? ""}
+			/>
 
 			<SubmitButton text={"edit class"} />
 		</Form>

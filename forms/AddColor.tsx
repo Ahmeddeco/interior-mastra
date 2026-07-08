@@ -22,17 +22,30 @@ export default function AddColor() {
 	})
 	return (
 		<Form id={form.id} action={action} onSubmit={form.onSubmit} className="space-y-6">
-			{/* ---------------------------------- title --------------------------------- */}
+			{/* ---------------------------------- titleAr --------------------------------- */}
 			<Field>
-				<FieldLabel htmlFor={fields.title.name}>{fields.title.name}</FieldLabel>
+				<FieldLabel htmlFor={fields.titleAr.name}>{fields.titleAr.name}</FieldLabel>
 				<Input
 					type="text"
-					key={fields.title.key}
-					name={fields.title.name}
-					defaultValue={fields.title.initialValue}
-					placeholder="Red"
+					key={fields.titleAr.key}
+					name={fields.titleAr.name}
+					defaultValue={fields.titleAr.initialValue}
+					placeholder="اسود"
 				/>
-				<FieldError>{fields.title.errors}</FieldError>
+				<FieldError>{fields.titleAr.errors}</FieldError>
+			</Field>
+
+			{/* ---------------------------------- titleEn --------------------------------- */}
+			<Field>
+				<FieldLabel htmlFor={fields.titleEn.name}>{fields.titleEn.name}</FieldLabel>
+				<Input
+					type="text"
+					key={fields.titleEn.key}
+					name={fields.titleEn.name}
+					defaultValue={fields.titleEn.initialValue}
+					placeholder="Black"
+				/>
+				<FieldError>{fields.titleEn.errors}</FieldError>
 			</Field>
 
 			{/* ------------------------------ colorCode ------------------------------ */}

@@ -11,7 +11,7 @@ export const getAllProducts = async (size: number, page: number) => {
 		const data = await prisma.product.findMany({
 			where: { status: "published" },
 			skip: (page * size) - size, take: size,
-			orderBy: { title: "asc" },
+			orderBy: { titleEn: "asc" },
 		})
 		return { data, totalPages }
 	} catch (error) {
@@ -30,17 +30,17 @@ export const getAllProductsForProductsPage = async (size: number, page: number) 
 			skip: (page * size) - size, take: size,
 			select: {
 				id: true,
-				title: true,
+				titleAr: true,
 				model: true,
 				price: true,
 				status: true,
 				mainImage: true,
-				class: { select: { title: true } },
-				style: { select: { title: true } },
+				class: { select: { titleEn: true } },
+				style: { select: { titleEn: true } },
 				factory: { select: { name: true } }
 			},
 
-			orderBy: { title: "asc" }
+			orderBy: { titleEn: "asc" }
 		})
 		return { data, totalPages }
 	} catch (error) {
@@ -54,9 +54,9 @@ export const getOneProduct = async (id: string) => {
 		return await prisma.product.findUnique({
 			where: { id, status: "published" },
 			include: {
-				class: { select: { id: true, title: true, slug: true } },
-				color: { select: { id: true, title: true, slug: true } },
-				style: { select: { id: true, title: true, slug: true } },
+				class: { select: { id: true, titleEn: true, slug: true } },
+				color: { select: { id: true, titleEn: true, slug: true } },
+				style: { select: { id: true, titleEn: true, slug: true } },
 				factory: { select: { id: true, name: true, slug: true } }
 			}
 		})
@@ -119,7 +119,7 @@ export const getAllProductsWithSpecificClass = async (classSlug: string, size: n
 			where: { status: "published", class: { slug: classSlug } },
 			take: size,
 			skip: (page * size) - size,
-			select: { title: true, price: true, discount: true, id: true, mainImage: true, class: { select: { title: true } } },
+			select: { title: true, price: true, discount: true, id: true, mainImage: true, class: { select: { titleEn: true } } },
 			orderBy: { createdAt: "desc" },
 		})
 		return { totalProducts, totalPages, data }
@@ -137,7 +137,7 @@ export const getAllDiscountProducts = async (discount: number, size: number = 10
 			where: { discount: { lte: discount } },
 			take: size,
 			skip: (page * size) - size,
-			select: { title: true, price: true, discount: true, id: true, mainImage: true, class: { select: { title: true } } },
+			select: { title: true, price: true, discount: true, id: true, mainImage: true, class: { select: { titleEn: true } } },
 			orderBy: { discount: "desc" },
 		})
 		return { totalProducts, totalPages, data }

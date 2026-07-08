@@ -3,6 +3,7 @@
 import prisma from "@/lib/prisma"
 import ClassSchema from "@/schemas/ClassSchema"
 import { parseWithZod } from "@conform-to/zod"
+import { refresh } from "next/cache"
 import { redirect } from "next/navigation"
 import slugify from "slugify"
 
@@ -15,19 +16,24 @@ export const addClassAction = async (prevState: unknown, formData: FormData) => 
 		return submission.reply()
 	}
 	// generatedSlug
-	const generatedSlug = slugify(submission.value.title, { lower: true, strict: true, locale: "ar" })
+	const generatedSlug = slugify(submission.value.titleEn, { lower: true, strict: true })
 
 	try {
 		await prisma.class.upsert({
-			where: { title: submission.value.title }, create: {
-				title: submission.value.title,
+			where: { slug: submission.value.slug },
+			create: {
+				titleAr: submission.value.titleAr,
+				titleEn: submission.value.titleEn,
 				slug: generatedSlug,
-				description: submission.value.description,
+				descriptionAr: submission.value.descriptionAr,
+				descriptionEn: submission.value.descriptionEn,
 				image: submission.value.image
 			}, update: {
-				title: submission.value.title,
+				titleAr: submission.value.titleAr,
+				titleEn: submission.value.titleEn,
 				slug: generatedSlug,
-				description: submission.value.description,
+				descriptionAr: submission.value.descriptionAr,
+				descriptionEn: submission.value.descriptionEn,
 				image: submission.value.image
 			}
 		})
@@ -46,16 +52,18 @@ export const editClassAction = async (prevState: unknown, formData: FormData) =>
 		return submission.reply()
 	}
 
-	const generatedSlug = slugify(submission.value.title, { lower: true, strict: true, locale: "ar" })
+	const generatedSlug = slugify(submission.value.titleEn, { lower: true, strict: true, })
 
 	try {
 		await prisma.class.update({
 			where: {
 				id: submission.value.id!
 			}, data: {
-				title: submission.value.title,
+				titleAr: submission.value.titleAr,
+				titleEn: submission.value.titleEn,
 				slug: generatedSlug,
-				description: submission.value.description,
+				descriptionAr: submission.value.descriptionAr,
+				descriptionEn: submission.value.descriptionEn,
 				image: submission.value.image
 			}
 		})
@@ -67,15 +75,15 @@ export const editClassAction = async (prevState: unknown, formData: FormData) =>
 
 /* ---------------------------- deleteClassAction --------------------------- */
 export const deleteClassAction = async (formData: FormData) => {
-	const slug = formData.get("slug")
+	const id = formData.get("id")
 	try {
 		await prisma.class.delete({
 			where: {
-				slug: slug as string
+				id: id as string
 			}
 		})
 	} catch (error) {
 		console.error(error)
 	}
-	redirect("/server/classes")
+	refresh()
 }

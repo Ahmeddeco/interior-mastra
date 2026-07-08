@@ -14,13 +14,18 @@ import { ProductStatus } from "@/generated/prisma/enums"
 import { Textarea } from "@/components/ui/textarea"
 import { UploadManyImagesDropZone, UploadOneImagesDropZone } from "@/components/shared/UploadImagesDropZone"
 import MultiSelect from "@/components/shared/MultiSelect"
+import { getAllColorsForProductPageType } from "@/types/color.type"
+import { getAllStylesForProductPageType } from "@/types/style.type"
+import { getAllFactoriesForProductPageType } from "@/types/factory.type"
+import { getAllClassesForProductPageType } from "@/types/class.type"
+import TiptapEditor from "@/components/shared/TiptapEditor"
 import { getOneProductType } from "@/types/product.type"
 
 type Props = {
-	colors: { id: string; title: string }[]
-	factories: { id: string; name: string }[]
-	styles: { id: string; title: string }[]
-	classes: { id: string; title: string }[]
+	colors: getAllColorsForProductPageType
+	styles: getAllStylesForProductPageType
+	factories: getAllFactoriesForProductPageType
+	classes: getAllClassesForProductPageType
 	product: getOneProductType
 }
 
@@ -34,45 +39,83 @@ export default function EditProduct({ colors, factories, styles, classes, produc
 		shouldValidate: "onBlur",
 		shouldRevalidate: "onInput",
 	})
+
+	const colorsData = colors?.map((color) => ({
+		id: color.id,
+		title: color.titleEn,
+	}))
+
+	const formattedColorsData = product?.color?.map((color) => ({
+		id: color.id,
+		title: color.titleEn,
+	}))
+
 	return (
 		<Form id={form.id} action={action} onSubmit={form.onSubmit} className="space-y-6">
+			<Input name="id" type="hidden" value={product?.id} />
 			{/* ---------------------------- title & model ---------------------------- */}
 			<div className="flex lg:flex-row flex-col items-center justify-center gap-4">
-				{/* ---------------------------------- title --------------------------------- */}
+				{/* ---------------------------------- titleAr --------------------------------- */}
 				<Field>
-					<FieldLabel htmlFor={fields.title.name}>{fields.title.name}</FieldLabel>
-					<Input type="text" key={fields.title.key} name={fields.title.name} defaultValue={product?.title} />
-					<FieldError>{fields.title.errors}</FieldError>
+					<FieldLabel htmlFor={fields.titleAr.name}>{fields.titleAr.name}</FieldLabel>
+					<Input type="text" key={fields.titleAr.key} name={fields.titleAr.name} defaultValue={product?.titleAr} />
+					<FieldError>{fields.titleAr.errors}</FieldError>
 				</Field>
-				{/* -------------------------------- model -------------------------------- */}
+
+				{/* ---------------------------------- titleEn --------------------------------- */}
 				<Field>
-					<FieldLabel htmlFor={fields.model.name}>{fields.model.name}</FieldLabel>
-					<Input type="text" key={fields.model.key} name={fields.model.name} defaultValue={product?.model} />
-					<FieldError>{fields.model.errors}</FieldError>
+					<FieldLabel htmlFor={fields.titleEn.name}>{fields.titleEn.name}</FieldLabel>
+					<Input type="text" key={fields.titleEn.key} name={fields.titleEn.name} defaultValue={product?.titleEn} />
+					<FieldError>{fields.titleEn.errors}</FieldError>
 				</Field>
 			</div>
 
-			{/* -------------------- description & miniDescription -------------------- */}
+			{/* -------------------------------- model -------------------------------- */}
+			<Field>
+				<FieldLabel htmlFor={fields.model.name}>{fields.model.name}</FieldLabel>
+				<Input type="text" key={fields.model.key} name={fields.model.name} defaultValue={product?.model} />
+				<FieldError>{fields.model.errors}</FieldError>
+			</Field>
+
+			{/* ----------------------------- descriptionAr ----------------------------- */}
+			<TiptapEditor
+				name={fields.descriptionAr.name}
+				label={fields.descriptionAr.name}
+				editorKey={fields.descriptionAr.key ?? ""}
+				defaultValue={product?.descriptionAr ?? ""}
+				errors={fields.descriptionAr.errors ?? []}
+			/>
+
+			{/* --------------------------- descriptionEn -------------------------- */}
+			<TiptapEditor
+				name={fields.descriptionEn.name}
+				label={fields.descriptionEn.name}
+				editorKey={fields.descriptionEn.key ?? ""}
+				defaultValue={product?.descriptionEn ?? ""}
+				errors={fields.descriptionEn.errors ?? []}
+			/>
+
 			<div className="flex lg:flex-row flex-col items-center justify-center gap-4">
-				{/* ----------------------------- description ----------------------------- */}
+				{/* --------------------------- miniDescriptionAr -------------------------- */}
 				<Field>
-					<FieldLabel htmlFor={fields.description.name}>{fields.description.name}</FieldLabel>
+					<FieldLabel htmlFor={fields.miniDescriptionAr.name}>{fields.miniDescriptionAr.name}</FieldLabel>
 					<Textarea
-						key={fields.description.key}
-						name={fields.description.name}
-						defaultValue={product?.description ?? ""}
+						key={fields.miniDescriptionAr.key}
+						name={fields.miniDescriptionAr.name}
+						defaultValue={product?.miniDescriptionAr ?? ""}
 					/>
-					<FieldError>{fields.description.errors}</FieldError>
+					<FieldError>{fields.miniDescriptionAr.errors}</FieldError>
 				</Field>
-				{/* --------------------------- miniDescription -------------------------- */}
+
+				{/* ----------------------------- miniDescriptionEn ----------------------------- */}
 				<Field>
-					<FieldLabel htmlFor={fields.miniDescription.name}>{fields.miniDescription.name}</FieldLabel>
+					<FieldLabel htmlFor={fields.miniDescriptionEn.name}>{fields.miniDescriptionEn.name}</FieldLabel>
 					<Textarea
-						key={fields.miniDescription.key}
-						name={fields.miniDescription.name}
-						defaultValue={product?.miniDescription}
+						key={fields.miniDescriptionEn.key}
+						name={fields.miniDescriptionEn.name}
+						defaultValue={product?.miniDescriptionEn ?? ""}
 					/>
-					<FieldError>{fields.miniDescription.errors}</FieldError>
+					<FieldError>{fields.miniDescriptionEn.errors}</FieldError>
 				</Field>
 			</div>
 
@@ -108,12 +151,12 @@ export default function EditProduct({ colors, factories, styles, classes, produc
 				{/* ------------------------------ factoryId ----------------------------- */}
 				<Field>
 					<FieldLabel htmlFor={fields.factoryId.name}>{fields.factoryId.name}</FieldLabel>
-					<Select key={fields.factoryId.key} name={fields.factoryId.name} defaultValue={product?.factory.id}>
+					<Select key={fields.factoryId.key} name={fields.factoryId.name} defaultValue={product?.factoryId}>
 						<SelectTrigger>
 							<SelectValue />
 						</SelectTrigger>
 						<SelectContent>
-							{factories.map(({ id, name }) => (
+							{factories?.map(({ id, name }) => (
 								<SelectItem value={id} key={id}>
 									{name}
 								</SelectItem>
@@ -125,14 +168,14 @@ export default function EditProduct({ colors, factories, styles, classes, produc
 				{/* ------------------------------- styleId ------------------------------ */}
 				<Field>
 					<FieldLabel htmlFor={fields.styleId.name}>{fields.styleId.name}</FieldLabel>
-					<Select key={fields.styleId.key} name={fields.styleId.name} defaultValue={product?.style?.id}>
+					<Select key={fields.styleId.key} name={fields.styleId.name} defaultValue={product?.styleId}>
 						<SelectTrigger>
 							<SelectValue />
 						</SelectTrigger>
 						<SelectContent>
-							{styles.map(({ id, title }) => (
+							{styles?.map(({ id, titleEn }) => (
 								<SelectItem value={id} key={id}>
-									{title}
+									{titleEn}
 								</SelectItem>
 							))}
 						</SelectContent>
@@ -142,14 +185,14 @@ export default function EditProduct({ colors, factories, styles, classes, produc
 				{/* --------------------------------- classId -------------------------------- */}
 				<Field>
 					<FieldLabel htmlFor={fields.classId.name}>{fields.classId.name}</FieldLabel>
-					<Select key={fields.classId.key} name={fields.classId.name} defaultValue={product?.class?.id}>
+					<Select key={fields.classId.key} name={fields.classId.name} defaultValue={product?.classId}>
 						<SelectTrigger>
 							<SelectValue />
 						</SelectTrigger>
 						<SelectContent>
-							{classes.map(({ id, title }) => (
+							{classes?.map(({ id, titleEn }) => (
 								<SelectItem value={id} key={id}>
-									{title}
+									{titleEn}
 								</SelectItem>
 							))}
 						</SelectContent>
@@ -178,7 +221,7 @@ export default function EditProduct({ colors, factories, styles, classes, produc
 						type="number"
 						key={fields.discount.key}
 						name={fields.discount.name}
-						defaultValue={product?.discount ?? ""}
+						defaultValue={product?.discount ?? 0}
 					/>
 					<FieldError>{fields.discount.errors}</FieldError>
 				</Field>
@@ -186,10 +229,10 @@ export default function EditProduct({ colors, factories, styles, classes, produc
 
 			{/* -------------------------------- colors ------------------------------- */}
 			<MultiSelect
-				allSelectedData={colors}
+				allSelectedData={colorsData}
 				inputName={fields.colors.name}
 				label={fields.colors.name}
-				defaultValues={product?.color}
+				defaultValues={formattedColorsData ?? []}
 			/>
 
 			{/* -------------------------------- mainImage ------------------------------- */}
@@ -208,13 +251,6 @@ export default function EditProduct({ colors, factories, styles, classes, produc
 				dbImages={product?.images}
 			/>
 
-			{/* -------------------------------- bluePrint ------------------------------- */}
-			<UploadOneImagesDropZone
-				imageName={fields.bluePrint.name}
-				errors={fields.bluePrint.errors}
-				label={fields.bluePrint.name}
-				dbImage={product?.bluePrint ?? ""}
-			/>
 			{/* ----------------------------- SubmitButton ---------------------------- */}
 			<SubmitButton text={"edit product"} />
 		</Form>

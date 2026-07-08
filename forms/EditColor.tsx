@@ -6,13 +6,13 @@ import Form from "next/form"
 import { useActionState } from "react"
 import { editColorAction } from "@/actions/color.action"
 import ColorSchema from "@/schemas/ColorSchema"
-import { Color } from "@/generated/modelSchema/ColorSchema"
 import { Input } from "@/components/ui/input"
 import { Field, FieldError, FieldLabel } from "@/components/ui/field"
 import SubmitButton from "@/components/shared/SubmitButton"
+import { getOneColorType } from "@/types/color.type"
 
 type Props = {
-	color: Color
+	color: getOneColorType
 }
 
 export default function EditColor({ color }: Props) {
@@ -27,19 +27,20 @@ export default function EditColor({ color }: Props) {
 	})
 	return (
 		<Form id={form.id} action={action} onSubmit={form.onSubmit} className="space-y-6">
-			<Input type="hidden" name="slug" value={color.slug} />
+			<Input type="hidden" name="slug" value={color?.slug} />
 
-			{/* ---------------------------------- title --------------------------------- */}
+			{/* ---------------------------------- titleAr --------------------------------- */}
 			<Field>
-				<FieldLabel htmlFor={fields.title.name}>{fields.title.name}</FieldLabel>
-				<Input
-					type="text"
-					key={fields.title.key}
-					name={fields.title.name}
-					defaultValue={color.title ?? ""}
-					placeholder="Red"
-				/>
-				<FieldError>{fields.title.errors}</FieldError>
+				<FieldLabel htmlFor={fields.titleAr.name}>{fields.titleAr.name}</FieldLabel>
+				<Input type="text" key={fields.titleAr.key} name={fields.titleAr.name} defaultValue={color?.titleAr} />
+				<FieldError>{fields.titleAr.errors}</FieldError>
+			</Field>
+
+			{/* ---------------------------------- titleEn --------------------------------- */}
+			<Field>
+				<FieldLabel htmlFor={fields.titleEn.name}>{fields.titleEn.name}</FieldLabel>
+				<Input type="text" key={fields.titleEn.key} name={fields.titleEn.name} defaultValue={color?.titleEn} />
+				<FieldError>{fields.titleEn.errors}</FieldError>
 			</Field>
 
 			{/* ------------------------------ colorCode ------------------------------ */}
@@ -49,7 +50,7 @@ export default function EditColor({ color }: Props) {
 					type="color"
 					key={fields.colorCode.key}
 					name={fields.colorCode.name}
-					defaultValue={color.colorCode ?? ""}
+					defaultValue={color?.colorCode ?? ""}
 				/>
 				<FieldError>{fields.colorCode.errors}</FieldError>
 			</Field>

@@ -24,28 +24,53 @@ export default function AddStyle() {
 	})
 	return (
 		<Form id={form.id} action={action} onSubmit={form.onSubmit} className="space-y-6">
-			{/* ---------------------------------- title --------------------------------- */}
+			<div className="flex lg:flex-row flex-col gap-6">
+				{/* ---------------------------------- titleAr --------------------------------- */}
+				<Field>
+					<FieldLabel htmlFor={fields.titleAr.name}>{fields.titleAr.name}</FieldLabel>
+					<Input
+						type="text"
+						key={fields.titleAr.key}
+						name={fields.titleAr.name}
+						defaultValue={fields.titleAr.initialValue}
+						placeholder="Modern"
+					/>
+					<FieldError>{fields.titleAr.errors}</FieldError>
+				</Field>
+				{/* ---------------------------------- titleEn --------------------------------- */}
+				<Field>
+					<FieldLabel htmlFor={fields.titleEn.name}>{fields.titleEn.name}</FieldLabel>
+					<Input
+						type="text"
+						key={fields.titleEn.key}
+						name={fields.titleEn.name}
+						defaultValue={fields.titleEn.initialValue}
+						placeholder="Modern"
+					/>
+					<FieldError>{fields.titleEn.errors}</FieldError>
+				</Field>
+			</div>
+
+			{/* ------------------------------- descriptionAr ------------------------------ */}
 			<Field>
-				<FieldLabel htmlFor={fields.title.name}>{fields.title.name}</FieldLabel>
-				<Input
-					type="text"
-					key={fields.title.key}
-					name={fields.title.name}
-					defaultValue={fields.title.initialValue}
-					placeholder="Modern"
+				<FieldLabel htmlFor={fields.descriptionAr.name}>{fields.descriptionAr.name}</FieldLabel>
+				<Textarea
+					key={fields.descriptionAr.key}
+					name={fields.descriptionAr.name}
+					defaultValue={fields.descriptionAr.initialValue}
 				/>
-				<FieldError>{fields.title.errors}</FieldError>
+				<FieldError>{fields.descriptionAr.errors}</FieldError>
 			</Field>
 
-			{/* ------------------------------ description ------------------------------ */}
+			{/* ------------------------------- descriptionEn ------------------------------ */}
 			<Field>
-				<FieldLabel htmlFor={fields.description.name}>{fields.description.name}</FieldLabel>
+				<FieldLabel htmlFor={fields.descriptionEn.name}>{fields.descriptionEn.name}</FieldLabel>
 				<Textarea
-					key={fields.description.key}
-					name={fields.description.name}
-					defaultValue={fields.description.initialValue}
+					key={fields.descriptionEn.key}
+					name={fields.descriptionEn.name}
+					defaultValue={fields.descriptionEn.initialValue}
 				/>
-				<FieldError>{fields.description.errors}</FieldError>
+				<FieldError>{fields.descriptionEn.errors}</FieldError>
 			</Field>
 
 			{/* ---------------------------------- image --------------------------------- */}
