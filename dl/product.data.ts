@@ -23,11 +23,12 @@ export const getAllProducts = async (size: number, page: number) => {
 /* ---------------------- getAllProductsForProductsPage --------------------- */
 export const getAllProductsForProductsPage = async (size: number, page: number) => {
 	try {
-		const totalProducts = await prisma.product.count()
+		const totalProducts = await prisma.product.count({ where: { status: "published" } })
 		const totalPages = Math.ceil(totalProducts / size)
 		const data = await prisma.product.findMany({
 			where: { status: "published" },
-			skip: (page * size) - size, take: size,
+			skip: (page * size) - size,
+			take: size,
 			select: {
 				id: true,
 				titleAr: true,
@@ -39,10 +40,9 @@ export const getAllProductsForProductsPage = async (size: number, page: number) 
 				style: { select: { titleEn: true } },
 				factory: { select: { name: true } }
 			},
-
 			orderBy: { titleEn: "asc" }
 		})
-		return { data, totalPages }
+		return { data, totalPages, totalProducts }
 	} catch (error) {
 		console.error(error)
 	}

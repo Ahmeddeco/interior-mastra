@@ -38,3 +38,14 @@ export const getAllStylesForProductPage = async () => {
 		console.error(error)
 	}
 }
+
+export const getAllStylesForFilterProductPage = async () => {
+	try {
+		return await prisma.style.findMany({
+			select: { id: true, titleEn: true, titleAr: true, image: true, slug: true },
+			orderBy: { titleEn: "asc" },
+		})
+	} catch (error) {
+		console.error(error)
+	}
+}

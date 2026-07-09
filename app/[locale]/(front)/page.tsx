@@ -14,7 +14,7 @@ export default async function HomePage({ params }: Props) {
 	const locale = (await params).locale
 
 	return (
-		<>
+		<div className="container mx-auto">
 			<Hero locale={locale} />
 			<OurTools locale={locale} />
 			<WhatWeProvide locale={locale} />
@@ -22,6 +22,6 @@ export default async function HomePage({ params }: Props) {
 			<Banner2 locale={locale} />
 			<Testimonial locale={locale} />
 			<Subscribe locale={locale} />
-		</>
+		</div>
 	)
 }

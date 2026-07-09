@@ -65,11 +65,17 @@ export default async function StylesPage({ searchParams }: { searchParams: Promi
 					<TableBody>
 						{users.data.map(({ id, mobile, name, role, city, country, state, image }) => (
 							<TableRow key={id}>
-								<TableCell className="relative rounded-lg size-16 ">
+								<TableCell>
 									{image ? (
-										<Image src={image} alt={name ?? "user"} fill className="rounded-lg object-contain" />
+										<Image
+											src={image}
+											alt={name ?? "user"}
+											width={48}
+											height={48}
+											className="rounded-lg object-cover aspect-square"
+										/>
 									) : (
-										<ImageOff size={72} />
+										<ImageOff size={48} />
 									)}
 								</TableCell>
 								<TableCell className="capitalize ">{name}</TableCell>

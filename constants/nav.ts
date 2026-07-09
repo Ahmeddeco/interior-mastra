@@ -16,7 +16,7 @@ export const frontNavLinks = [
   },
   {
     title: { ar: "منتجاتنا", en: "products" },
-    href: "/shop",
+    href: "/products",
     icon: Package2
   },
   {

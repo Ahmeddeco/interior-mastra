@@ -96,6 +96,7 @@ model User {
 
   @@unique([email, mobile])
   @@index([email])
+  @@index([name])
   @@map("user")
 }
 
@@ -114,6 +115,9 @@ model Factory {
   products  Product[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+
+  @@index([slug])
+  @@index([name])
 }
 
 model Style {
@@ -125,6 +129,8 @@ model Style {
   descriptionEn String?   @db.Text
   image         String?
   product       Product[]
+
+  @@index([slug])
 }
 
 model Color {
@@ -134,6 +140,8 @@ model Color {
   slug      String    @unique
   colorCode String    @unique
   product   Product[]
+
+  @@index([slug])
 }
 
 model Class {
@@ -147,6 +155,8 @@ model Class {
   product       Product[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+
+  @@index([slug])
 }
 
 model Favorite {

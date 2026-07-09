@@ -42,3 +42,15 @@ export const getAllFactoriesForProductPage = async () => {
     console.error(error)
   }
 }
+
+/* ------------------------- getAllFactoriesForSort ------------------------- */
+export const getAllFactoriesForSort = async () => {
+  try {
+    return await prisma.factory.findMany({
+      select: { id: true, slug: true, logo: true, name: true },
+      orderBy: { name: "asc" }
+    })
+  } catch (error) {
+    console.error(error)
+  }
+}
