@@ -7,6 +7,8 @@ import { useCartStore } from "@/store/cartStore"
 import { IoBagCheckOutline } from "react-icons/io5"
 import { authClient } from "@/lib/auth-client"
 import React from "react"
+import { useCurrentLocale } from "@/locales/client.locale"
+import { filteredProductType } from "@/types/product.type"
 
 type SubmitButtonType = {
 	title: string
@@ -40,21 +42,22 @@ export function SubmitButton({ title, type = "submit", size = "full", variant, i
 
 /* -------------------------------- AddToCart ------------------------------- */
 
-export function AddToCart({ product }: { product: string }) {
+export function AddToCart({ product, className }: { product: filteredProductType; className?: string }) {
 	const session = authClient.useSession()
 	const { pending } = useFormStatus()
 	const addToCart = useCartStore((state) => state.addToCart)
+	const locale = useCurrentLocale()
 
 	if (!session) return null
 	return (
 		<>
 			{pending ? (
-				<Button disabled>
+				<Button size={"full"} disabled className={className}>
 					<Loader2 className="size-5 animate-spin" /> انتظر لحظة
 				</Button>
 			) : (
-				<Button type="button" onClick={() => addToCart(product)} className="lg:flex-1">
-					<ShoppingBag /> أضف الى السلة
+				<Button size={"full"} type="button" onClick={() => addToCart(product)} className={`${className} lg:flex-1`}>
+					<ShoppingBag /> {locale === "en" ? "add to cart" : "أضف الى السلة"}
 				</Button>
 			)}
 		</>

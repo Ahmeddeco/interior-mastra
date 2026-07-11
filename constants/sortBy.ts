@@ -7,14 +7,14 @@ type sortByItemsType = {
 
 export const sortByItems: sortByItemsType = [
   {
-    titleAr: "الأحدث",
-    titleEn: "Latest",
-    value: "latest",
-  },
-  {
     titleAr: "جديد",
     titleEn: "new",
     value: "new",
+  },
+  {
+    titleAr: "الأحدث",
+    titleEn: "Latest",
+    value: "latest",
   },
   {
     titleAr: "السعر: من الأقل للأعلى",

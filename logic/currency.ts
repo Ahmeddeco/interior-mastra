@@ -1,5 +1,5 @@
 export const Currency = (price: number, locale: "ar" | "en") => {
-    return price.toLocaleString(locale === "ar" ? "ar-EG" : "en-EG", {
+    return price?.toLocaleString(locale === "ar" ? "ar-EG" : "en-EG", {
         style: 'currency',
         currency: 'EGP',
         minimumFractionDigits: 2,

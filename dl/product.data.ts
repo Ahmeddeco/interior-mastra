@@ -1,6 +1,6 @@
 import { Prisma } from "@/generated/prisma/client"
 import prisma from "@/lib/prisma"
-import { ProductFilterType } from "@/types/product.type"
+import { ProductFilterType, } from "@/types/product.type"
 import { subDays } from "date-fns"
 
 /* ----------------------------- getAllProducts ---------------------------- */
@@ -146,3 +146,15 @@ export const getAllDiscountProducts = async (discount: number, size: number = 10
 	}
 }
 
+/* ----------------------------- relatedProducts ---------------------------- */
+export const relatedProducts = async (classId: string, styleId: string) => {
+	try {
+		await prisma.product.findMany({
+			where: { class: { id: classId }, style: { id: styleId } },
+			take: 6,
+			orderBy: { createdAt: "desc" }
+		})
+	} catch (error) {
+		console.error(error)
+	}
+}

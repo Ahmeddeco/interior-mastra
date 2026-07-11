@@ -1,4 +1,4 @@
-import { ProductCardType } from "@/types/Product.type"
+import { filteredProductType } from "@/types/product.type"
 import { toast } from "sonner"
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
@@ -6,18 +6,17 @@ import { persist } from "zustand/middleware"
 export type CartItem = {
   id: string
   quantity: number
-  title: string
+  titleAr: string
+  titleEn: string
   price: number
   image: string
-  increaseByOne?: boolean
 }
 
 type CartState = {
   items: CartItem[]
-  addToCart: (product: ProductCardType) => void
+  addToCart: (product: filteredProductType) => void
   removeFromCart: (id: string) => void
-  updateQuantityByHalf: (type: 'increment' | 'decrement', id: string) => void
-  updateQuantityByOnes: (type: 'increment' | 'decrement', id: string) => void
+  updateQuantity: (type: 'increment' | 'decrement', id: string) => void
 }
 
 export const useCartStore = create<CartState>()(
@@ -25,7 +24,7 @@ export const useCartStore = create<CartState>()(
     (set, get) => ({
       items: [],
 
-      addToCart: (product: ProductCardType) => {
+      addToCart: (product: filteredProductType) => {
         const existingProduct = get().items.find((item) => item.id === product!.id)
         set({
           items: existingProduct
@@ -35,10 +34,10 @@ export const useCartStore = create<CartState>()(
               {
                 quantity: 1,
                 id: product!.id,
-                title: product!.title,
+                titleEn: product!.titleEn,
+                titleAr: product!.titleAr,
                 price: product!.price,
                 image: product!.mainImage,
-                increaseByOne: product?.increaseByOne ?? false
               },
             ],
         })
@@ -58,26 +57,8 @@ export const useCartStore = create<CartState>()(
 
       },
 
-      /* -------------------------- updateQuantityByHalf -------------------------- */
-      updateQuantityByHalf: (type, id) => {
-        set({
-          items: get().items.map((item) =>
-            item.id === id
-              ? {
-                ...item,
-                quantity:
-                  type === "increment"
-                    ? item.quantity + .5
-
-                    : Math.max(1, item.quantity - .5), // preventing the quantity from going below .5 when decrementing.
-              }
-              : item
-          ),
-        })
-      },
-
-      /* -------------------------- updateQuantityByOnes -------------------------- */
-      updateQuantityByOnes: (type, id) => {
+      /* ----------------------------- updateQuantity ----------------------------- */
+      updateQuantity: (type, id) => {
         set({
           items: get().items.map((item) =>
             item.id === id
@@ -93,6 +74,6 @@ export const useCartStore = create<CartState>()(
           ),
         })
       }
-    }), { name: 'cart-storage' }
+    }), { name: 'interior-cart-storage' }
   )
 )

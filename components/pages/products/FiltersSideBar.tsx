@@ -21,7 +21,6 @@ import { getAllStylesForFilterProductPageType } from "@/types/style.type"
 import SelectColors from "@/components/shared/SelectColors"
 import { getAllColorsForProductPageType } from "@/types/color.type"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Separator } from "@/components/ui/separator"
 import SortBy from "@/components/shared/SortBy"
 import { sortByItems } from "@/constants/sortBy"
 import { SubmitButton } from "@/components/shared/CustomButtons"
@@ -56,21 +55,21 @@ export default function FiltersSideBar({ locale, allClasses, allStyles, allColor
 				<Input type="hidden" name={isMaxPriceChanged ? "max_price" : undefined} value={price[1]} />
 				{activeSort && <Input type="hidden" name="sort_by" value={activeSort} />}
 
-				<SidebarHeader>
-					<div className="flex items-center gap-2">
-						<ListFilter />
-						{locale === "en" ? "filter products" : "فلتر المنتجات"}
-					</div>
-					<Separator />
+				{/* ------------------------------ SidebarHeader ----------------------------- */}
+				<SidebarHeader className="flex-row items-center gap-2">
+					<ListFilter />
+					{locale === "en" ? "filter products" : "فلتر المنتجات"}
 				</SidebarHeader>
+
+				{/* --------------------------- SidebarContent --------------------------- */}
 				<ScrollArea className="h-full ">
 					<SidebarContent className="h-[80vh]">
-						{/* ----------------------------- sort-by ---------------------------- */}
+						{/* ----------------------------- order-by ---------------------------- */}
 						<SidebarGroup>
 							<SidebarGroupContent>
 								<Accordion type="multiple">
-									<AccordionItem value="sort-by">
-										<AccordionTrigger>{locale === "en" ? "Sort By" : "فلتر بواسطة"}</AccordionTrigger>
+									<AccordionItem value="order-by">
+										<AccordionTrigger>{locale === "en" ? "order By" : "ترتيب بواسطة"}</AccordionTrigger>
 										<AccordionContent>
 											<ScrollArea className="h-32">
 												{sortByItems.map(({ titleAr, titleEn, value }, index) => (
@@ -143,7 +142,7 @@ export default function FiltersSideBar({ locale, allClasses, allStyles, allColor
 						</SidebarGroup>
 					</SidebarContent>
 					<SidebarFooter>
-						<SubmitButton title={locale === "en" ? "apply filter" : "طبق الفلتر"} icon={ListFilter} variant="default" />
+						<SubmitButton title={locale === "en" ? "apply filter" : "طبق الفلتر"} icon={ListFilter} />
 					</SidebarFooter>
 				</ScrollArea>
 			</Form>

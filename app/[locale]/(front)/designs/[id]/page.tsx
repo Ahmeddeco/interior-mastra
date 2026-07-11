@@ -1,4 +1,4 @@
-import ProductCard from "@/components/shared/ProductCard"
+import ProductCard from "@/components/shared/ProductDialog"
 import { getOneInterior } from "@/dl/interior.data"
 import { oneInteriorProject } from "@/types/interior.type"
 
