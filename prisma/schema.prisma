@@ -215,6 +215,7 @@ model Product {
 
   @@index([factoryId])
   @@index([classId])
+  @@index([styleId])
   @@index([price])
   @@index([slug])
 }

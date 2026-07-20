@@ -147,14 +147,15 @@ export const getAllDiscountProducts = async (discount: number, size: number = 10
 }
 
 /* ----------------------------- relatedProducts ---------------------------- */
-export const relatedProducts = async (classId: string, styleId: string) => {
+export const relatedProducts = async (styleId: string, currentProductId: string) => {
 	try {
-		await prisma.product.findMany({
-			where: { class: { id: classId }, style: { id: styleId } },
+		return await prisma.product.findMany({
+			where: { styleId, id: { not: currentProductId } },
 			take: 6,
 			orderBy: { createdAt: "desc" }
 		})
 	} catch (error) {
 		console.error(error)
+		return [] // إرجاع مصفوفة فارغة في حالة حدوث خطأ لمنع انهيار التطبيق
 	}
 }
