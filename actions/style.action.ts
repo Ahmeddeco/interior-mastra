@@ -52,7 +52,6 @@ export const editStyleAction = async (prevState: unknown, formData: FormData) =>
     return submission.reply()
   }
   const generatedSlug = slugify(submission.value.titleEn, { lower: true, strict: true })
-  console.log('editStyleAction entries', Array.from(formData.entries()))
 
   try {
     await prisma.style.update({

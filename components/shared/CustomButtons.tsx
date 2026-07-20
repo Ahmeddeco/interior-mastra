@@ -2,13 +2,9 @@
 
 import { useFormStatus } from "react-dom"
 import { Button } from "../ui/button"
-import { Loader2, LucideIcon, ShoppingBag, X } from "lucide-react"
-import { useCartStore } from "@/store/cartStore"
+import { Loader2, LucideIcon, X } from "lucide-react"
 import { IoBagCheckOutline } from "react-icons/io5"
-import { authClient } from "@/lib/auth-client"
 import React from "react"
-import { useCurrentLocale } from "@/locales/client.locale"
-import { filteredProductType } from "@/types/product.type"
 
 type SubmitButtonType = {
 	title: string
@@ -34,30 +30,6 @@ export function SubmitButton({ title, type = "submit", size = "full", variant, i
 				<Button type={type} size={size} variant={variant}>
 					{icon && React.createElement(icon)}
 					{title}
-				</Button>
-			)}
-		</>
-	)
-}
-
-/* -------------------------------- AddToCart ------------------------------- */
-
-export function AddToCart({ product, className }: { product: filteredProductType; className?: string }) {
-	const session = authClient.useSession()
-	const { pending } = useFormStatus()
-	const addToCart = useCartStore((state) => state.addToCart)
-	const locale = useCurrentLocale()
-
-	if (!session) return null
-	return (
-		<>
-			{pending ? (
-				<Button size={"full"} disabled className={className}>
-					<Loader2 className="size-5 animate-spin" /> انتظر لحظة
-				</Button>
-			) : (
-				<Button size={"full"} type="button" onClick={() => addToCart(product)} className={`${className} lg:flex-1`}>
-					<ShoppingBag /> {locale === "en" ? "add to cart" : "أضف الى السلة"}
 				</Button>
 			)}
 		</>

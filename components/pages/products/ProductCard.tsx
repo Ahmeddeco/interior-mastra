@@ -1,8 +1,8 @@
-import { AddToCart } from "@/components/shared/CustomButtons"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Currency, finalPrice } from "@/logic/currency"
+import AddToCart from "@/store/AddToCart"
 import { filteredProductType } from "@/types/product.type"
 import { Eye, Palette, Shapes } from "lucide-react"
 import Image from "next/image"
@@ -15,7 +15,7 @@ type Props = {
 
 export default function ProductCard({ locale, product }: Props) {
 	return (
-		<Card className="w-md">
+		<Card className="w-md min-w-sm">
 			<CardHeader>
 				<CardTitle>{locale === "en" ? product.titleEn : product.titleAr}</CardTitle>
 				<CardDescription className="line-clamp-1">
@@ -54,14 +54,14 @@ export default function ProductCard({ locale, product }: Props) {
 					)}
 				</div>
 			</CardContent>
-			<CardFooter className="flex flex-row gap-6">
-				<AddToCart product={product} className="flex-1" />
-				<Button asChild size={"full"} className="flex-1">
+			<CardFooter className="flex flex-col items-center justify-center gap-4">
+				<Button asChild size={"full"} variant={"outline"}>
 					<Link href={`/products/${product.id}`}>
 						<Eye />
 						{locale === "en" ? "see more" : "شاهد المزيد"}
 					</Link>
 				</Button>
+				<AddToCart product={product} />
 			</CardFooter>
 		</Card>
 	)

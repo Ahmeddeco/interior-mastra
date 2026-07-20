@@ -38,11 +38,11 @@ export default function Cart() {
 				</SheetHeader>
 				<Separator />
 				<ScrollArea className="flex flex-col gap-4 p-4 w-full h-full max-h-[60vh]">
-					{items.map(({ id, image, price, quantity, titleAr, titleEn }) => (
+					{items.map(({ id, mainImage, price, quantity, titleAr, titleEn }) => (
 						<Item key={id} variant="default" role="listitem">
 							<ItemMedia variant="image" className="relative aspect-square size-24">
 								<Image
-									src={image}
+									src={mainImage}
 									alt={locale === "en" ? titleEn : titleAr}
 									fill
 									className="object-cover rounded-md "
@@ -72,7 +72,7 @@ export default function Cart() {
 									>
 										<Minus />
 									</Button>
-									<Button size={"sm"} type="button" variant={"outline"} className="cursor-not-allowed">
+									<Button size={"icon"} type="button" variant={"outline"} className="cursor-not-allowed">
 										{quantity.toFixed(0)}
 									</Button>
 									<Button

@@ -152,7 +152,13 @@ export const relatedProducts = async (styleId: string, currentProductId: string)
 		return await prisma.product.findMany({
 			where: { styleId, id: { not: currentProductId } },
 			take: 6,
-			orderBy: { createdAt: "desc" }
+			orderBy: { createdAt: "desc" },
+			include: {
+				color: true,
+				factory: true,
+				style: true,
+				class: true,
+			},
 		})
 	} catch (error) {
 		console.error(error)

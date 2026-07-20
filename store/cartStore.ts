@@ -1,4 +1,3 @@
-import { filteredProductType } from "@/types/product.type"
 import { toast } from "sonner"
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
@@ -9,12 +8,16 @@ export type CartItem = {
   titleAr: string
   titleEn: string
   price: number
-  image: string
+  mainImage: string
 }
+export type productCart = {
+  id: string; titleAr: string; titleEn: string; price: number; mainImage: string
+}
+
 
 type CartState = {
   items: CartItem[]
-  addToCart: (product: filteredProductType) => void
+  addToCart: (product: productCart) => void
   removeFromCart: (id: string) => void
   updateQuantity: (type: 'increment' | 'decrement', id: string) => void
 }
@@ -24,7 +27,7 @@ export const useCartStore = create<CartState>()(
     (set, get) => ({
       items: [],
 
-      addToCart: (product: filteredProductType) => {
+      addToCart: (product: productCart) => {
         const existingProduct = get().items.find((item) => item.id === product!.id)
         set({
           items: existingProduct
@@ -37,7 +40,7 @@ export const useCartStore = create<CartState>()(
                 titleEn: product!.titleEn,
                 titleAr: product!.titleAr,
                 price: product!.price,
-                image: product!.mainImage,
+                mainImage: product!.mainImage,
               },
             ],
         })

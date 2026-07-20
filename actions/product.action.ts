@@ -16,7 +16,7 @@ export const addProductAction = async (prevState: unknown, formData: FormData) =
 	if (submission.status !== "success") {
 		return submission.reply()
 	}
-	console.log('formData from addProductAction', formData)
+
 	const splittedImagesData = splittedItems(submission.value.images!.join(","))
 	const splittedColorsData = splittedItems(JSON.parse(submission.value.colors[0]).join(","))
 	const generatedSlug = slugify(submission.value.titleEn, { lower: true, strict: true, })
