@@ -1,5 +1,5 @@
 import { Agent } from '@mastra/core/agent'
-import { ollama } from 'ollama-ai-provider-v2'
+// import { ollama } from 'ollama-ai-provider-v2'
 import { Memory } from '@mastra/memory'
 
 export const interiorDesignerAgent = new Agent({
