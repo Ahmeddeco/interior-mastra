@@ -6,7 +6,9 @@ import { PostgresStore } from '@mastra/pg'
 const storage = new PostgresStore({
   id: 'pg-storage',
   connectionString: process.env.DATABASE_URL,
-  ssl: false,
+  ssl: process.env.NODE_ENV === 'production'
+    ? { rejectUnauthorized: false }
+    : false,
 })
 
 export const mastra = new Mastra({
