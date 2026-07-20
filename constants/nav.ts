@@ -1,4 +1,4 @@
-import { Brush, Home, MapPin, Newspaper, Package2, Server, Smartphone, } from "lucide-react"
+import { Brush, FileUser, Home, MapPin, Newspaper, Package2, Server, Smartphone, } from "lucide-react"
 import { FaFacebookF, FaInstagram, FaXTwitter } from "react-icons/fa6"
 import { RiRobot3Line } from "react-icons/ri"
 
@@ -23,6 +23,11 @@ export const frontNavLinks = [
     title: { ar: "مقالاتنا", en: "articles" },
     href: "/articles",
     icon: Newspaper
+  },
+  {
+    title: { ar: "من نحن", en: "information" },
+    href: "/information",
+    icon: FileUser
   },
   {
     title: { ar: "ديكو بوت", en: "deco bot" },

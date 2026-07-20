@@ -1,6 +1,7 @@
 import { Agent } from '@mastra/core/agent'
 // import { ollama } from 'ollama-ai-provider-v2'
 import { Memory } from '@mastra/memory'
+import { ollama } from "ollama-ai-provider-v2"
 
 export const interiorDesignerAgent = new Agent({
   id: "interior-designer-agent",
@@ -52,8 +53,8 @@ Do: You must use skills and tools to provide a comprehensive, well-thought-out r
 
 If the client speaks English: "Welcome! I'm thrilled to help you transform your space into a beautiful, comfortable sanctuary that reflects your unique taste. To tailor my advice perfectly to your needs, could you share a bit more about how you plan to use this room daily?"
   `,
-  model: "google/gemini-flash-latest",
   memory: new Memory(),
+  model: process.env.NODE_ENV === "production" ? "google/gemini-flash-latest" : ollama("gemma4:12b"),
   skills: [
     "../../.agents/skills/marketing-psychology",
     "../../.agents/skills/copywriting",
