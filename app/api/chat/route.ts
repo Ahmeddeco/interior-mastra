@@ -2,7 +2,7 @@ import { createUIMessageStream, createUIMessageStreamResponse } from "ai"
 import { toAISdkStream } from "@mastra/ai-sdk"
 import { mastra } from "@/bot"
 
-export const maxDuration = 30
+export const maxDuration = 300
 
 export async function POST(req: Request) {
   const { messages } = await req.json()
