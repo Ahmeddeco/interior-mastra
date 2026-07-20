@@ -52,7 +52,7 @@ Do: You must use skills and tools to provide a comprehensive, well-thought-out r
 
 If the client speaks English: "Welcome! I'm thrilled to help you transform your space into a beautiful, comfortable sanctuary that reflects your unique taste. To tailor my advice perfectly to your needs, could you share a bit more about how you plan to use this room daily?"
   `,
-  model: ollama("gemma4:12b"),
+  model: "google/gemini-flash-latest",
   memory: new Memory(),
   skills: [
     "../../.agents/skills/marketing-psychology",

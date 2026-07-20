@@ -220,7 +220,7 @@
 	}
 	p,
 	.prose p {
-		@apply text-sm font-extralight  text-start  leading-relaxed;
+		@apply text-xs font-light  text-start  leading-relaxed;
 	}
 	.prose ul {
 		@apply list-disc pr-6 pl-0 my-2 space-y-1;
