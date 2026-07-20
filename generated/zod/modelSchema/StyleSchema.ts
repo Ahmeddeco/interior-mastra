@@ -1,0 +1,19 @@
+import { z } from 'zod';
+
+/////////////////////////////////////////
+// STYLE SCHEMA
+/////////////////////////////////////////
+
+export const StyleSchema = z.object({
+  id: z.string(),
+  titleAr: z.string(),
+  titleEn: z.string(),
+  slug: z.string(),
+  descriptionAr: z.string().nullish(),
+  descriptionEn: z.string().nullish(),
+  image: z.string().nullish(),
+})
+
+export type Style = z.infer<typeof StyleSchema>
+
+export default StyleSchema;
