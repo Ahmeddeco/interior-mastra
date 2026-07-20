@@ -10,14 +10,14 @@ export const frontNavLinks = [
     icon: Home
   },
   {
-    title: { ar: "تصميماتنا", en: "designs" },
-    href: "/designs",
-    icon: Brush
-  },
-  {
     title: { ar: "منتجاتنا", en: "products" },
     href: "/products",
     icon: Package2
+  },
+  {
+    title: { ar: "تصميماتنا", en: "designs" },
+    href: "/designs",
+    icon: Brush
   },
   {
     title: { ar: "مقالاتنا", en: "articles" },

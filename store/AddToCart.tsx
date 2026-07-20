@@ -20,7 +20,7 @@ export default function AddToCart({ product, className }: Props) {
 	return (
 		<div className="w-full">
 			{pending ? (
-				<Button size={"full"} disabled className={className}>
+				<Button size={"full"} disabled className={className} variant={"default"}>
 					<Loader2 className="size-5 animate-spin" /> انتظر لحظة
 				</Button>
 			) : currentItem ? (
@@ -60,7 +60,7 @@ export default function AddToCart({ product, className }: Props) {
 					</div>
 				</div>
 			) : (
-				<Button size={"full"} type="button" onClick={() => addToCart(product)}>
+				<Button size={"full"} variant={"default"} type="button" onClick={() => addToCart(product)}>
 					<ShoppingBag /> {locale === "en" ? "add to cart" : "أضف الى السلة"}
 				</Button>
 			)}
