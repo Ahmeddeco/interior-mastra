@@ -93,6 +93,7 @@ model User {
   country       String?
   favorites     Favorite[]
   factories     Factory[]
+  designs       Design[]
 
   @@unique([email, mobile])
   @@index([email])
@@ -129,6 +130,7 @@ model Style {
   descriptionEn String?   @db.Text
   image         String?
   product       Product[]
+  designs       Design[]
 
   @@index([slug])
 }
@@ -218,4 +220,34 @@ model Product {
   @@index([styleId])
   @@index([price])
   @@index([slug])
+}
+
+model Design {
+  id            String   @id @default(cuid())
+  titleAr       String
+  titleEn       String
+  slug          String   @unique
+  descriptionAr String?  @db.Text
+  descriptionEn String?  @db.Text
+  painPointsAr  String?  @db.Text
+  painPointsEn  String?  @db.Text
+  solutionsAr   String?  @db.Text
+  solutionsEn   String?  @db.Text
+  mainImage     String
+  images        String[]
+  country       String?
+  state         String?
+  city          String?
+  client        User     @relation(fields: [userId], references: [id])
+  style         Style    @relation(fields: [styleId], references: [id])
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  userId        String
+  styleId       String
+
+  @@index([userId])
+  @@index([styleId])
+  @@index([slug])
+  @@index([titleAr])
+  @@index([titleEn])
 }

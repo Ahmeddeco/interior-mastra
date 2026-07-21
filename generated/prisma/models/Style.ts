@@ -199,6 +199,7 @@ export type StyleWhereInput = {
   descriptionEn?: Prisma.StringNullableFilter<"Style"> | string | null
   image?: Prisma.StringNullableFilter<"Style"> | string | null
   product?: Prisma.ProductListRelationFilter
+  designs?: Prisma.DesignListRelationFilter
 }
 
 export type StyleOrderByWithRelationInput = {
@@ -210,6 +211,7 @@ export type StyleOrderByWithRelationInput = {
   descriptionEn?: Prisma.SortOrderInput | Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
   product?: Prisma.ProductOrderByRelationAggregateInput
+  designs?: Prisma.DesignOrderByRelationAggregateInput
 }
 
 export type StyleWhereUniqueInput = Prisma.AtLeast<{
@@ -224,6 +226,7 @@ export type StyleWhereUniqueInput = Prisma.AtLeast<{
   descriptionEn?: Prisma.StringNullableFilter<"Style"> | string | null
   image?: Prisma.StringNullableFilter<"Style"> | string | null
   product?: Prisma.ProductListRelationFilter
+  designs?: Prisma.DesignListRelationFilter
 }, "id" | "titleAr" | "titleEn" | "slug">
 
 export type StyleOrderByWithAggregationInput = {
@@ -261,6 +264,7 @@ export type StyleCreateInput = {
   descriptionEn?: string | null
   image?: string | null
   product?: Prisma.ProductCreateNestedManyWithoutStyleInput
+  designs?: Prisma.DesignCreateNestedManyWithoutStyleInput
 }
 
 export type StyleUncheckedCreateInput = {
@@ -272,6 +276,7 @@ export type StyleUncheckedCreateInput = {
   descriptionEn?: string | null
   image?: string | null
   product?: Prisma.ProductUncheckedCreateNestedManyWithoutStyleInput
+  designs?: Prisma.DesignUncheckedCreateNestedManyWithoutStyleInput
 }
 
 export type StyleUpdateInput = {
@@ -283,6 +288,7 @@ export type StyleUpdateInput = {
   descriptionEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product?: Prisma.ProductUpdateManyWithoutStyleNestedInput
+  designs?: Prisma.DesignUpdateManyWithoutStyleNestedInput
 }
 
 export type StyleUncheckedUpdateInput = {
@@ -294,6 +300,7 @@ export type StyleUncheckedUpdateInput = {
   descriptionEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product?: Prisma.ProductUncheckedUpdateManyWithoutStyleNestedInput
+  designs?: Prisma.DesignUncheckedUpdateManyWithoutStyleNestedInput
 }
 
 export type StyleCreateManyInput = {
@@ -375,6 +382,20 @@ export type StyleUpdateOneRequiredWithoutProductNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.StyleUpdateToOneWithWhereWithoutProductInput, Prisma.StyleUpdateWithoutProductInput>, Prisma.StyleUncheckedUpdateWithoutProductInput>
 }
 
+export type StyleCreateNestedOneWithoutDesignsInput = {
+  create?: Prisma.XOR<Prisma.StyleCreateWithoutDesignsInput, Prisma.StyleUncheckedCreateWithoutDesignsInput>
+  connectOrCreate?: Prisma.StyleCreateOrConnectWithoutDesignsInput
+  connect?: Prisma.StyleWhereUniqueInput
+}
+
+export type StyleUpdateOneRequiredWithoutDesignsNestedInput = {
+  create?: Prisma.XOR<Prisma.StyleCreateWithoutDesignsInput, Prisma.StyleUncheckedCreateWithoutDesignsInput>
+  connectOrCreate?: Prisma.StyleCreateOrConnectWithoutDesignsInput
+  upsert?: Prisma.StyleUpsertWithoutDesignsInput
+  connect?: Prisma.StyleWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StyleUpdateToOneWithWhereWithoutDesignsInput, Prisma.StyleUpdateWithoutDesignsInput>, Prisma.StyleUncheckedUpdateWithoutDesignsInput>
+}
+
 export type StyleCreateWithoutProductInput = {
   id?: string
   titleAr: string
@@ -383,6 +404,7 @@ export type StyleCreateWithoutProductInput = {
   descriptionAr?: string | null
   descriptionEn?: string | null
   image?: string | null
+  designs?: Prisma.DesignCreateNestedManyWithoutStyleInput
 }
 
 export type StyleUncheckedCreateWithoutProductInput = {
@@ -393,6 +415,7 @@ export type StyleUncheckedCreateWithoutProductInput = {
   descriptionAr?: string | null
   descriptionEn?: string | null
   image?: string | null
+  designs?: Prisma.DesignUncheckedCreateNestedManyWithoutStyleInput
 }
 
 export type StyleCreateOrConnectWithoutProductInput = {
@@ -419,6 +442,7 @@ export type StyleUpdateWithoutProductInput = {
   descriptionAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descriptionEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designs?: Prisma.DesignUpdateManyWithoutStyleNestedInput
 }
 
 export type StyleUncheckedUpdateWithoutProductInput = {
@@ -429,6 +453,67 @@ export type StyleUncheckedUpdateWithoutProductInput = {
   descriptionAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descriptionEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designs?: Prisma.DesignUncheckedUpdateManyWithoutStyleNestedInput
+}
+
+export type StyleCreateWithoutDesignsInput = {
+  id?: string
+  titleAr: string
+  titleEn: string
+  slug: string
+  descriptionAr?: string | null
+  descriptionEn?: string | null
+  image?: string | null
+  product?: Prisma.ProductCreateNestedManyWithoutStyleInput
+}
+
+export type StyleUncheckedCreateWithoutDesignsInput = {
+  id?: string
+  titleAr: string
+  titleEn: string
+  slug: string
+  descriptionAr?: string | null
+  descriptionEn?: string | null
+  image?: string | null
+  product?: Prisma.ProductUncheckedCreateNestedManyWithoutStyleInput
+}
+
+export type StyleCreateOrConnectWithoutDesignsInput = {
+  where: Prisma.StyleWhereUniqueInput
+  create: Prisma.XOR<Prisma.StyleCreateWithoutDesignsInput, Prisma.StyleUncheckedCreateWithoutDesignsInput>
+}
+
+export type StyleUpsertWithoutDesignsInput = {
+  update: Prisma.XOR<Prisma.StyleUpdateWithoutDesignsInput, Prisma.StyleUncheckedUpdateWithoutDesignsInput>
+  create: Prisma.XOR<Prisma.StyleCreateWithoutDesignsInput, Prisma.StyleUncheckedCreateWithoutDesignsInput>
+  where?: Prisma.StyleWhereInput
+}
+
+export type StyleUpdateToOneWithWhereWithoutDesignsInput = {
+  where?: Prisma.StyleWhereInput
+  data: Prisma.XOR<Prisma.StyleUpdateWithoutDesignsInput, Prisma.StyleUncheckedUpdateWithoutDesignsInput>
+}
+
+export type StyleUpdateWithoutDesignsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  titleAr?: Prisma.StringFieldUpdateOperationsInput | string
+  titleEn?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product?: Prisma.ProductUpdateManyWithoutStyleNestedInput
+}
+
+export type StyleUncheckedUpdateWithoutDesignsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  titleAr?: Prisma.StringFieldUpdateOperationsInput | string
+  titleEn?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  descriptionAr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product?: Prisma.ProductUncheckedUpdateManyWithoutStyleNestedInput
 }
 
 
@@ -438,10 +523,12 @@ export type StyleUncheckedUpdateWithoutProductInput = {
 
 export type StyleCountOutputType = {
   product: number
+  designs: number
 }
 
 export type StyleCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   product?: boolean | StyleCountOutputTypeCountProductArgs
+  designs?: boolean | StyleCountOutputTypeCountDesignsArgs
 }
 
 /**
@@ -461,6 +548,13 @@ export type StyleCountOutputTypeCountProductArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.ProductWhereInput
 }
 
+/**
+ * StyleCountOutputType without action
+ */
+export type StyleCountOutputTypeCountDesignsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DesignWhereInput
+}
+
 
 export type StyleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -471,6 +565,7 @@ export type StyleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   descriptionEn?: boolean
   image?: boolean
   product?: boolean | Prisma.Style$productArgs<ExtArgs>
+  designs?: boolean | Prisma.Style$designsArgs<ExtArgs>
   _count?: boolean | Prisma.StyleCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["style"]>
 
@@ -507,6 +602,7 @@ export type StyleSelectScalar = {
 export type StyleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "titleAr" | "titleEn" | "slug" | "descriptionAr" | "descriptionEn" | "image", ExtArgs["result"]["style"]>
 export type StyleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   product?: boolean | Prisma.Style$productArgs<ExtArgs>
+  designs?: boolean | Prisma.Style$designsArgs<ExtArgs>
   _count?: boolean | Prisma.StyleCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type StyleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -516,6 +612,7 @@ export type $StylePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   name: "Style"
   objects: {
     product: Prisma.$ProductPayload<ExtArgs>[]
+    designs: Prisma.$DesignPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -920,6 +1017,7 @@ readonly fields: StyleFieldRefs;
 export interface Prisma__StyleClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   product<T extends Prisma.Style$productArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Style$productArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  designs<T extends Prisma.Style$designsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Style$designsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DesignPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1370,6 +1468,30 @@ export type Style$productArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.ProductScalarFieldEnum | Prisma.ProductScalarFieldEnum[]
+}
+
+/**
+ * Style.designs
+ */
+export type Style$designsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Design
+   */
+  select?: Prisma.DesignSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Design
+   */
+  omit?: Prisma.DesignOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DesignInclude<ExtArgs> | null
+  where?: Prisma.DesignWhereInput
+  orderBy?: Prisma.DesignOrderByWithRelationInput | Prisma.DesignOrderByWithRelationInput[]
+  cursor?: Prisma.DesignWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DesignScalarFieldEnum | Prisma.DesignScalarFieldEnum[]
 }
 
 /**

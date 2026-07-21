@@ -37,6 +37,11 @@ export const serverNav = [
     icon: Sofa
   },
   {
+    title: { ar: "التصميمات", en: "designs" },
+    href: "/server/designs",
+    icon: SwatchBook
+  },
+  {
     title: { ar: "الإحصائيات", en: "charts" },
     href: "/server/charts",
     icon: ChartNoAxesCombined

@@ -393,7 +393,8 @@ export const ModelName = {
   Color: 'Color',
   Class: 'Class',
   Favorite: 'Favorite',
-  Product: 'Product'
+  Product: 'Product',
+  Design: 'Design'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -409,7 +410,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "session" | "account" | "verification" | "user" | "factory" | "style" | "color" | "class" | "favorite" | "product"
+    modelProps: "session" | "account" | "verification" | "user" | "factory" | "style" | "color" | "class" | "favorite" | "product" | "design"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1153,6 +1154,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Design: {
+      payload: Prisma.$DesignPayload<ExtArgs>
+      fields: Prisma.DesignFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DesignFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DesignPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DesignFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DesignPayload>
+        }
+        findFirst: {
+          args: Prisma.DesignFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DesignPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DesignFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DesignPayload>
+        }
+        findMany: {
+          args: Prisma.DesignFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DesignPayload>[]
+        }
+        create: {
+          args: Prisma.DesignCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DesignPayload>
+        }
+        createMany: {
+          args: Prisma.DesignCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DesignCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DesignPayload>[]
+        }
+        delete: {
+          args: Prisma.DesignDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DesignPayload>
+        }
+        update: {
+          args: Prisma.DesignUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DesignPayload>
+        }
+        deleteMany: {
+          args: Prisma.DesignDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DesignUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DesignUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DesignPayload>[]
+        }
+        upsert: {
+          args: Prisma.DesignUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DesignPayload>
+        }
+        aggregate: {
+          args: Prisma.DesignAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDesign>
+        }
+        groupBy: {
+          args: Prisma.DesignGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DesignGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DesignCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DesignCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1349,6 +1424,31 @@ export const ProductScalarFieldEnum = {
 } as const
 
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
+
+
+export const DesignScalarFieldEnum = {
+  id: 'id',
+  titleAr: 'titleAr',
+  titleEn: 'titleEn',
+  slug: 'slug',
+  descriptionAr: 'descriptionAr',
+  descriptionEn: 'descriptionEn',
+  painPointsAr: 'painPointsAr',
+  painPointsEn: 'painPointsEn',
+  solutionsAr: 'solutionsAr',
+  solutionsEn: 'solutionsEn',
+  mainImage: 'mainImage',
+  images: 'images',
+  country: 'country',
+  state: 'state',
+  city: 'city',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId',
+  styleId: 'styleId'
+} as const
+
+export type DesignScalarFieldEnum = (typeof DesignScalarFieldEnum)[keyof typeof DesignScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1591,6 +1691,7 @@ export type GlobalOmitConfig = {
   class?: Prisma.ClassOmit
   favorite?: Prisma.FavoriteOmit
   product?: Prisma.ProductOmit
+  design?: Prisma.DesignOmit
 }
 
 /* Types for Logging */

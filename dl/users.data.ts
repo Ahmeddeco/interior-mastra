@@ -44,3 +44,16 @@ export const getAllUsersForFactoriesPage = async () => {
     console.error(error)
   }
 }
+
+/* ------------------------------- allClients ------------------------------- */
+export const getAllClients = async () => {
+  try {
+    return await prisma.user.findMany({
+      where: { role: "client" },
+      select: { id: true, name: true },
+      orderBy: { name: "asc" }
+    })
+  } catch (error) {
+    console.error(error)
+  }
+}

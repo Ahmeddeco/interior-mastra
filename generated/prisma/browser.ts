@@ -67,3 +67,8 @@ export type Favorite = Prisma.FavoriteModel
  * 
  */
 export type Product = Prisma.ProductModel
+/**
+ * Model Design
+ * 
+ */
+export type Design = Prisma.DesignModel

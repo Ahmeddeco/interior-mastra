@@ -60,7 +60,8 @@ export const ModelName = {
   Color: 'Color',
   Class: 'Class',
   Favorite: 'Favorite',
-  Product: 'Product'
+  Product: 'Product',
+  Design: 'Design'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -236,6 +237,31 @@ export const ProductScalarFieldEnum = {
 } as const
 
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
+
+
+export const DesignScalarFieldEnum = {
+  id: 'id',
+  titleAr: 'titleAr',
+  titleEn: 'titleEn',
+  slug: 'slug',
+  descriptionAr: 'descriptionAr',
+  descriptionEn: 'descriptionEn',
+  painPointsAr: 'painPointsAr',
+  painPointsEn: 'painPointsEn',
+  solutionsAr: 'solutionsAr',
+  solutionsEn: 'solutionsEn',
+  mainImage: 'mainImage',
+  images: 'images',
+  country: 'country',
+  state: 'state',
+  city: 'city',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId',
+  styleId: 'styleId'
+} as const
+
+export type DesignScalarFieldEnum = (typeof DesignScalarFieldEnum)[keyof typeof DesignScalarFieldEnum]
 
 
 export const SortOrder = {
