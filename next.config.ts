@@ -1,6 +1,15 @@
-import type { NextConfig } from "next"
+import withPWAInit from "@ducanh2912/next-pwa"
 
-const nextConfig: NextConfig = {
+
+const withPWA = withPWAInit({
+  dest: "public",
+  disable: process.env.NODE_ENV === "development",
+  register: true,
+  dynamicStartUrl: true,
+  reloadOnOnline: true,
+})
+
+export default withPWA({
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "i.pravatar.cc" },
@@ -15,6 +24,5 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true
   },
-}
-
-export default nextConfig
+  turbopack: {},
+})
