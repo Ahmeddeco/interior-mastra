@@ -5,13 +5,16 @@ import { ThemeButton } from "../theme/ThemeButton"
 import UserButton from "@/auth/UserButton"
 import FrontNavigation from "./FrontNavigation"
 import LanguageButton from "./LanguageButton"
+import { Button } from "../ui/button"
 
 export default function MobileMenu() {
 	return (
 		<>
 			<Sheet>
-				<SheetTrigger>
-					<Menu />
+				<SheetTrigger asChild>
+					<Button size={"icon"}>
+						<Menu />
+					</Button>
 				</SheetTrigger>
 				<SheetContent>
 					<SheetHeader className="border-b shadow-md">

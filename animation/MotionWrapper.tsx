@@ -11,7 +11,7 @@ type Props = {
 
 export default function MotionWrapper({ children, variants, className }: Props) {
 	return (
-		<motion.div variants={variants} initial="initial" whileInView={"animate"} className={`${className} h-fit w-fit`}>
+		<motion.div variants={variants} initial="initial" whileInView={"animate"} className={`${className} h-fit w-fit `}>
 			{children}
 		</motion.div>
 	)

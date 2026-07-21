@@ -21,7 +21,7 @@ export default async function HomePage({ params }: Props) {
 			<Banner locale={locale} />
 			<Banner2 locale={locale} />
 			<Testimonial locale={locale} />
-			<Subscribe locale={locale} />
+			{/* <Subscribe locale={locale} /> */}
 		</div>
 	)
 }

@@ -37,7 +37,7 @@ export default async function RootLayout({
 			className={`h-full antialiased ${cairo.className}`}
 			suppressHydrationWarning
 		>
-			<body className="scroll-smooth">
+			<body className="scroll-smooth min-h-screen w-full overflow-x-hidden">
 				<ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
 					<NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
 					<TooltipProvider>

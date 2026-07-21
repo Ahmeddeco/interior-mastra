@@ -25,7 +25,7 @@ export default function Cart() {
 	return (
 		<Sheet>
 			<SheetTrigger asChild>
-				<Button className="relative border">
+				<Button className="relative " size={"icon"}>
 					<ShoppingCart />
 					<div className="rounded-lg bg-primary text-neutral-950 size-5 absolute -bottom-2 -right-2 flex items-center justify-center">
 						<span className="text-xs font-medium">{items.length}</span>

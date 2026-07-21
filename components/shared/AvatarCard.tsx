@@ -14,7 +14,7 @@ type Props = {
 export default function AvatarCard({ className, image, name, description, job, color = "black" }: Props) {
 	return (
 		<Card
-			className={`${className} ${color === "white" ? "bg-foreground border-background border" : "bg-card border-foreground"}   w-xs `}
+			className={`${className} ${color === "white" ? "bg-foreground border-background border" : "bg-card border-foreground"} max-w-md  min-w-3xs `}
 		>
 			<CardHeader>
 				<CardTitle className="flex items-center gap-4">
@@ -33,7 +33,7 @@ export default function AvatarCard({ className, image, name, description, job, c
 				</CardTitle>
 				<Separator color={color === "white" ? "black" : "white"} />
 			</CardHeader>
-			<CardContent className="line-clamp-4">
+			<CardContent className="lg:line-clamp-4 line-clamp-6">
 				<p className={color === "black" ? "text-foreground" : "text-background"}>{description}</p>
 			</CardContent>
 		</Card>
