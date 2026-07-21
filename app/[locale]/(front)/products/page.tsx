@@ -62,7 +62,7 @@ export default async function ProductsPage({ params, searchParams }: Props) {
 				allColors={allColors}
 				allFactories={allFactories}
 			/>
-			<div className="w-full p-6 ">
+			<div className="w-full ">
 				<SidebarTrigger dir={locale === "ar" ? "rtl" : "ltr"}>
 					<ListFilter />
 				</SidebarTrigger>
@@ -71,17 +71,21 @@ export default async function ProductsPage({ params, searchParams }: Props) {
 				<Card>
 					<CardHeader>
 						<CardTitle>
-							Total Filtered Products.
+							{locale === "en" ? "Total Filtered Products." : "إجمالي المنتجات المفلترة."}
 							<br />
 							<Badge variant={"default"}>
 								{filteredProducts.totalProducts} {locale === "en" ? "Products" : "منتج"}
 							</Badge>{" "}
 						</CardTitle>
-						<CardDescription>All filtered products via filters you select from filter sidebar</CardDescription>
+						<CardDescription>
+							{locale === "en"
+								? "All filtered products via filters you select from filter sidebar"
+								: "جميع المنتجات التي تم تصفيتها عبر الفلاتر التي تحددها من شريط الفلاتر الجانبي"}
+						</CardDescription>
 					</CardHeader>
 
 					{/* ---------------------------- ProductCards ---------------------------- */}
-					<CardContent className="flex flex-wrap justify-center  gap-6">
+					<CardContent className="flex flex-wrap justify-center items-center  gap-6">
 						{filteredProducts ? (
 							filteredProducts.data.map((product) => <ProductCard key={product.id} product={product} locale={locale} />)
 						) : (

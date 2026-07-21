@@ -15,14 +15,14 @@ type Props = {
 
 export default function ProductCard({ locale, product }: Props) {
 	return (
-		<Card className="w-md min-w-sm">
+		<Card className=" md:w-xs lg:w-md sm:w-xs w-xs min-w-2xs">
 			<CardHeader>
-				<CardTitle>{locale === "en" ? product.titleEn : product.titleAr}</CardTitle>
+				<CardTitle className="line-clamp-1">{locale === "en" ? product.titleEn : product.titleAr}</CardTitle>
 				<CardDescription className="line-clamp-1">
 					{locale === "en" ? product.miniDescriptionEn : product.miniDescriptionAr}
 				</CardDescription>
 			</CardHeader>
-			<CardContent className="flex flex-col  gap-4">
+			<CardContent className="flex flex-col  gap-2">
 				<Image
 					src={product.mainImage}
 					alt={product.titleEn}
@@ -31,7 +31,7 @@ export default function ProductCard({ locale, product }: Props) {
 					className="aspect-video w-full object-cover"
 				/>
 
-				<div className="flex flex-wrap items-center  gap-4">
+				<div className="flex flex-wrap items-center  gap-2">
 					<Badge>
 						<Shapes />
 						{locale === "en" ? product.class.titleEn : product.class.titleAr}
@@ -43,7 +43,7 @@ export default function ProductCard({ locale, product }: Props) {
 				</div>
 
 				{/* -------------------------- price & discount -------------------------- */}
-				<div className="flex items-center gap-4">
+				<div className="flex items-center gap-2">
 					{product.discount && product?.discount > 0 ? (
 						<>
 							<h4>{finalPrice(product.price, product.discount, locale)}</h4>
@@ -54,7 +54,7 @@ export default function ProductCard({ locale, product }: Props) {
 					)}
 				</div>
 			</CardContent>
-			<CardFooter className="flex flex-col items-center justify-center gap-4">
+			<CardFooter className="flex flex-col items-center justify-center gap-2">
 				<Button asChild size={"full"} variant={"outline"}>
 					<Link href={`/products/${product.id}`}>
 						<Eye />

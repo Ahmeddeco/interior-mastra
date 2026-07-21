@@ -89,7 +89,7 @@ export default function FiltersSideBar({ locale, allClasses, allStyles, allColor
 
 									{/* --------------------------------- factory -------------------------------- */}
 									<AccordionItem value="factory">
-										<AccordionTrigger>{locale === "en" ? "factory" : "الفئة"}</AccordionTrigger>
+										<AccordionTrigger>{locale === "en" ? "factory" : "المصنع"}</AccordionTrigger>
 										<AccordionContent>
 											<MultiSelectItem data={formattedFactories} inputName={"factory"} locale={locale} />
 										</AccordionContent>
@@ -116,7 +116,7 @@ export default function FiltersSideBar({ locale, allClasses, allStyles, allColor
 
 									{/* ---------------------------------- class --------------------------------- */}
 									<AccordionItem value="class">
-										<AccordionTrigger>{locale === "en" ? "class" : "الفئة"}</AccordionTrigger>
+										<AccordionTrigger>{locale === "en" ? "class" : "النوع"}</AccordionTrigger>
 										<AccordionContent>
 											<MultiSelectItem data={allClasses} inputName={"class"} locale={locale} />
 										</AccordionContent>

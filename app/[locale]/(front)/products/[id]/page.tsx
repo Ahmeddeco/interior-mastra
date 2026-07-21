@@ -1,7 +1,6 @@
 import ProductCard from "@/components/pages/products/ProductCard"
 import ImageSlider from "@/components/shared/ImageSlider"
 import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { getOneProduct, relatedProducts } from "@/dl/product.data"
 import { Currency, finalPrice } from "@/logic/currency"
 import { dateFormate } from "@/logic/dateFormate"
@@ -13,7 +12,6 @@ import { FaRegCalendarAlt } from "react-icons/fa"
 type Props = {
 	params: Promise<{ id: string; locale: "ar" | "en" }>
 }
-// TODO: Complete the page and add related products section
 export default async function ProductPage({ params }: Props) {
 	const locale = (await params).locale
 	const id = (await params).id
@@ -22,7 +20,6 @@ export default async function ProductPage({ params }: Props) {
 	if (oneProduct?.classId && oneProduct?.styleId) {
 		related_Products = await relatedProducts(oneProduct.styleId, oneProduct.id)
 	}
-
 
 	return (
 		<div className="flex flex-col gap-6">
@@ -106,23 +103,21 @@ export default async function ProductPage({ params }: Props) {
 
 			{/* --------------------------- related products -------------------------- */}
 			{(related_Products && (
-				<Card className="bg-background container mx-auto">
-					<CardHeader>
-						<CardTitle className="text-center text-primary capitalize">
-							{locale === "en" ? "related products" : "منتجات ذات صلة"}
-						</CardTitle>
-						<CardDescription className="text-center">
+				<section className="flex flex-col items-center justify-center gap-6">
+					<div className="flex flex-col items-center justify-center gap-1">
+						<h2 className="text-center">{locale === "en" ? "related products" : "منتجات ذات صلة"}</h2>
+						<h6 className="text-center text-pretty">
 							{locale === "en"
 								? "Products that follow the same style and the same category."
 								: "منتجات تتبع نفس الاستايل ونفس الفئة."}
-						</CardDescription>
-					</CardHeader>
-					<CardContent className="flex flex-wrap justify-center  gap-8">
+						</h6>
+					</div>
+					<div className="flex flex-wrap justify-center items-center gap-6">
 						{related_Products.map((product) => (
 							<ProductCard key={product.id} product={product} locale={locale} />
 						))}
-					</CardContent>
-				</Card>
+					</div>
+				</section>
 			)) ||
 				null}
 		</div>
