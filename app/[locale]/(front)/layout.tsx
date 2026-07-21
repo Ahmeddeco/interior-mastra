@@ -4,7 +4,7 @@ export default function FrontLayout({ children }: { children: React.ReactNode })
 	return (
 		<div className="w-full overflow-x-hidden px-0">
 			<NavBar />
-			<main className="min-h-dvh w-full px-4 pt-14 " suppressHydrationWarning>
+			<main className="w-full px-4 pt-14 " suppressHydrationWarning>
 				{children}
 			</main>
 		</div>

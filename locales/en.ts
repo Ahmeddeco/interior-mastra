@@ -72,29 +72,29 @@ export const enDic = {
       [
         {
           id: 1,
-          name: "John Doe",
+          name: "Mohamed Ahmed",
           job: "Designer",
-          img: "https://i.pravatar.cc/300?img=1",
-          text: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          img: "/images/man1.webp",
+          text: "Honestly, it was an excellent experience. The sofa I bought has a wonderful material and the finishing is much cleaner than the pictures. The service was extremely polite .",
           delay: 0.2,
           backgroundColor: "black"
         },
         {
           id: 2,
-          name: "Alice",
-          job: "Developer",
-          img: "https://i.pravatar.cc/300?img=5",
-          text: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          name: "Doaa Ahmed",
+          job: "fashion designer",
+          img: "/images/woman.webp",
+          text: "I was hesitant to order online, but your products are truly impressive. The colors turned out exactly as I imagined, and the finishing really rivals international brands.",
           delay: 0.4,
           backgroundColor: "white"
 
         },
         {
           id: 3,
-          name: "George",
-          job: "Manager",
-          img: "https://i.pravatar.cc/300?img=3",
-          text: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          name: "Mahmoud Ahmed",
+          job: "business owner",
+          img: "/images/man2.webp",
+          text: "I bought a complete living room set, the material is excellent and very comfortable . The best thing is that they understand you and help you choose what suits your home's space.",
           delay: 0.6,
           backgroundColor: "black"
 

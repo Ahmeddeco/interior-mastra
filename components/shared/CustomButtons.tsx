@@ -5,6 +5,9 @@ import { Button } from "../ui/button"
 import { Loader2, LucideIcon, X } from "lucide-react"
 import { IoBagCheckOutline } from "react-icons/io5"
 import React from "react"
+import Link from "next/link"
+import { FaWhatsapp } from "react-icons/fa6"
+import { useCurrentLocale } from "@/locales/client.locale"
 
 type SubmitButtonType = {
 	title: string
@@ -71,5 +74,18 @@ export function DeleteItemButton() {
 				</Button>
 			)}
 		</>
+	)
+}
+
+/* ---------------------------- WhatsAppContactUs --------------------------- */
+export const WhatsAppContactUs = ({ mobile }: { mobile: string }) => {
+	const locale = useCurrentLocale()
+	return (
+		<Button asChild size={"sm"} variant={"outline"}>
+			<Link href={`https://wa.me/${mobile}`} target="_blank">
+				<FaWhatsapp />
+				{locale === "en" ? "contact us" : "تواصل معنا"}
+			</Link>
+		</Button>
 	)
 }

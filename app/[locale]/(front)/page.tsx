@@ -4,7 +4,6 @@ import Hero from "@/components/pages/home/Hero"
 import OurTools from "@/components/pages/home/OurTools"
 import Testimonial from "@/components/pages/home/Testimonial"
 import WhatWeProvide from "@/components/pages/home/WhatWeProvide"
-import Gps from "@/components/shared/Gps"
 
 type Props = {
 	params: Promise<{ locale: "ar" | "en" }>
@@ -21,7 +20,6 @@ export default async function HomePage({ params }: Props) {
 			<Banner locale={locale} />
 			<Banner2 locale={locale} />
 			<Testimonial locale={locale} />
-			<Gps />
 		</div>
 	)
 }

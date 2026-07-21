@@ -1,10 +1,8 @@
 "use client"
 
-import Link from "next/link"
 import Logo from "./Logo"
-import { Copyright, ExternalLink } from "lucide-react"
+import { Copyright } from "lucide-react"
 import Socials from "./Socials"
-import { Button } from "../ui/button"
 import { Badge } from "../ui/badge"
 import { useCurrentLocale } from "@/locales/client.locale"
 import { Separator } from "../ui/separator"
@@ -23,20 +21,10 @@ export default function Footer() {
 							: "نحن في انتريور اسم موثوق في عالم الأثاث عالي الجودة منذ عام 1994، نقدم قطعاً مصنوعة بعناية لتضفي الراحة والأناقة على منزلك."}
 					</h6>
 					<Socials />
+
 					<Separator />
-					<h6 className="max-w-md text-center text-balance">
-						{locale === "en"
-							? "Follow us for daily home design inspiration and the latest exclusive offers."
-							: "تابعنا للحصول على إلهام يومي لتصميم منزلك وأحدث العروض الحصرية"}
-						.
-					</h6>
-					<Button asChild variant="default" size={"lg"}>
-						<Link href="/information">
-							{locale === "en" ? "Learn more about us" : "تعرف علينا أكثر"}
-							<ExternalLink />
-						</Link>
-					</Button>
-					<Badge>
+
+					<Badge variant={"default"}>
 						<Copyright />
 						2026 Ahmed Elgazzar. All rights reserved.
 					</Badge>

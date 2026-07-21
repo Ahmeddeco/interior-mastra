@@ -34,7 +34,7 @@ export default function AvatarCard({ className, image, name, description, job, c
 				<Separator color={color === "white" ? "black" : "white"} />
 			</CardHeader>
 			<CardContent className="lg:line-clamp-4 line-clamp-6">
-				<p className={color === "black" ? "text-foreground" : "text-background"}>{description}</p>
+				<p className={`${color === "black" ? "text-foreground" : "text-background"} line-clamp-2`}>{description}</p>
 			</CardContent>
 		</Card>
 	)

@@ -17,7 +17,7 @@ export default function AddToCart({ product, className }: Props) {
 	const currentItem = items.find((item) => item.id === product.id)
 
 	if (!data?.session || isPending) return null
-	
+
 	return (
 		<div className="w-full">
 			{pending ? (
@@ -25,40 +25,35 @@ export default function AddToCart({ product, className }: Props) {
 					<Loader2 className="size-5 animate-spin" /> انتظر لحظة
 				</Button>
 			) : currentItem ? (
-				<div className="flex flex-col items-center justify-center gap-2 h-fit ">
-					<Button size={"full"} type="button" disabled variant={"outline"}>
-						<ShoppingBag /> {locale === "en" ? "the product already in the cart" : "المنتج موجود في السلة"}
-					</Button>
-					<div className="flex items-center justify-between w-full ">
-						<div className=" flex items-center gap-4 w-full">
-							<Button
-								variant={"ghost"}
-								size={"icon"}
-								type="button"
-								onClick={() => {
-									updateQuantity("decrement", product.id!)
-								}}
-							>
-								<Minus />
-							</Button>
-							<Button size={"icon"} type="button" variant={"outline"} className="cursor-none">
-								{currentItem?.quantity.toFixed(0) ?? 0}
-							</Button>
-							<Button
-								variant={"ghost"}
-								size={"icon"}
-								type="button"
-								onClick={() => {
-									updateQuantity("increment", product.id!)
-								}}
-							>
-								<Plus />
-							</Button>
-						</div>
-						<Button type="button" variant={"destructive"} onClick={() => removeFromCart(product.id)}>
-							<XCircle /> {locale === "en" ? "remove from cart" : "إحذف المنتج من السلة"}
+				<div className="flex items-center justify-between w-full ">
+					<div className=" flex items-center gap-4 w-full">
+						<Button
+							variant={"ghost"}
+							size={"icon"}
+							type="button"
+							onClick={() => {
+								updateQuantity("decrement", product.id!)
+							}}
+						>
+							<Minus />
+						</Button>
+						<Button size={"icon"} type="button" variant={"outline"} className="cursor-none">
+							{currentItem?.quantity.toFixed(0) ?? 0}
+						</Button>
+						<Button
+							variant={"ghost"}
+							size={"icon"}
+							type="button"
+							onClick={() => {
+								updateQuantity("increment", product.id!)
+							}}
+						>
+							<Plus />
 						</Button>
 					</div>
+					<Button type="button" variant={"destructive"} onClick={() => removeFromCart(product.id)}>
+						<XCircle /> {locale === "en" ? "remove from cart" : "إحذف المنتج من السلة"}
+					</Button>
 				</div>
 			) : (
 				<Button size={"full"} variant={"default"} type="button" onClick={() => addToCart(product)}>
