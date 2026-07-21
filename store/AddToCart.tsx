@@ -10,13 +10,14 @@ import { Loader2, Minus, Plus, ShoppingBag, XCircle } from "lucide-react"
 type Props = { product: productCart; className?: string }
 
 export default function AddToCart({ product, className }: Props) {
-	const session = authClient.useSession()
+	const { data, isPending } = authClient.useSession()
 	const { pending } = useFormStatus()
 	const { items, updateQuantity, addToCart, removeFromCart } = useCartStore((state) => state)
 	const locale = useCurrentLocale()
 	const currentItem = items.find((item) => item.id === product.id)
 
-	if (!session) return null
+	if (!data?.session || isPending) return null
+	
 	return (
 		<div className="w-full">
 			{pending ? (
