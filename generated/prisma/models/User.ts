@@ -259,6 +259,7 @@ export type UserWhereInput = {
   favorites?: Prisma.FavoriteListRelationFilter
   factories?: Prisma.FactoryListRelationFilter
   designs?: Prisma.DesignListRelationFilter
+  articles?: Prisma.ArticleListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -281,6 +282,7 @@ export type UserOrderByWithRelationInput = {
   favorites?: Prisma.FavoriteOrderByRelationAggregateInput
   factories?: Prisma.FactoryOrderByRelationAggregateInput
   designs?: Prisma.DesignOrderByRelationAggregateInput
+  articles?: Prisma.ArticleOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -307,6 +309,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   favorites?: Prisma.FavoriteListRelationFilter
   factories?: Prisma.FactoryListRelationFilter
   designs?: Prisma.DesignListRelationFilter
+  articles?: Prisma.ArticleListRelationFilter
 }, "id" | "email" | "mobile" | "email_mobile">
 
 export type UserOrderByWithAggregationInput = {
@@ -369,6 +372,7 @@ export type UserCreateInput = {
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   factories?: Prisma.FactoryCreateNestedManyWithoutOwnerInput
   designs?: Prisma.DesignCreateNestedManyWithoutClientInput
+  articles?: Prisma.ArticleCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -391,6 +395,7 @@ export type UserUncheckedCreateInput = {
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   factories?: Prisma.FactoryUncheckedCreateNestedManyWithoutOwnerInput
   designs?: Prisma.DesignUncheckedCreateNestedManyWithoutClientInput
+  articles?: Prisma.ArticleUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUpdateInput = {
@@ -413,6 +418,7 @@ export type UserUpdateInput = {
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   factories?: Prisma.FactoryUpdateManyWithoutOwnerNestedInput
   designs?: Prisma.DesignUpdateManyWithoutClientNestedInput
+  articles?: Prisma.ArticleUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -435,6 +441,7 @@ export type UserUncheckedUpdateInput = {
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   factories?: Prisma.FactoryUncheckedUpdateManyWithoutOwnerNestedInput
   designs?: Prisma.DesignUncheckedUpdateManyWithoutClientNestedInput
+  articles?: Prisma.ArticleUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -661,6 +668,20 @@ export type UserUpdateOneRequiredWithoutDesignsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDesignsInput, Prisma.UserUpdateWithoutDesignsInput>, Prisma.UserUncheckedUpdateWithoutDesignsInput>
 }
 
+export type UserCreateNestedOneWithoutArticlesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutArticlesInput, Prisma.UserUncheckedCreateWithoutArticlesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutArticlesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutArticlesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutArticlesInput, Prisma.UserUncheckedCreateWithoutArticlesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutArticlesInput
+  upsert?: Prisma.UserUpsertWithoutArticlesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutArticlesInput, Prisma.UserUpdateWithoutArticlesInput>, Prisma.UserUncheckedUpdateWithoutArticlesInput>
+}
+
 export type UserCreateWithoutSessionsInput = {
   id?: string
   name: string
@@ -680,6 +701,7 @@ export type UserCreateWithoutSessionsInput = {
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   factories?: Prisma.FactoryCreateNestedManyWithoutOwnerInput
   designs?: Prisma.DesignCreateNestedManyWithoutClientInput
+  articles?: Prisma.ArticleCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -701,6 +723,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   factories?: Prisma.FactoryUncheckedCreateNestedManyWithoutOwnerInput
   designs?: Prisma.DesignUncheckedCreateNestedManyWithoutClientInput
+  articles?: Prisma.ArticleUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -738,6 +761,7 @@ export type UserUpdateWithoutSessionsInput = {
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   factories?: Prisma.FactoryUpdateManyWithoutOwnerNestedInput
   designs?: Prisma.DesignUpdateManyWithoutClientNestedInput
+  articles?: Prisma.ArticleUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -759,6 +783,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   factories?: Prisma.FactoryUncheckedUpdateManyWithoutOwnerNestedInput
   designs?: Prisma.DesignUncheckedUpdateManyWithoutClientNestedInput
+  articles?: Prisma.ArticleUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -780,6 +805,7 @@ export type UserCreateWithoutAccountsInput = {
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   factories?: Prisma.FactoryCreateNestedManyWithoutOwnerInput
   designs?: Prisma.DesignCreateNestedManyWithoutClientInput
+  articles?: Prisma.ArticleCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -801,6 +827,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   factories?: Prisma.FactoryUncheckedCreateNestedManyWithoutOwnerInput
   designs?: Prisma.DesignUncheckedCreateNestedManyWithoutClientInput
+  articles?: Prisma.ArticleUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -838,6 +865,7 @@ export type UserUpdateWithoutAccountsInput = {
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   factories?: Prisma.FactoryUpdateManyWithoutOwnerNestedInput
   designs?: Prisma.DesignUpdateManyWithoutClientNestedInput
+  articles?: Prisma.ArticleUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -859,6 +887,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   factories?: Prisma.FactoryUncheckedUpdateManyWithoutOwnerNestedInput
   designs?: Prisma.DesignUncheckedUpdateManyWithoutClientNestedInput
+  articles?: Prisma.ArticleUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserCreateWithoutFactoriesInput = {
@@ -880,6 +909,7 @@ export type UserCreateWithoutFactoriesInput = {
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   designs?: Prisma.DesignCreateNestedManyWithoutClientInput
+  articles?: Prisma.ArticleCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateWithoutFactoriesInput = {
@@ -901,6 +931,7 @@ export type UserUncheckedCreateWithoutFactoriesInput = {
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   designs?: Prisma.DesignUncheckedCreateNestedManyWithoutClientInput
+  articles?: Prisma.ArticleUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserCreateOrConnectWithoutFactoriesInput = {
@@ -963,6 +994,7 @@ export type UserCreateWithoutFavoritesInput = {
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   factories?: Prisma.FactoryCreateNestedManyWithoutOwnerInput
   designs?: Prisma.DesignCreateNestedManyWithoutClientInput
+  articles?: Prisma.ArticleCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateWithoutFavoritesInput = {
@@ -984,6 +1016,7 @@ export type UserUncheckedCreateWithoutFavoritesInput = {
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   factories?: Prisma.FactoryUncheckedCreateNestedManyWithoutOwnerInput
   designs?: Prisma.DesignUncheckedCreateNestedManyWithoutClientInput
+  articles?: Prisma.ArticleUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserCreateOrConnectWithoutFavoritesInput = {
@@ -1021,6 +1054,7 @@ export type UserUpdateWithoutFavoritesInput = {
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   factories?: Prisma.FactoryUpdateManyWithoutOwnerNestedInput
   designs?: Prisma.DesignUpdateManyWithoutClientNestedInput
+  articles?: Prisma.ArticleUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFavoritesInput = {
@@ -1042,6 +1076,7 @@ export type UserUncheckedUpdateWithoutFavoritesInput = {
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   factories?: Prisma.FactoryUncheckedUpdateManyWithoutOwnerNestedInput
   designs?: Prisma.DesignUncheckedUpdateManyWithoutClientNestedInput
+  articles?: Prisma.ArticleUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserCreateWithoutDesignsInput = {
@@ -1063,6 +1098,7 @@ export type UserCreateWithoutDesignsInput = {
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   factories?: Prisma.FactoryCreateNestedManyWithoutOwnerInput
+  articles?: Prisma.ArticleCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateWithoutDesignsInput = {
@@ -1084,6 +1120,7 @@ export type UserUncheckedCreateWithoutDesignsInput = {
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   factories?: Prisma.FactoryUncheckedCreateNestedManyWithoutOwnerInput
+  articles?: Prisma.ArticleUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserCreateOrConnectWithoutDesignsInput = {
@@ -1121,6 +1158,7 @@ export type UserUpdateWithoutDesignsInput = {
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   factories?: Prisma.FactoryUpdateManyWithoutOwnerNestedInput
+  articles?: Prisma.ArticleUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDesignsInput = {
@@ -1142,6 +1180,111 @@ export type UserUncheckedUpdateWithoutDesignsInput = {
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   factories?: Prisma.FactoryUncheckedUpdateManyWithoutOwnerNestedInput
+  articles?: Prisma.ArticleUncheckedUpdateManyWithoutAuthorNestedInput
+}
+
+export type UserCreateWithoutArticlesInput = {
+  id?: string
+  name: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: $Enums.Role
+  lat?: string | null
+  lng?: string | null
+  mobile?: string | null
+  city?: string | null
+  state?: string | null
+  country?: string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  factories?: Prisma.FactoryCreateNestedManyWithoutOwnerInput
+  designs?: Prisma.DesignCreateNestedManyWithoutClientInput
+}
+
+export type UserUncheckedCreateWithoutArticlesInput = {
+  id?: string
+  name: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: $Enums.Role
+  lat?: string | null
+  lng?: string | null
+  mobile?: string | null
+  city?: string | null
+  state?: string | null
+  country?: string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  factories?: Prisma.FactoryUncheckedCreateNestedManyWithoutOwnerInput
+  designs?: Prisma.DesignUncheckedCreateNestedManyWithoutClientInput
+}
+
+export type UserCreateOrConnectWithoutArticlesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutArticlesInput, Prisma.UserUncheckedCreateWithoutArticlesInput>
+}
+
+export type UserUpsertWithoutArticlesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutArticlesInput, Prisma.UserUncheckedUpdateWithoutArticlesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutArticlesInput, Prisma.UserUncheckedCreateWithoutArticlesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutArticlesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutArticlesInput, Prisma.UserUncheckedUpdateWithoutArticlesInput>
+}
+
+export type UserUpdateWithoutArticlesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  lat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lng?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  factories?: Prisma.FactoryUpdateManyWithoutOwnerNestedInput
+  designs?: Prisma.DesignUpdateManyWithoutClientNestedInput
+}
+
+export type UserUncheckedUpdateWithoutArticlesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  lat?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lng?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobile?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  factories?: Prisma.FactoryUncheckedUpdateManyWithoutOwnerNestedInput
+  designs?: Prisma.DesignUncheckedUpdateManyWithoutClientNestedInput
 }
 
 export type UserUpdateWithoutFactoriesInput = {
@@ -1163,6 +1306,7 @@ export type UserUpdateWithoutFactoriesInput = {
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   designs?: Prisma.DesignUpdateManyWithoutClientNestedInput
+  articles?: Prisma.ArticleUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFactoriesInput = {
@@ -1184,6 +1328,7 @@ export type UserUncheckedUpdateWithoutFactoriesInput = {
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   designs?: Prisma.DesignUncheckedUpdateManyWithoutClientNestedInput
+  articles?: Prisma.ArticleUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutFactoriesInput = {
@@ -1214,6 +1359,7 @@ export type UserCountOutputType = {
   favorites: number
   factories: number
   designs: number
+  articles: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1222,6 +1368,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   favorites?: boolean | UserCountOutputTypeCountFavoritesArgs
   factories?: boolean | UserCountOutputTypeCountFactoriesArgs
   designs?: boolean | UserCountOutputTypeCountDesignsArgs
+  articles?: boolean | UserCountOutputTypeCountArticlesArgs
 }
 
 /**
@@ -1269,6 +1416,13 @@ export type UserCountOutputTypeCountDesignsArgs<ExtArgs extends runtime.Types.Ex
   where?: Prisma.DesignWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountArticlesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ArticleWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1290,6 +1444,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   favorites?: boolean | Prisma.User$favoritesArgs<ExtArgs>
   factories?: boolean | Prisma.User$factoriesArgs<ExtArgs>
   designs?: boolean | Prisma.User$designsArgs<ExtArgs>
+  articles?: boolean | Prisma.User$articlesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1351,6 +1506,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   favorites?: boolean | Prisma.User$favoritesArgs<ExtArgs>
   factories?: boolean | Prisma.User$factoriesArgs<ExtArgs>
   designs?: boolean | Prisma.User$designsArgs<ExtArgs>
+  articles?: boolean | Prisma.User$articlesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1364,6 +1520,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     favorites: Prisma.$FavoritePayload<ExtArgs>[]
     factories: Prisma.$FactoryPayload<ExtArgs>[]
     designs: Prisma.$DesignPayload<ExtArgs>[]
+    articles: Prisma.$ArticlePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1779,6 +1936,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   favorites<T extends Prisma.User$favoritesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$favoritesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   factories<T extends Prisma.User$factoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$factoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FactoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   designs<T extends Prisma.User$designsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$designsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DesignPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  articles<T extends Prisma.User$articlesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$articlesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2332,6 +2490,30 @@ export type User$designsArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.DesignScalarFieldEnum | Prisma.DesignScalarFieldEnum[]
+}
+
+/**
+ * User.articles
+ */
+export type User$articlesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Article
+   */
+  select?: Prisma.ArticleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Article
+   */
+  omit?: Prisma.ArticleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ArticleInclude<ExtArgs> | null
+  where?: Prisma.ArticleWhereInput
+  orderBy?: Prisma.ArticleOrderByWithRelationInput | Prisma.ArticleOrderByWithRelationInput[]
+  cursor?: Prisma.ArticleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ArticleScalarFieldEnum | Prisma.ArticleScalarFieldEnum[]
 }
 
 /**

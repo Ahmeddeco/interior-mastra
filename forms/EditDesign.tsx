@@ -4,7 +4,7 @@ import { useForm } from "@conform-to/react"
 import { parseWithZod } from "@conform-to/zod"
 import Form from "next/form"
 import { useActionState, useState } from "react"
-import { Field, FieldError, FieldLabel } from "@/components/ui/field"
+import { Field, FieldDescription, FieldError, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import SubmitButton from "@/components/shared/SubmitButton"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -67,6 +67,7 @@ export default function EditDesign({ styles, clients, design }: Props) {
 			{/* ---------------------------------- slug ---------------------------------- */}
 			<Field>
 				<FieldLabel>slug</FieldLabel>
+				<FieldDescription>This field fill automatically when you fill the titleEn field.</FieldDescription>
 				<Input type="text" name={"slug"} value={slugTitle} readOnly />
 			</Field>
 

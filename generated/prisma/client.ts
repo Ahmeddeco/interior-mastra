@@ -96,3 +96,8 @@ export type Product = Prisma.ProductModel
  * 
  */
 export type Design = Prisma.DesignModel
+/**
+ * Model Article
+ * 
+ */
+export type Article = Prisma.ArticleModel

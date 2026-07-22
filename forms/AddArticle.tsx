@@ -9,29 +9,27 @@ import { Input } from "@/components/ui/input"
 import SubmitButton from "@/components/shared/SubmitButton"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { UploadManyImagesDropZone, UploadOneImagesDropZone } from "@/components/shared/UploadImagesDropZone"
-import { getAllStylesForProductPageType } from "@/types/style.type"
 import TiptapEditor from "@/components/shared/TiptapEditor"
-import { addDesignAction } from "@/actions/design.action"
-import DesignSchema from "@/schemas/DesignSchema"
-import { getAllClientsType } from "@/types/user.type"
-import CountryInput from "@/components/shared/CountryInput"
+import { getAllAuthorsType } from "@/types/user.type"
 import DatePicker from "@/components/shared/DatePicker"
 import slugify from "slugify"
+import { addArticleAction } from "@/actions/article.action"
+import ArticleSchema from "@/schemas/ArticleSchema"
+import { Textarea } from "@/components/ui/textarea"
 
 type Props = {
-	styles: getAllStylesForProductPageType
-	clients: getAllClientsType
+	authors: getAllAuthorsType
 }
 
-export default function AddDesign({ styles, clients }: Props) {
+export default function AddArticle({ authors }: Props) {
 	const [slug, setSlug] = useState("")
 	const slugTitle = slugify(slug)
 
-	const [lastResult, action] = useActionState(addDesignAction, undefined)
+	const [lastResult, action] = useActionState(addArticleAction, undefined)
 	const [form, fields] = useForm({
 		lastResult,
 		onValidate({ formData }) {
-			return parseWithZod(formData, { schema: DesignSchema })
+			return parseWithZod(formData, { schema: ArticleSchema })
 		},
 		shouldValidate: "onBlur",
 		shouldRevalidate: "onInput",
@@ -39,7 +37,7 @@ export default function AddDesign({ styles, clients }: Props) {
 
 	return (
 		<Form id={form.id} action={action} onSubmit={form.onSubmit} className="space-y-6">
-			{/* ---------------------------- title & model ---------------------------- */}
+			{/* ---------------------------- title  ---------------------------- */}
 			<div className="flex lg:flex-row flex-col items-center justify-center gap-4">
 				{/* ---------------------------------- titleAr --------------------------------- */}
 				<Field>
@@ -73,35 +71,17 @@ export default function AddDesign({ styles, clients }: Props) {
 				<Input type="text" name={"slug"} value={slugTitle} readOnly />
 			</Field>
 
-			{/* ------------------------ style & clients & createdAt ----------------------- */}
+			{/* ------------------------ authors & createdAt ----------------------- */}
 			<div className="flex lg:flex-row flex-col items-center justify-center gap-4">
-				{/* --------------------------------- style -------------------------------- */}
+				{/* --------------------------------- authors -------------------------------- */}
 				<Field>
-					<FieldLabel htmlFor={fields.styleId.name}>style</FieldLabel>
-					<Select key={fields.styleId.key} name={fields.styleId.name} defaultValue={fields.styleId.initialValue}>
-						<SelectTrigger>
-							<SelectValue />
-						</SelectTrigger>
-						<SelectContent>
-							{styles?.map(({ id, titleEn }) => (
-								<SelectItem value={id} key={id}>
-									{titleEn}
-								</SelectItem>
-							))}
-						</SelectContent>
-					</Select>
-					<FieldError>{fields.styleId.errors}</FieldError>
-				</Field>
-
-				{/* --------------------------------- clients -------------------------------- */}
-				<Field>
-					<FieldLabel htmlFor={fields.userId.name}>{"clients"}</FieldLabel>
+					<FieldLabel htmlFor={fields.userId.name}>{"author"}</FieldLabel>
 					<Select key={fields.userId.key} name={fields.userId.name} defaultValue={fields.userId.initialValue}>
 						<SelectTrigger>
 							<SelectValue />
 						</SelectTrigger>
 						<SelectContent>
-							{clients?.map(({ id, name }) => (
+							{authors?.map(({ id, name }) => (
 								<SelectItem value={id} key={id}>
 									{name}
 								</SelectItem>
@@ -120,61 +100,47 @@ export default function AddDesign({ styles, clients }: Props) {
 				/>
 			</div>
 
-			{/* ----------------------------- CountryInput ---------------------------- */}
-			<CountryInput />
+			{/* ------------------------------- description ------------------------------ */}
+			<div className="flex lg:flex-row flex-col items-center justify-center gap-4">
+				{/* ---------------------------- descriptionAr --------------------------- */}
+				<Field>
+					<FieldLabel htmlFor={fields.descriptionAr.name}>{fields.descriptionAr.name}</FieldLabel>
+					<Textarea
+						key={fields.descriptionAr.key}
+						name={fields.descriptionAr.name}
+						defaultValue={fields.descriptionAr.initialValue}
+					/>
+					<FieldError>{fields.descriptionAr.errors}</FieldError>
+				</Field>
 
-			{/* ----------------------------- descriptionAr ----------------------------- */}
+				{/* ---------------------------- descriptionEn --------------------------- */}
+				<Field>
+					<FieldLabel htmlFor={fields.descriptionEn.name}>{fields.descriptionEn.name}</FieldLabel>
+					<Textarea
+						key={fields.descriptionEn.key}
+						name={fields.descriptionEn.name}
+						defaultValue={fields.descriptionEn.initialValue}
+					/>
+					<FieldError>{fields.descriptionEn.errors}</FieldError>
+				</Field>
+			</div>
+
+			{/* ----------------------------- topicAr ----------------------------- */}
 			<TiptapEditor
-				name={fields.descriptionAr.name}
-				label={fields.descriptionAr.name}
-				editorKey={fields.descriptionAr.key ?? ""}
-				defaultValue={fields.descriptionAr.initialValue ?? ""}
-				errors={fields.descriptionAr.errors ?? []}
+				name={fields.topicAr.name}
+				label={fields.topicAr.name}
+				editorKey={fields.topicAr.key ?? ""}
+				defaultValue={fields.topicAr.initialValue ?? ""}
+				errors={fields.topicAr.errors ?? []}
 			/>
 
-			{/* --------------------------- descriptionEn -------------------------- */}
+			{/* --------------------------- topicEn -------------------------- */}
 			<TiptapEditor
-				name={fields.descriptionEn.name}
-				label={fields.descriptionEn.name}
-				editorKey={fields.descriptionEn.key ?? ""}
-				defaultValue={fields.descriptionEn.initialValue ?? ""}
-				errors={fields.descriptionEn.errors ?? []}
-			/>
-
-			{/* ------------------------------ painPointsAr ------------------------------ */}
-			<TiptapEditor
-				name={fields.painPointsAr.name}
-				label={fields.painPointsAr.name}
-				editorKey={fields.painPointsAr.key ?? ""}
-				defaultValue={fields.painPointsAr.initialValue ?? ""}
-				errors={fields.painPointsAr.errors ?? []}
-			/>
-
-			{/* ----------------------------- painPointsEn ---------------------------- */}
-			<TiptapEditor
-				name={fields.painPointsEn.name}
-				label={fields.painPointsEn.name}
-				editorKey={fields.painPointsEn.key ?? ""}
-				defaultValue={fields.painPointsEn.initialValue ?? ""}
-				errors={fields.painPointsEn.errors ?? []}
-			/>
-
-			{/* ------------------------------- solutionsAr ------------------------------ */}
-			<TiptapEditor
-				name={fields.solutionsAr.name}
-				label={fields.solutionsAr.name}
-				editorKey={fields.solutionsAr.key ?? ""}
-				defaultValue={fields.solutionsAr.initialValue ?? ""}
-				errors={fields.solutionsAr.errors ?? []}
-			/>
-
-			{/* ----------------------------- solutionsEn ----------------------------- */}
-			<TiptapEditor
-				name={fields.solutionsEn.name}
-				label={fields.solutionsEn.name}
-				editorKey={fields.solutionsEn.key ?? ""}
-				defaultValue={fields.solutionsEn.initialValue ?? ""}
-				errors={fields.solutionsEn.errors ?? []}
+				name={fields.topicEn.name}
+				label={fields.topicEn.name}
+				editorKey={fields.topicEn.key ?? ""}
+				defaultValue={fields.topicEn.initialValue ?? ""}
+				errors={fields.topicEn.errors ?? []}
 			/>
 
 			{/* -------------------------------- mainImage ------------------------------- */}
@@ -192,7 +158,7 @@ export default function AddDesign({ styles, clients }: Props) {
 			/>
 
 			{/* ----------------------------- SubmitButton ---------------------------- */}
-			<SubmitButton text={"add design"} />
+			<SubmitButton text={"add article"} />
 		</Form>
 	)
 }

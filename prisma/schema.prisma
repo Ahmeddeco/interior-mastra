@@ -94,6 +94,7 @@ model User {
   favorites     Favorite[]
   factories     Factory[]
   designs       Design[]
+  articles      Article[]
 
   @@unique([email, mobile])
   @@index([email])
@@ -250,4 +251,26 @@ model Design {
   @@index([slug])
   @@index([titleAr])
   @@index([titleEn])
+}
+
+model Article {
+  id            String   @id @default(cuid())
+  author        User     @relation(fields: [userId], references: [id])
+  titleAr       String
+  titleEn       String
+  descriptionAr String
+  descriptionEn String
+  slug          String   @unique
+  topicAr       String   @db.Text
+  topicEn       String   @db.Text
+  mainImage     String
+  images        String[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  userId        String
+
+  @@index([titleAr])
+  @@index([titleEn])
+  @@index([slug])
+  @@index([userId])
 }

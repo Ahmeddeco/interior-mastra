@@ -18,6 +18,7 @@ export default withPWA({
       { protocol: "https", hostname: "cdn.jsdelivr.net" },
       { protocol: "https", hostname: "syillp7vjw.ufs.sh" },
       { protocol: "https", hostname: "picsum.photos" },
+      { protocol: "https", hostname: "images.unsplash.com" },
     ]
   },
   devIndicators: false,

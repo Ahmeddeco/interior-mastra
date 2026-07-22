@@ -14,7 +14,7 @@ export default async function AddColorPage() {
 	const clients: getAllClientsType = await getAllClients()
 
 	return (
-		<ServerPageCard title={"Add design"} description={"Add a design to the database."} href="/server/products">
+		<ServerPageCard title={"Add design"} description={"Add a design to the database."} href="/server/designs">
 			<AddDesign styles={styles!} clients={clients} />
 		</ServerPageCard>
 	)

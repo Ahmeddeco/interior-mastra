@@ -1,4 +1,4 @@
-import { ChartNoAxesCombined, Factory, Palette, Server, Shapes, Sofa, SwatchBook, Users } from "lucide-react"
+import { ChartNoAxesCombined, Factory, Newspaper, Palette, Server, Shapes, Sofa, SwatchBook, Users } from "lucide-react"
 
 export const serverNav = [
   {
@@ -40,6 +40,11 @@ export const serverNav = [
     title: { ar: "التصميمات", en: "designs" },
     href: "/server/designs",
     icon: SwatchBook
+  },
+  {
+    title: { ar: "مقالاتنا", en: "articles" },
+    href: "/server/articles",
+    icon: Newspaper
   },
   {
     title: { ar: "الإحصائيات", en: "charts" },
