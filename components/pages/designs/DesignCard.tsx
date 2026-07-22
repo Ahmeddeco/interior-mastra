@@ -48,7 +48,7 @@ export default function DesignCard({ design, locale }: Props) {
 
 			<CardFooter className="justify-between">
 				<WhatsAppContactUs mobile={"+201503150014"} />
-				<Button asChild size={"sm"} variant={"outline"}>
+				<Button asChild size={"sm"} variant={"default"}>
 					<Link href={`/designs/${design?.slug}`}>
 						<Eye />
 						{locale === "en" ? "see more" : "شاهد المزيد"}

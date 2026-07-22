@@ -81,7 +81,7 @@ export function DeleteItemButton() {
 export const WhatsAppContactUs = ({ mobile }: { mobile: string }) => {
 	const locale = useCurrentLocale()
 	return (
-		<Button asChild size={"sm"} variant={"outline"}>
+		<Button asChild size={"sm"} variant={"link"}>
 			<Link href={`https://wa.me/${mobile}`} target="_blank">
 				<FaWhatsapp />
 				{locale === "en" ? "contact us" : "تواصل معنا"}

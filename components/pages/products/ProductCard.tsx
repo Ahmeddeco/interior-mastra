@@ -55,13 +55,13 @@ export default function ProductCard({ locale, product }: Props) {
 				</div>
 			</CardContent>
 			<CardFooter className="flex flex-col items-center justify-center gap-2">
+				<AddToCart product={product} />
 				<Button asChild size={"full"} variant={"outline"}>
 					<Link href={`/products/${product.id}`}>
 						<Eye />
-						{locale === "en" ? "see more" : "شاهد المزيد"}
+						{locale === "en" ? "see the product" : "شاهد المنتج"}
 					</Link>
 				</Button>
-				<AddToCart product={product} />
 			</CardFooter>
 		</Card>
 	)

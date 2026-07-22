@@ -54,22 +54,23 @@ export default async function ProductPage({ params }: Props) {
 						</Badge>
 					</div>
 
-					{/* ------------------------------- Price ------------------------------- */}
-					<div>
-						<h4>{locale === "en" ? "Price" : "السعر :"}</h4>
-						<div className="flex items-center gap-4">
-							<Badge variant={"default"}>
-								{finalPrice(Number(oneProduct?.price), Number(oneProduct?.discount), locale)}
-							</Badge>
-							<h6 className="line-through text-muted-foreground">{Currency(Number(oneProduct?.price), locale)}</h6>
-						</div>
+					{/* -------------------------- price & discount -------------------------- */}
+					<div className="flex items-center gap-2">
+						{oneProduct?.discount && oneProduct?.discount > 0 ? (
+							<>
+								<h4>{finalPrice(oneProduct?.price, oneProduct?.discount, locale)}</h4>
+								<h6 className="line-through text-muted-foreground">{Currency(oneProduct?.price, locale)}</h6>
+							</>
+						) : (
+							<h4>{Currency(oneProduct!.price, locale)}</h4>
+						)}
 					</div>
 
 					{/* -------------------------------- quantity -------------------------------- */}
 					<div>
 						<h4>
 							{locale === "en" ? "Available quantity" : "الكمية المتاحة :"} :{" "}
-							<span className="text-primary font-black">{oneProduct?.quantity}</span>
+							<span className="dark:text-primary font-black">{oneProduct?.quantity}</span>
 							{locale === "en" ? " piece" : " قطعة "}
 						</h4>
 					</div>

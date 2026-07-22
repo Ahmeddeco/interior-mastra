@@ -15,7 +15,7 @@ export default async function OneArticlesPage({ params }: Props) {
 	const oneArticle: getOneArticleType = await getOneArticle(slug)
 
 	return (
-		<div className="flex flex-col gap-6 container mx-auto">
+		<article className="flex flex-col gap-6 container mx-auto">
 			<section className="flex lg:flex-row flex-col  gap-6  h-fit">
 				{/* ----------------------------- ImageSlider ----------------------------- */}
 				<div className="flex-1 h-full">
@@ -56,6 +56,6 @@ export default async function OneArticlesPage({ params }: Props) {
 					)}
 				</div>
 			</section>
-		</div>
+		</article>
 	)
 }

@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge"
 import { getAllArticlesForArticlesPageType } from "@/types/article.type"
 import { getAllArticlesForArticlesPage } from "@/dl/article.data"
 import ArticleCard from "@/components/pages/articles/ArticleCard"
+import { Separator } from "@/components/ui/separator"
 
 type Props = {
 	params: Promise<{ locale: "ar" | "en" }>
@@ -42,13 +43,14 @@ export default async function ArticlesPage({ params, searchParams }: Props) {
 					{locale === "en" ? "All the designs we have implemented." : "جميع التصاميم التي قمنا بتنفيذها"}
 				</CardDescription>
 			</CardHeader>
+			<Separator />
 
 			{/* ------------------------------- Designs ------------------------------ */}
 			<CardContent className="flex flex-wrap justify-center items-center  gap-6">
 				{articles ? (
 					articles.data.map((article) => <ArticleCard key={article.id} article={article} locale={locale} />)
 				) : (
-					<h2>no product found</h2>
+					<h2>no article found</h2>
 				)}
 			</CardContent>
 
