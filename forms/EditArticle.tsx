@@ -13,7 +13,7 @@ import TiptapEditor from "@/components/shared/TiptapEditor"
 import { getAllAuthorsType } from "@/types/user.type"
 import DatePicker from "@/components/shared/DatePicker"
 import slugify from "slugify"
-import { addArticleAction } from "@/actions/article.action"
+import { editArticleAction } from "@/actions/article.action"
 import ArticleSchema from "@/schemas/ArticleSchema"
 import { Textarea } from "@/components/ui/textarea"
 import { getOneArticleType } from "@/types/article.type"
@@ -25,9 +25,9 @@ type Props = {
 
 export default function EditArticle({ authors, article }: Props) {
 	const [slug, setSlug] = useState(article?.slug ?? "")
-	const slugTitle = slugify(slug)
+	const slugTitle = slugify(slug, { lower: true })
 
-	const [lastResult, action] = useActionState(addArticleAction, undefined)
+	const [lastResult, action] = useActionState(editArticleAction, undefined)
 	const [form, fields] = useForm({
 		lastResult,
 		onValidate({ formData }) {
@@ -39,6 +39,7 @@ export default function EditArticle({ authors, article }: Props) {
 
 	return (
 		<Form id={form.id} action={action} onSubmit={form.onSubmit} className="space-y-6">
+			<Input type="hidden" name="id" value={article?.id} />
 			{/* ---------------------------- title  ---------------------------- */}
 			<div className="flex lg:flex-row flex-col items-center justify-center gap-4">
 				{/* ---------------------------------- titleAr --------------------------------- */}

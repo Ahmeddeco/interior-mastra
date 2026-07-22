@@ -23,7 +23,7 @@ type Props = {
 
 export default function AddArticle({ authors }: Props) {
 	const [slug, setSlug] = useState("")
-	const slugTitle = slugify(slug)
+	const slugTitle = slugify(slug, { lower: true })
 
 	const [lastResult, action] = useActionState(addArticleAction, undefined)
 	const [form, fields] = useForm({

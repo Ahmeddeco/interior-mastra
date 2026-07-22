@@ -1,5 +1,6 @@
-import { getAllArticlesForArticlesPage, getOneArticle, getOneArticleForArticleCard } from "@/dl/article.data"
+import { getAllArticlesForArticlesPage, getOneArticle, getOneArticleForOneArticlePage } from "@/dl/article.data"
 
 export type getAllArticlesForArticlesPageType = Awaited<ReturnType<typeof getAllArticlesForArticlesPage>>
-export type getOneArticleForArticleCardType = Awaited<ReturnType<typeof getOneArticleForArticleCard>>
+export type getOneArticleForOneArticlePageType = Awaited<ReturnType<typeof getOneArticleForOneArticlePage>>
 export type getOneArticleType = Awaited<ReturnType<typeof getOneArticle>>
+export type OneArticleCard = NonNullable<getAllArticlesForArticlesPageType>["data"][number]

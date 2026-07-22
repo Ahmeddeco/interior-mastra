@@ -10,7 +10,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 type Props = {
 	params: Promise<{ slug: string; locale: "ar" | "en" }>
 }
-export default async function DesignPage({ params }: Props) {
+export default async function OneDesignPage({ params }: Props) {
 	const locale = (await params).locale
 	const slug = (await params).slug
 	const oneDesign: getOneDesignType = await getOneDesign(slug)

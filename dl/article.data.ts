@@ -7,7 +7,7 @@ export const getAllArticlesForArticlesPage = async (size: number, page: number) 
     const totalPages = Math.ceil(totalArticles / size)
     const data = await prisma.article.findMany({
       select: {
-        titleEn: true, descriptionEn: true, id: true, slug: true, createdAt: true, mainImage: true,
+        titleEn: true, titleAr: true, descriptionAr: true, descriptionEn: true, id: true, slug: true, createdAt: true, mainImage: true,
         author: { select: { id: true, name: true, image: true } }
       },
       skip: (page * size) - size,
@@ -21,7 +21,7 @@ export const getAllArticlesForArticlesPage = async (size: number, page: number) 
 }
 
 /* ----------------------- getOneArticleForArticleCard ----------------------- */
-export const getOneArticleForArticleCard = async (id: string) => {
+export const getOneArticleForOneArticlePage = async (id: string) => {
   try {
     return await prisma.article.findUnique({
       where: { id },

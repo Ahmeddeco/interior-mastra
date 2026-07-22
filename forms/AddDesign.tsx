@@ -25,7 +25,7 @@ type Props = {
 
 export default function AddDesign({ styles, clients }: Props) {
 	const [slug, setSlug] = useState("")
-	const slugTitle = slugify(slug)
+	const slugTitle = slugify(slug, { lower: true })
 
 	const [lastResult, action] = useActionState(addDesignAction, undefined)
 	const [form, fields] = useForm({
