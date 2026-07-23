@@ -1,6 +1,6 @@
 generator zod {
   provider                         = "zod-prisma-types"
-  output                           = "../generated/zod"
+  output                           = "../src/generated/zod"
   useMultipleFiles                 = true
   writeNullishInModelTypes         = true
   createModelTypes                 = true
@@ -19,7 +19,7 @@ generator zod {
 
 generator client {
   provider = "prisma-client"
-  output   = "../generated/prisma"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {

@@ -1,5 +1,6 @@
 "use cache"
 
+import { Role } from "@/generated/prisma/enums"
 import prisma from "@/lib/prisma"
 import { cacheLife, cacheTag } from "next/cache"
 
@@ -64,7 +65,7 @@ export const getAllClients = async () => {
 
   try {
     return await prisma.user.findMany({
-      where: { role: "client" },
+      where: { role: Role.client },
       select: { id: true, name: true },
       orderBy: { name: "asc" }
     })

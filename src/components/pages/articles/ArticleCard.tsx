@@ -42,8 +42,8 @@ export default function ArticleCard({ article, locale }: Props) {
 					<Image
 						src={article?.mainImage}
 						alt={article?.titleEn}
-						width={128}
-						height={128}
+						width={1920}
+						height={1080}
 						className="aspect-video w-full object-cover"
 					/>
 				) : (

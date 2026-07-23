@@ -4,12 +4,12 @@ import EmptyCard from "@/components/shared/EmptyCard"
 import { isAllowedRoles } from "@/auth/isAllowedRoles"
 import { Role } from "@/generated/prisma/enums"
 import EditDesign from "@/forms/EditDesign"
-import { getAllStylesForProductPageType } from "@/types/style.type"
-import { getAllClientsType } from "@/types/user.type"
 import { getAllClients } from "@/dl/users.data"
 import { getAllStylesForProductPage } from "@/dl/styles.data"
-import { getOneDesignType } from "@/types/design.type"
 import { getOneDesign } from "@/dl/design.data"
+import { getOneDesignType } from "@/types/design.type"
+import { getAllStylesForProductPageType } from "@/types/style.type"
+import { getAllClientsType } from "@/types/user.type"
 
 export default async function EditUserPage({ params }: { params: Promise<{ slug: string }> }) {
 	await isAllowedRoles([Role.admin])
@@ -18,6 +18,9 @@ export default async function EditUserPage({ params }: { params: Promise<{ slug:
 	const design: getOneDesignType = await getOneDesign(slug)
 	const styles: getAllStylesForProductPageType = await getAllStylesForProductPage()
 	const clients: getAllClientsType = await getAllClients()
+
+	console.log("clients from EditDesign", clients)
+	console.log("styles from EditDesign", styles)
 
 	return (
 		<ServerPageCard

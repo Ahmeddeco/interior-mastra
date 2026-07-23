@@ -26,8 +26,8 @@ export default function DesignCard({ design, locale }: Props) {
 					<Image
 						src={design?.mainImage}
 						alt={design?.titleEn}
-						width={128}
-						height={128}
+						width={192}
+						height={108}
 						className="aspect-video w-full object-cover"
 					/>
 				) : (
