@@ -3,7 +3,7 @@
 import prisma from "@/lib/prisma"
 import StyleSchema from "@/schemas/StyleSchema"
 import { parseWithZod } from "@conform-to/zod"
-import { refresh } from "next/cache"
+import { refresh, revalidateTag } from "next/cache"
 import { redirect } from "next/navigation"
 import slugify from "slugify"
 
@@ -40,6 +40,8 @@ export const addStyleAction = async (prevState: unknown, formData: FormData) => 
   } catch (error) {
     console.error(error)
   }
+  revalidateTag("styles", "max")
+
   redirect("/server/styles")
 }
 
@@ -70,6 +72,8 @@ export const editStyleAction = async (prevState: unknown, formData: FormData) =>
   } catch (error) {
     console.error(error)
   }
+  revalidateTag("styles", "max")
+
   redirect("/server/styles")
 }
 
@@ -85,5 +89,7 @@ export const deleteStyleAction = async (formData: FormData) => {
   } catch (error) {
     console.error(error)
   }
+  revalidateTag("styles", "max")
+
   refresh()
 }

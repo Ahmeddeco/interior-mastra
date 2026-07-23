@@ -26,4 +26,5 @@ export default withPWA({
     ignoreBuildErrors: true
   },
   turbopack: {},
+  cacheComponents: true,
 })

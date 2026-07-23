@@ -4,7 +4,7 @@ import prisma from "@/lib/prisma"
 import { splittedItems } from "@/logic/splittedItems"
 import { parseWithZod } from "@conform-to/zod"
 import { redirect } from "next/navigation"
-import { refresh } from "next/cache"
+import { refresh, updateTag } from "next/cache"
 import DesignSchema from "@/schemas/DesignSchema"
 
 /* ----------------------------- addDesignAction ----------------------------- */
@@ -66,6 +66,8 @@ export const addDesignAction = async (prevState: unknown, formData: FormData) =>
 			formErrors: ["فشل اضافة البيانات، تأكد من أن المعرف صحيح"]
 		})
 	}
+	updateTag("designs")
+
 	redirect("/server/designs")
 }
 
@@ -109,6 +111,8 @@ export const editDesignAction = async (prevState: unknown, formData: FormData) =
 			formErrors: ["فشل تحديث البيانات، تأكد من أن المعرف صحيح"]
 		})
 	}
+	updateTag("designs")
+
 	redirect("/server/designs")
 }
 
@@ -124,5 +128,7 @@ export const deleteDesignAction = async (formData: FormData) => {
 	} catch (error) {
 		console.error(error)
 	}
+	updateTag("designs")
+
 	refresh()
 }

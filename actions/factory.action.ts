@@ -4,7 +4,7 @@ import prisma from "@/lib/prisma"
 import { splittedItems } from "@/logic/splittedItems"
 import FactorySchema from "@/schemas/FactorySchema"
 import { parseWithZod } from "@conform-to/zod"
-import { refresh } from "next/cache"
+import { refresh, updateTag } from "next/cache"
 import { redirect } from "next/navigation"
 import slugify from "slugify"
 
@@ -51,6 +51,8 @@ export const addFactoryAction = async (prevState: unknown, formData: FormData) =
 	} catch (error) {
 		console.error(error)
 	}
+	updateTag("factories")
+
 	redirect("/server/factories")
 }
 
@@ -89,6 +91,8 @@ export const editFactoryAction = async (prevState: unknown, formData: FormData) 
 			formErrors: ["فشل تحديث البيانات، تأكد من أن المعرف صحيح"]
 		})
 	}
+	updateTag("factories")
+
 	redirect("/server/factories")
 }
 
@@ -104,5 +108,7 @@ export const deleteFactoryAction = async (formData: FormData) => {
 	} catch (error) {
 		console.error(error)
 	}
+	updateTag("factories")
+
 	refresh()
 }

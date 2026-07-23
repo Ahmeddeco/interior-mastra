@@ -3,7 +3,7 @@
 import prisma from "@/lib/prisma"
 import UserSchema from "@/schemas/UserSchema"
 import { parseWithZod } from "@conform-to/zod"
-import { refresh } from "next/cache"
+import { refresh, updateTag } from "next/cache"
 import { redirect } from "next/navigation"
 
 /* ----------------------------- addUserAction ----------------------------- */
@@ -45,6 +45,8 @@ export const addUserAction = async (prevState: unknown, formData: FormData) => {
       formErrors: ["Server Error"],
     })
   }
+  updateTag("users")
+
   redirect("/server/users")
 }
 
@@ -79,6 +81,8 @@ export const editUserAction = async (prevState: unknown, formData: FormData) => 
       formErrors: ["فشل تحديث البيانات، تأكد من أن المعرف صحيح"],
     })
   }
+  updateTag("users")
+
   redirect("/server/users")
 }
 
@@ -94,5 +98,7 @@ export const deleteUserAction = async (formData: FormData) => {
   } catch (error) {
     console.error(error)
   }
+  updateTag("users")
+
   refresh()
 }

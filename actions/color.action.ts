@@ -3,7 +3,7 @@
 import prisma from "@/lib/prisma"
 import ColorSchema from "@/schemas/ColorSchema"
 import { parseWithZod } from "@conform-to/zod"
-import { refresh } from "next/cache"
+import { refresh, revalidateTag } from "next/cache"
 import { redirect } from "next/navigation"
 import slugify from "slugify"
 
@@ -38,6 +38,8 @@ export const addColorAction = async (prevState: unknown, formData: FormData) => 
   } catch (error) {
     console.error(error)
   }
+  revalidateTag("colors", "max")
+
   redirect("/server/colors")
 }
 
@@ -68,6 +70,8 @@ export const editColorAction = async (prevState: unknown, formData: FormData) =>
   } catch (error) {
     console.error(error)
   }
+  revalidateTag("colors", "max")
+
   redirect("/server/colors")
 }
 
@@ -83,5 +87,7 @@ export const deleteColorAction = async (formData: FormData) => {
   } catch (error) {
     console.error(error)
   }
+  revalidateTag("colors", "max")
+
   refresh()
 }

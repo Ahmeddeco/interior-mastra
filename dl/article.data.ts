@@ -1,7 +1,13 @@
+"use cache"
+
 import prisma from "@/lib/prisma"
+import { cacheLife, cacheTag } from "next/cache"
 
 /* -------------------- getAllArticlesForArticlesPage -------------------- */
 export const getAllArticlesForArticlesPage = async (size: number, page: number) => {
+  cacheLife("days")
+  cacheTag('articles')
+
   try {
     const totalArticles = await prisma.article.count()
     const totalPages = Math.ceil(totalArticles / size)
@@ -22,6 +28,9 @@ export const getAllArticlesForArticlesPage = async (size: number, page: number) 
 
 /* ----------------------- getOneArticleForArticleCard ----------------------- */
 export const getOneArticleForOneArticlePage = async (id: string) => {
+  cacheLife("days")
+  cacheTag('articles')
+
   try {
     return await prisma.article.findUnique({
       where: { id },
@@ -32,8 +41,11 @@ export const getOneArticleForOneArticlePage = async (id: string) => {
   }
 }
 
-/* ------------------------------ getOneDesign ----------------------------- */
+/* ------------------------------ getOneArticle ----------------------------- */
 export const getOneArticle = async (slug: string) => {
+  cacheLife("days")
+  cacheTag('articles')
+
   try {
     return await prisma.article.findUnique({
       where: { slug },

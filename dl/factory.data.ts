@@ -1,7 +1,13 @@
+"use cache"
+
 import prisma from "@/lib/prisma"
+import { cacheLife, cacheTag } from "next/cache"
 
 /* ----------------------------- getAllFactories ---------------------------- */
 export const getAllFactories = async (size: number, page: number) => {
+  cacheLife("days")
+  cacheTag('factories')
+
   try {
     const totalColors = await prisma.factory.count()
     const totalPages = Math.ceil(totalColors / size)
@@ -19,6 +25,9 @@ export const getAllFactories = async (size: number, page: number) => {
 
 /* ---------------------------- getOneFactory ------------------------------ */
 export const getOneFactory = async (slug: string) => {
+  cacheLife("days")
+  cacheTag('factories')
+
   try {
     const data = await prisma.factory.findUnique({
       where: { slug },
@@ -32,6 +41,9 @@ export const getOneFactory = async (slug: string) => {
 
 /* ---------------------- getAllFactoriesForProductPage --------------------- */
 export const getAllFactoriesForProductPage = async () => {
+  cacheLife("days")
+  cacheTag('factories')
+
   try {
     const data = await prisma.factory.findMany({
       select: { id: true, name: true },
@@ -45,6 +57,9 @@ export const getAllFactoriesForProductPage = async () => {
 
 /* ------------------------- getAllFactoriesForSort ------------------------- */
 export const getAllFactoriesForSort = async () => {
+  cacheLife("days")
+  cacheTag('factories')
+
   try {
     return await prisma.factory.findMany({
       select: { id: true, slug: true, logo: true, name: true },

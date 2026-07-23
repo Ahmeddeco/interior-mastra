@@ -1,10 +1,15 @@
+"use cache"
+
 import { Prisma } from "@/generated/prisma/client"
 import prisma from "@/lib/prisma"
 import { ProductFilterType, } from "@/types/product.type"
 import { subDays } from "date-fns"
+import { cacheLife, cacheTag } from "next/cache"
 
 /* ----------------------------- getAllProducts ---------------------------- */
 export const getAllProducts = async (size: number, page: number) => {
+	cacheLife("hours")
+
 	try {
 		const totalProducts = await prisma.product.count()
 		const totalPages = Math.ceil(totalProducts / size)
@@ -22,6 +27,8 @@ export const getAllProducts = async (size: number, page: number) => {
 
 /* ---------------------- getAllProductsForProductsPage --------------------- */
 export const getAllProductsForProductsPage = async (size: number, page: number) => {
+	cacheLife("hours")
+
 	try {
 		const totalProducts = await prisma.product.count({ where: { status: "published" } })
 		const totalPages = Math.ceil(totalProducts / size)
@@ -50,6 +57,8 @@ export const getAllProductsForProductsPage = async (size: number, page: number) 
 
 /* ---------------------------- getOneProduct ------------------------------ */
 export const getOneProduct = async (id: string) => {
+	cacheLife("hours")
+
 	try {
 		return await prisma.product.findUnique({
 			where: { id, status: "published" },
@@ -67,6 +76,8 @@ export const getOneProduct = async (id: string) => {
 
 /* -------------------------- getOurLatestProducts -------------------------- */
 export const getOurLatestProducts = async () => {
+	cacheLife("hours")
+
 	try {
 		return await prisma.product.findMany({
 			where: { status: "published" },
@@ -81,6 +92,8 @@ export const getOurLatestProducts = async () => {
 
 /* ------------------------ getTheMostFavoriteProduct ----------------------- */
 export const getTheMostFavoriteProduct = async () => {
+	cacheLife("hours")
+
 	try {
 		return await prisma.product.findFirst({
 			where: { status: "published" },
@@ -94,6 +107,8 @@ export const getTheMostFavoriteProduct = async () => {
 
 /* --------------------------- getFilteredProducts -------------------------- */
 export const getFilteredProducts = async (filter?: ProductFilterType) => {
+	cacheLife("hours")
+
 	const where: Prisma.ProductWhereInput = { status: "published" }
 
 	if (filter === "sale") {
@@ -112,6 +127,8 @@ export const getFilteredProducts = async (filter?: ProductFilterType) => {
 
 /* --------------------- getAllProductsWithSpecificClass -------------------- */
 export const getAllProductsWithSpecificClass = async (classSlug: string, size: number = 10, page: number = 1) => {
+	cacheLife("hours")
+
 	try {
 		const totalProducts = (await prisma.product.findMany({ where: { class: { slug: classSlug } } })).length
 		const totalPages = Math.ceil(totalProducts / size)
@@ -130,6 +147,9 @@ export const getAllProductsWithSpecificClass = async (classSlug: string, size: n
 
 /* ------------------------- getAllDiscountProducts ------------------------- */
 export const getAllDiscountProducts = async (discount: number, size: number = 10, page: number = 1) => {
+	cacheLife("hours")
+	cacheTag('products')
+
 	try {
 		const totalProducts = (await prisma.product.findMany({ where: { discount: { lte: discount } } })).length
 		const totalPages = Math.ceil(totalProducts / size)
@@ -148,6 +168,9 @@ export const getAllDiscountProducts = async (discount: number, size: number = 10
 
 /* ----------------------------- relatedProducts ---------------------------- */
 export const relatedProducts = async (styleId: string, currentProductId: string) => {
+	cacheLife("hours")
+	cacheTag('products')
+
 	try {
 		return await prisma.product.findMany({
 			where: { styleId, id: { not: currentProductId } },

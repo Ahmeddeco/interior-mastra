@@ -5,7 +5,7 @@ import { splittedItems } from "@/logic/splittedItems"
 import ProductSchema from "@/schemas/ProductSchema"
 import { parseWithZod } from "@conform-to/zod"
 import { redirect } from "next/navigation"
-import { refresh } from "next/cache"
+import { refresh, updateTag } from "next/cache"
 import slugify from "slugify"
 
 /* ----------------------------- addProductAction ----------------------------- */
@@ -70,6 +70,8 @@ export const addProductAction = async (prevState: unknown, formData: FormData) =
 	} catch (error) {
 		console.error(error)
 	}
+	updateTag("products")
+
 	redirect("/server/products")
 }
 
@@ -117,6 +119,8 @@ export const editProductAction = async (prevState: unknown, formData: FormData) 
 			formErrors: ["فشل تحديث البيانات، تأكد من أن المعرف صحيح"]
 		})
 	}
+	updateTag("products")
+
 	redirect("/server/products")
 }
 
@@ -132,5 +136,7 @@ export const deleteProductAction = async (formData: FormData) => {
 	} catch (error) {
 		console.error(error)
 	}
+	updateTag("products")
+
 	refresh()
 }

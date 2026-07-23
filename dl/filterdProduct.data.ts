@@ -1,10 +1,16 @@
+"use cache"
+
 import { Prisma } from "@/generated/prisma/client"
 import prisma from "@/lib/prisma"
 import { ProductSearchParamsType } from "@/types/product.type"
 import { subDays } from "date-fns"
+import { cacheLife, cacheTag } from "next/cache"
 
 /* ------------------- getFilteredProductsForFilteredPage ------------------- */
 export const getFilteredProductsForFilteredPage = async (searchParams: ProductSearchParamsType, size: number, page: number) => {
+  cacheLife("hours")
+  cacheTag('products')
+
   try {
     const where: Prisma.ProductWhereInput = { status: "published" }
     /* ----------------------------- price filter ----------------------------- */

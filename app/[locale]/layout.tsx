@@ -4,25 +4,27 @@ import { ThemeProvider } from "@/components/theme/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
 import { CircleAlert, CircleCheckBig, CircleX } from "lucide-react"
 import Footer from "@/components/layout/Footer"
-import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin"
-import { extractRouterConfig } from "uploadthing/server"
-import { ourFileRouter } from "@/app/api/uploadthing/core"
 import localFont from "next/font/local"
 import { DirectionProvider } from "@/components/ui/direction"
-
 import { TooltipProvider } from "@/components/ui/tooltip"
+import { UploadthingSSRPlugin } from "@/utils/uploadthing-plugin"
 
+/* -------------------------------- localFont ------------------------------- */
 const cairo = localFont({
 	src: "../../public/fonts/Cairo.ttf",
 	variable: "--cairo-font",
 })
 
+/* -------------------------------- APP_INFO -------------------------------- */
 const APP_NAME = "Interior"
 const APP_DEFAULT_TITLE = "Interior | 3D Interior Design Studio"
 const APP_TITLE_TEMPLATE = "%s - Interior"
 const APP_DESCRIPTION = "استوديو متقدم لتصاميم الديكور الداخلي والأثاث ثلاثي الأبعاد"
 
+/* -------------------------------- Metadata -------------------------------- */
 export const metadata: Metadata = {
+	metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"),
+
 	applicationName: APP_NAME,
 	title: {
 		default: APP_DEFAULT_TITLE,
@@ -64,10 +66,17 @@ export const metadata: Metadata = {
 	},
 }
 
+/* -------------------------------- Viewport -------------------------------- */
 export const viewport: Viewport = {
 	themeColor: "#facc15",
 }
 
+/* -------------------------- generateStaticParams -------------------------- */
+export function generateStaticParams() {
+	return [{ locale: "ar" }, { locale: "en" }]
+}
+
+/* ------------------------------- RootLayout ------------------------------- */
 export default async function RootLayout({
 	children,
 	params,
@@ -86,7 +95,7 @@ export default async function RootLayout({
 		>
 			<body className="scroll-smooth min-h-screen w-full overflow-x-hidden">
 				<ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
-					<NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
+					<UploadthingSSRPlugin />
 					<TooltipProvider>
 						<DirectionProvider dir={locale === "ar" ? "rtl" : "ltr"}>{children}</DirectionProvider>
 						<Toaster

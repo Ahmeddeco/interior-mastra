@@ -4,7 +4,7 @@ import prisma from "@/lib/prisma"
 import { splittedItems } from "@/logic/splittedItems"
 import { parseWithZod } from "@conform-to/zod"
 import { redirect } from "next/navigation"
-import { refresh } from "next/cache"
+import { refresh, revalidateTag } from "next/cache"
 import ArticleSchema from "@/schemas/ArticleSchema"
 
 /* ----------------------------- addArticleAction ----------------------------- */
@@ -53,6 +53,8 @@ export const addArticleAction = async (prevState: unknown, formData: FormData) =
 			formErrors: ["فشل اضافة البيانات، تأكد من أن المعرف صحيح"]
 		})
 	}
+	revalidateTag("articles", "max")
+
 	redirect("/server/articles")
 }
 
@@ -89,6 +91,8 @@ export const editArticleAction = async (prevState: unknown, formData: FormData) 
 			formErrors: ["فشل تحديث البيانات، تأكد من أن المعرف صحيح"]
 		})
 	}
+	revalidateTag("articles", "max")
+
 	redirect("/server/articles")
 }
 
@@ -104,5 +108,7 @@ export const deleteArticleAction = async (formData: FormData) => {
 	} catch (error) {
 		console.error(error)
 	}
+	revalidateTag("articles", "max")
+
 	refresh()
 }

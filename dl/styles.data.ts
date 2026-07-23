@@ -1,7 +1,13 @@
+"use cache"
+
 import prisma from "@/lib/prisma"
+import { cacheLife, cacheTag } from "next/cache"
 
 /* ------------------------------ getAllStyles ------------------------------ */
 export const getAllStylesForStylesServerPage = async (size: number, page: number) => {
+	cacheLife("max")
+	cacheTag('styles')
+
 	try {
 		const totalColors = await prisma.style.count()
 		const totalPages = Math.ceil(totalColors / size)
@@ -18,6 +24,9 @@ export const getAllStylesForStylesServerPage = async (size: number, page: number
 
 /* ------------------------------- getOneStyle ------------------------------ */
 export const getOneStyle = async (slug: string) => {
+	cacheLife("max")
+	cacheTag('styles')
+
 	try {
 		return await prisma.style.findUnique({
 			where: { slug }
@@ -29,6 +38,9 @@ export const getOneStyle = async (slug: string) => {
 
 /* ----------------------- getAllStylesForProductPage ----------------------- */
 export const getAllStylesForProductPage = async () => {
+	cacheLife("max")
+	cacheTag('styles')
+
 	try {
 		return await prisma.style.findMany({
 			select: { id: true, titleAr: true, titleEn: true },
@@ -40,6 +52,9 @@ export const getAllStylesForProductPage = async () => {
 }
 
 export const getAllStylesForFilterProductPage = async () => {
+	cacheLife("max")
+	cacheTag('styles')
+
 	try {
 		return await prisma.style.findMany({
 			select: { id: true, titleEn: true, titleAr: true, image: true, slug: true },

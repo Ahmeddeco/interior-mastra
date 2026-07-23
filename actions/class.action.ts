@@ -3,7 +3,7 @@
 import prisma from "@/lib/prisma"
 import ClassSchema from "@/schemas/ClassSchema"
 import { parseWithZod } from "@conform-to/zod"
-import { refresh } from "next/cache"
+import { refresh, revalidateTag } from "next/cache"
 import { redirect } from "next/navigation"
 import slugify from "slugify"
 
@@ -40,6 +40,8 @@ export const addClassAction = async (prevState: unknown, formData: FormData) => 
 	} catch (error) {
 		console.error(error)
 	}
+	revalidateTag("classes", "max")
+
 	redirect("/server/classes")
 }
 
@@ -70,6 +72,8 @@ export const editClassAction = async (prevState: unknown, formData: FormData) =>
 	} catch (error) {
 		console.error(error)
 	}
+	revalidateTag("classes", "max")
+
 	redirect("/server/classes")
 }
 
@@ -85,5 +89,7 @@ export const deleteClassAction = async (formData: FormData) => {
 	} catch (error) {
 		console.error(error)
 	}
+	revalidateTag("classes", "max")
+
 	refresh()
 }

@@ -1,12 +1,18 @@
+"use cache"
+
 import prisma from "@/lib/prisma"
+import { cacheLife, cacheTag } from "next/cache"
 
 /* ------------------------------ getAllClasses ----------------------------- */
 export const getAllClassesForClassesServerPage = async (size: number, page: number) => {
+  cacheLife("weeks")
+  cacheTag('classes')
+
   try {
     const totalClasses = await prisma.class.count()
     const totalPages = Math.ceil(totalClasses / size)
     const data = await prisma.class.findMany({
-      select: { titleAr: true, titleEn: true, id: true, image: true, slug: true,descriptionEn:true },
+      select: { titleAr: true, titleEn: true, id: true, image: true, slug: true, descriptionEn: true },
       skip: (page * size) - size,
       take: size,
       orderBy: {
@@ -21,6 +27,9 @@ export const getAllClassesForClassesServerPage = async (size: number, page: numb
 
 /* ------------------------------ getOneClass ------------------------------- */
 export const getOneClass = async (slug: string) => {
+  cacheLife("weeks")
+  cacheTag('classes')
+
   try {
     return await prisma.class.findUnique({
       where: {
@@ -34,6 +43,9 @@ export const getOneClass = async (slug: string) => {
 
 /* ----------------------- getAllClassesForProductPage ---------------------- */
 export const getAllClassesForProductPage = async () => {
+  cacheLife("weeks")
+  cacheTag('classes')
+
   try {
     return await prisma.class.findMany({
       select: { id: true, titleEn: true, titleAr: true, image: true, slug: true },
