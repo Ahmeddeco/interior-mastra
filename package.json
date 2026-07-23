@@ -97,7 +97,7 @@
 		"build": "next build",
 		"dev": "next dev",
 		"lint": "eslint",
-		"mastra": "mastra dev --dir bot",
+		"mastra": "mastra dev --dir src/bot",
 		"push": "prisma db push",
 		"reset": "prisma db push --force-reset",
 		"seed": "prisma db seed",
