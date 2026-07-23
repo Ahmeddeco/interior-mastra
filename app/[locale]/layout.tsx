@@ -20,10 +20,15 @@ const APP_NAME = "Interior"
 const APP_DEFAULT_TITLE = "Interior | 3D Interior Design Studio"
 const APP_TITLE_TEMPLATE = "%s - Interior"
 const APP_DESCRIPTION = "استوديو متقدم لتصاميم الديكور الداخلي والأثاث ثلاثي الأبعاد"
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL
+	? process.env.NEXT_PUBLIC_APP_URL
+	: process.env.NODE_ENV === "development"
+		? "http://localhost:3000"
+		: "https://interior-eg.vercel.app"
 
 /* -------------------------------- Metadata -------------------------------- */
 export const metadata: Metadata = {
-	metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"),
+	metadataBase: new URL(baseUrl),
 
 	applicationName: APP_NAME,
 	title: {
@@ -77,7 +82,7 @@ export function generateStaticParams() {
 }
 
 /* ------------------------------- RootLayout ------------------------------- */
-export default async function RootLayout({
+export default async function LocaleLayout({
 	children,
 	params,
 }: Readonly<{
